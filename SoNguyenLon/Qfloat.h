@@ -2,6 +2,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#define QFLOAT_SIZE 128
+#define K 16383
+#define SIGN_SIZE 1
+#define EXP_SIZE 15
+#define SIGNIF_SIZE 112
 using namespace std;
 class Qfloat
 {
