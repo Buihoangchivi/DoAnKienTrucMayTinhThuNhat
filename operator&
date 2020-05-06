@@ -1,0 +1,16 @@
+QInt QInt::operator&(QInt x)
+{
+	QInt temp;
+	char s;
+	for (int i = 0; i < 128; i++)
+	{
+		s = this->getBit(i) + x.getBit(i);
+		if (s == 2)
+		{
+			temp.setBit(i, 1);
+		}
+		else
+			temp.setBit(i, 0);
+	}
+	return temp;
+}
