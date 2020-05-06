@@ -1,5 +1,5 @@
 ﻿#include "Qfloat.h"
-
+//Kiểm tra dãy bit toàn bit 1 và 0
 bool KTraBitGiongNhau(string s, char c)
 {
 	for (int i = 0; i < s.size(); i++)
@@ -7,12 +7,52 @@ bool KTraBitGiongNhau(string s, char c)
 			return false;
 	return true;
 }
-int KTTHdacbiet (string np) {
-	string Exp = np.substr(1, 15);
-	string M = np.substr(16,112);
-	if (KTraBitGiongNhau(Exp, '0'))
+bool KiemTraDuLieuHopLe(string Dec)
+{
+	int DemDauCham = 0;
+	int DemDau = 0;
+	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0]<'0' || Dec[0]>'9')))
 	{
-		if (KTraBitGiongNhau(M, '0'))
+		cout << "Du lieu sai!";
+		return false;
+	}
+	if (Dec[0] == '-')
+		DemDau = 1;
+	for (int i = 1; i < Dec.size(); i++)
+	{
+		if (Dec[i] == '.')
+		{
+			DemDauCham++;
+			if (DemDauCham == 2)
+			{
+				cout << "Du lieu sai!";
+				return false;
+			}
+		}
+		else if (Dec[i] == '-')
+		{
+			DemDau++;
+			if (DemDau == 2)
+			{
+				cout << "Du lieu sai!";
+				return false;
+			}
+		}
+		else if (Dec[i] < '0' || Dec[i]>'9')
+		{
+			cout << "Du lieu sai!";
+			return false;
+		}
+	}
+	return true;
+}
+//Ktra trường hợp đặc biệt khi chuyển từ nhị phân sang số chấm động
+int KTTHdacbiet (string np) {
+	string strExp = np.substr(SIGN_SIZE, EXP_SIZE);
+	string strSignif = np.substr(SIGN_SIZE + EXP_SIZE,SIGNIF_SIZE);
+	if (KTraBitGiongNhau(strExp, '0'))
+	{
+		if (KTraBitGiongNhau(strSignif, '0'))
 		{
 			return 1; // So 0
 		}
@@ -21,9 +61,9 @@ int KTTHdacbiet (string np) {
 			return 2; //So khong the chuan hoa
 		}
 	}
-	if (KTraBitGiongNhau(Exp, '1'))
+	if (KTraBitGiongNhau(strExp, '1'))
 	{
-		if (KTraBitGiongNhau(M, '0'))
+		if (KTraBitGiongNhau(strSignif, '0'))
 		{
 			return 3; // So vo cung
 		}
@@ -34,6 +74,7 @@ int KTTHdacbiet (string np) {
 	}
 	return 0; //Khong phai truong hop dac biet
 }
+//Đảo chuỗi
 string reverse(string s) {
 	string result;
 	for (int i = s.length() - 1; i >= 0; i--) {
@@ -41,6 +82,7 @@ string reverse(string s) {
 	}
 	return result;
 }
+//hàm nhân 2
 string nhan2(string so) {
 	int temp = 0;
 	string s;
@@ -86,6 +128,7 @@ string nhan2(string so) {
 	}
 	return s;
 }
+//Hàm chia 2 phần nguyên
 string chia2(string nguyen) {
 	string s;
 	int temp = 0;
@@ -110,7 +153,8 @@ string chia2(string nguyen) {
 	}
 	return s.substr(index);
 }
-string chia2_thapphan(string so) {
+//Hàm chia 2 phần thập phân
+string chia2_FracDec(string so) {
 	string s;
 	int temp = 0;
 	bool check = false;
@@ -149,6 +193,7 @@ string chia2_thapphan(string so) {
 	}
 	return s;
 }
+//Hàm cộng 2 phần nguyên
 string Cong(string a, string b)
 {
 	int i = a.size() - 1;
@@ -171,6 +216,7 @@ string Cong(string a, string b)
 		KetQua = (char)(temp + '0') + KetQua;
 	return KetQua;
 }
+//Xóa các số 0 dư ở đầu phần nguyên
 void ChuanHoaSo0(string &a)
 {
 	int i = 0;
@@ -185,6 +231,7 @@ void ChuanHoaSo0(string &a)
 	else
 		return;
 }
+//Chuẩn hóa bit có dấu cách
 void ChuanHoaBit(string &a)
 {
 	for (int i = 0; i < a.size(); i++)
@@ -195,6 +242,7 @@ void ChuanHoaBit(string &a)
 		}
 	}
 }
+//Chuẩn hóa phần nhị phân về cùng độ dài
 void ChuanHoaTP(string &a, string &b)
 {
 	int dodai1 = a.size();
@@ -216,6 +264,7 @@ void ChuanHoaTP(string &a, string &b)
 		}
 	}
 }
+//Cộng 2 phần thập phân
 string CongTP(string a, string b)
 {
 	string KetQua = "";
@@ -258,28 +307,51 @@ void Qfloat::setBit(int index, bool bit)
 }
 void Qfloat::ScanQfloat()
 {
-	string num;
-	cin >> num;
-	//Dua bit vao data
-	string result = DecToBin(num);
-	//Kiem tra truong hop dac biet
-	//string result = "01111111111111101111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
-	//string result = "000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-	int check = KTTHdacbiet(result);
-	if (check > 1) {
-		switch (check) {
-		case 2:
-			cout << "So khong the chuan hoa!!!";
-			break;
-		case 3:
-			cout << "So vo cung!!!";
-			break;
-		case 4:
-			cout << "So bao loi!!!";
-			break;
+	string result;
+	int check = 1;
+	do
+	{
+		cout << "Nhap Qfloat = ";
+		string num;
+		cin >> num;
+		//Dua bit vao data
+		result = DecToBin(num);
+		if(result != "")
+		{
+			check = KTTHdacbiet(result);
+			if (check > 1) {
+				switch (check) {
+				case 2:
+					cout << "So khong the chuan hoa!!!";
+					break;
+				case 3:
+					cout << "So vo cung!!!";
+					break;
+				case 4:
+					cout << "So bao loi!!!";
+					break;
+				}
+			}
 		}
-	}
-	for (int i = 0; i < 128; i++) {
+		//Kiem tra truong hop dac biet
+		//string result = "01111111111111101111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
+		//string result = "000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+	/*	int check = KTTHdacbiet(result);
+		if (check > 1) {
+			switch (check) {
+			case 2:
+				cout << "So khong the chuan hoa!!!";
+				break;
+			case 3:
+				cout << "So vo cung!!!";
+				break;
+			case 4:
+				cout << "So bao loi!!!";
+				break;
+			}
+		}*/
+	} while (check != 0 || result == "");
+	for (int i = 0; i < QFLOAT_SIZE; i++) {
 		if (result[i] - '0' == 0) {
 			setBit(i, 0);
 		}
@@ -290,6 +362,11 @@ void Qfloat::ScanQfloat()
 }
 string Qfloat::DecToBin(string num)
 {
+	bool KTra = KiemTraDuLieuHopLe(num);
+	if (KTra == false)
+	{
+		return "";
+	}
 	//Kiem tra so nhap vao phai 0 khong?
 	bool check = true;
 	for(int i=0;i<num.length();i++){
@@ -302,13 +379,13 @@ string Qfloat::DecToBin(string num)
 	}
 	if (check) {
 		string s;
-		for (int i = 0; i < 128; i++) {
+		for (int i = 0; i < QFLOAT_SIZE; i++) {
 			s += '0';
 		}
 		return s;
 	}
 	//Vi tri so 1 dau tien
-	int vt_1 = -1;
+	int pos_1 = -1;
 	//Chuyen phan nguyen qua nhi phan
 	//Vi tri dau "." trong chuoi num
 	int index = num.find('.');
@@ -316,68 +393,68 @@ string Qfloat::DecToBin(string num)
 		num += ".0";
 	}
 	index = num.find('.');
-	string nguyen;
+	string IntDec;
 	if (num[0] == '-')
-		nguyen = num.substr(1, index - 1);
+		IntDec = num.substr(1, index - 1);
 	else
-		nguyen = num.substr(0, index);
-	string np_nguyen = "";
-	while (nguyen != "0") {
-		if ((nguyen[nguyen.length() - 1] - '0') % 2 == 0) {
-			np_nguyen = '0' + np_nguyen;
+		IntDec = num.substr(0, index);
+	string IntBin = "";
+	while (IntDec != "0") {
+		if ((IntDec[IntDec.length() - 1] - '0') % 2 == 0) {
+			IntBin = '0' + IntBin;
 		}
 		else {
-			np_nguyen = '1' + np_nguyen;
+			IntBin = '1' + IntBin;
 		}
-		nguyen = chia2(nguyen);
+		IntDec = chia2(IntDec);
 	}
-	if (np_nguyen.length() == 0)
-		np_nguyen += '0';
+	if (IntBin.length() == 0)
+		IntBin += '0';
 	else
-		vt_1 = 0;
-	string np_tp = "";
-	string thapphan = "0" + num.substr(index);
-	int somu;
+		pos_1 = 0;
+	string FracBin = "";
+	string FracDec = "0" + num.substr(index);
+	int Exp;
 	int sophantri;
-	if(vt_1==-1) {
+	if(pos_1==-1) {
 		while (1) {
-			thapphan = nhan2(thapphan);
-			if (thapphan[0] == '0') {
-				np_tp += '0';
-				if (thapphan == "0") {
+			FracDec = nhan2(FracDec);
+			if (FracDec[0] == '0') {
+				FracBin += '0';
+				if (FracDec == "0") {
 					break;
 				}
 			}
 			else {
-				np_tp += '1';
-				vt_1 = np_nguyen.length() + np_tp.length();
-				thapphan[0] = '0';
+				FracBin += '1';
+				pos_1 = IntBin.length() + FracBin.length();
+				FracDec[0] = '0';
 				break;
-				if (thapphan == "1") {
+				if (FracDec == "1") {
 					break;
 				}
 			}
 		}
-		somu = np_nguyen.length() - vt_1;
-		sophantri = 112 - somu;
-		somu += 16383;
+		Exp = IntBin.length() - pos_1;
+		sophantri = SIGNIF_SIZE - Exp;
+		Exp += K;
 		int dem_phantri = 0;
 		//Chuyen phan thap phan qua nhi phan
 		while (1) {
-			thapphan = nhan2(thapphan);
-			if (thapphan[0] == '0') {
-				np_tp += '0';
-				if (thapphan == "0") {
+			FracDec = nhan2(FracDec);
+			if (FracDec[0] == '0') {
+				FracBin += '0';
+				if (FracDec == "0") {
 					break;
 				}
 			}
 			else {
 
-				np_tp += '1';
-				if (thapphan == "1") {
+				FracBin += '1';
+				if (FracDec == "1") {
 					break;
 				}
-				thapphan[0] = '0';
+				FracDec[0] = '0';
 			}
 			dem_phantri++;
 			if (dem_phantri > 112)
@@ -385,26 +462,26 @@ string Qfloat::DecToBin(string num)
 		}
 	}
 	else {
-		somu = np_nguyen.length() - 1;
-		sophantri = 112 - somu;
-		somu += 16383;
+		Exp = IntBin.length() - 1;
+		sophantri = SIGNIF_SIZE - Exp;
+		Exp += K;
 		int dem_phantri = 0;
 		//Chuyen phan thap phan qua nhi phan
 		while (1) {
-			thapphan = nhan2(thapphan);
-			if (thapphan[0] == '0') {
-				np_tp += '0';
-				if (thapphan == "0") {
+			FracDec = nhan2(FracDec);
+			if (FracDec[0] == '0') {
+				FracBin += '0';
+				if (FracDec == "0") {
 					break;
 				}
 			}
 			else {
 
-				np_tp += '1';
-				if (thapphan == "1") {
+				FracBin += '1';
+				if (FracDec == "1") {
 					break;
 				}
-				thapphan[0] = '0';
+				FracDec[0] = '0';
 			}
 			dem_phantri++;
 			if(dem_phantri>sophantri) 
@@ -413,13 +490,13 @@ string Qfloat::DecToBin(string num)
 	}
 
 	//Luu vo bien np
-	string np = np_nguyen +"."+ np_tp;
+	string np = IntBin +"."+ FracBin;
 	/*if(num[0]=='-')
 	{
-		np = '-' + np_nguyen + '.' + np_tp;
+		np = '-' + IntBin + '.' + FracBin;
 	}
 	else
-	  np = np_nguyen + "." + np_tp;
+	  np = IntBin + "." + FracBin;
 	*/
 
 	//
@@ -435,12 +512,12 @@ string Qfloat::DecToBin(string num)
 	//Chuyen e ra nhi phan
 	string _e = "";
 	//Dung bien temp de tinh phan tri
-	int temp = somu-16383;
+	int temp = Exp-K;
 	//Chuyen so mu qua nhi phan roi dua vao chuoi e
-	while (somu != 0) {
-		char x = somu % 10 + '0';
+	while (Exp != 0) {
+		char x = Exp % 10 + '0';
 		_e = x + _e;
-		somu = somu / 10;
+		Exp = Exp / 10;
 	}
 
 	//Kich co cua exp
@@ -453,22 +530,22 @@ string Qfloat::DecToBin(string num)
 			e = '1' + e;
 		}
 		size_e++;
-		if(size_e==15) {
+		if(size_e==EXP_SIZE) {
 			break;
 		}
 		_e = chia2(_e);
 	}
 
 	//Chua du 15 bit thi them 0 vao de du 15 bit
-	if (e.length() < 15) {
+	if (e.length() < EXP_SIZE) {
 		int n = e.length();
-		for (int i = 0; i < 15 - n; i++) {
+		for (int i = 0; i < EXP_SIZE - n; i++) {
 			e = '0' + e;
 		}
 	}
 
 	//Luu phan tri m
-	int temp2 = np_nguyen.length() - temp;
+	int temp2 = IntBin.length() - temp;
 	if (temp < 0)
 		temp2++;
 	//Kich co cua m
@@ -478,14 +555,14 @@ string Qfloat::DecToBin(string num)
 		{
 			m += np[i];
 			size_m++;
-			if (size_m == 112)
+			if (size_m == SIGNIF_SIZE)
 				break;
 		}
 	}
 	//Neu khong du 112 bit thi them '0' vao cho du 
-	if (m.length() < 112) {
+	if (m.length() < SIGNIF_SIZE) {
 		int n = m.length();
-		for (int i = 0; i < 112 - n; i++) {
+		for (int i = 0; i < SIGNIF_SIZE - n; i++) {
 			m += '0';
 		}
 	}
@@ -495,14 +572,19 @@ string Qfloat::BinToDec(string s)
 {
 	ChuanHoaBit(s);
 	//Kiem tra du lieu dua vao
-	if (s.size() != 128) //128
-		return "Du lieu sai!";
+	if (s.size() != QFLOAT_SIZE) //128
+	{
+		cout << "Du lieu sai!";
+		return "";
+	}
 	for (int i = 0; i < s.size(); i++)
 	{
 		if (s[i] != '0' && s[i] != '1')
-			return "Du lieu sai!";
+		{
+			cout << "Du lieu sai!";
+			return "";
+		}
 	}
-
 	//Kiem tra truong hop dac biet
 	int check = KTTHdacbiet(s);
 	if(check >0) {
@@ -521,22 +603,22 @@ string Qfloat::BinToDec(string s)
 		}
 		return "";
 	}
-	string Sign = s.substr(0, 1);
-	string Exp = s.substr(1, 15); //1, 15
-	string M = s.substr(16, 112);// 16,112
-	string Dau = "";
-	if (Sign == "1")
-		Dau = "-";
+	string strSign = s.substr(0, SIGN_SIZE);
+	string strExp = s.substr(SIGN_SIZE, EXP_SIZE); //1, 15
+	string strSignif = s.substr(SIGN_SIZE + EXP_SIZE, SIGNIF_SIZE);// 16,112
+	string Sign = "";
+	if (strSign == "1")
+		Sign = "-";
 	
 	//Tính giá trị Exp;
 	string ExpDec = "0";
 	string temp = "1";
-	if (Exp[Exp.size() - 1] == '1')
+	if (strExp[strExp.size() - 1] == '1')
 		ExpDec = "1";
-	for (int i = Exp.size() - 2; i >= 0; i--)
+	for (int i = strExp.size() - 2; i >= 0; i--)
 	{
 		temp = nhan2(temp);
-		if (Exp[i] == '1')
+		if (strExp[i] == '1')
 		{
 			ExpDec = Cong(ExpDec, temp);
 		}
@@ -547,26 +629,26 @@ string Qfloat::BinToDec(string s)
 	{
 		_Exp = _Exp * 10 + ExpDec[i] - '0';
 	}
-	int E = _Exp - 16383;//K
+	int Exp = _Exp - 16383;//K
 
 	//Tìm phần nguyên và phần thập phân ở hệ 2
 	string IntBin = "1";
-	string FracBin = M;
-	while (E != 0)
+	string FracBin = strSignif;
+	while (Exp != 0)
 	{
-		if (E > 0)
+		if (Exp > 0)
 		{
 			IntBin += FracBin[0];
 			FracBin.erase(0, 1);
 			FracBin += '0';
-			E--;
+			Exp--;
 		}
 		else
 		{
 			FracBin = IntBin[IntBin.size() - 1] + FracBin;
 			IntBin.erase(IntBin.size() - 1, 1);
 			IntBin = '0' + IntBin;
-			E++;
+			Exp++;
 		}
 	}
 	//Xóa số 0 dư trước phần nguyên và số 0 dư sau phần thập phân
@@ -595,7 +677,7 @@ string Qfloat::BinToDec(string s)
 	temp = "1";
 	for (int i = 0; i < FracBin.size(); i++)
 	{
-		temp = chia2_thapphan(temp);
+		temp = chia2_FracDec(temp);
 		if (FracBin[i] == '1')
 		{
 			FracDec = CongTP(FracDec, temp);
@@ -604,15 +686,15 @@ string Qfloat::BinToDec(string s)
 	FracDec = FracDec.substr(2, FracDec.size() - 2);
 	string KetQua = "";
 	if (FracDec == "0")
-		KetQua = Dau + IntDec;
+		KetQua = Sign + IntDec;
 	else
-		KetQua = Dau + IntDec + '.' + FracDec;
+		KetQua = Sign + IntDec + '.' + FracDec;
 	return KetQua;
 }
 void Qfloat::PrintQfloat()
 {
 	string s = "";
-	for (int i = 0; i < 128; i++)
+	for (int i = 0; i < QFLOAT_SIZE; i++)
 	{
 		if (getBit(i))
 		{
