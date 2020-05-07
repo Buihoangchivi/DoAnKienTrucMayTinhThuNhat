@@ -10,15 +10,18 @@
 using namespace std;
 class Qfloat
 {
+private:
 	int* data = new int[4];
 public:
 	Qfloat();
-	bool getBit(int index);
-	void setBit(int index, bool bit);
+	Qfloat(string);
 	void ScanQfloat();
 	void PrintQfloat();
-	string BinToDec(string);
-	string DecToBin(string);	 
-	Qfloat operator=(Qfloat x);
+	static string BinToDec(string);
+	static string DecToBin(string);
+private:
+	bool getBit(int index);
+	void setBit(int index, bool bit);
+	Qfloat operator=(Qfloat);
 };
 
