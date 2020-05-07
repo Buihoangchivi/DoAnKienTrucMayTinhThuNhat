@@ -491,7 +491,7 @@ string Qfloat::DecToBin(string num)
 				FracDec[0] = '0';
 			}
 			count_size_signif++;
-			if (count_size_signif == 112) {
+			if (count_size_signif == Size_Signif) {
 				if(FracDec !="1") {
 					check_round = true;
 				}
@@ -523,8 +523,13 @@ string Qfloat::DecToBin(string num)
 				FracDec[0] = '0';
 			}
 			count_size_signif++;
-			if(count_size_signif > Size_Signif)
+			if(count_size_signif == Size_Signif)
+			{
+				if (FracDec != "1") {
+					check_round = true;
+				}
 				break;
+			}
 		}
 	}
 	if (Exp < 0 || Exp > 2*K)
@@ -601,32 +606,32 @@ string Qfloat::DecToBin(string num)
 	}
 
 	//Kiểm tra xem có làm tròn số không? Có thì làm tròn số.
-		if(check_round) {
-			if(Signif_bin == "0") {
-				for (int i = Signif_bin.length() - 1; i >= 0; i--) {
-					if(Signif_bin[i]=='1')
-					{
-						Signif_bin[i] = '0';
-					}
-					else {
-						Signif_bin[i] = '1';
-						break;
-					}
+	if(check_round) {
+		if(Sign_bin == "0") {
+			for (int i = Signif_bin.length() - 1; i >= 0; i--) {
+				if(Signif_bin[i]=='1')
+				{
+					Signif_bin[i] = '0';
 				}
-			}
-			else {
-				for (int i = Signif_bin.length() - 1; i >= 0; i--) {
-					if (Signif_bin[i] == '0')
-					{
-						Signif_bin[i] = '1';
-					}
-					else {
-						Signif_bin[i] = '0';
-						break;
-					}
+				else {
+					Signif_bin[i] = '1';
+					break;
 				}
 			}
 		}
+		else {
+			for (int i = Signif_bin.length() - 1; i >= 0; i--) {
+				if (Signif_bin[i] == '0')
+				{
+					Signif_bin[i] = '1';
+				}
+				else {
+					Signif_bin[i] = '0';
+					break;
+				}
+			}
+		}
+	}
 	return Sign_bin + Exp_bin + Signif_bin;
 }
 string Qfloat::BinToDec(string s)
