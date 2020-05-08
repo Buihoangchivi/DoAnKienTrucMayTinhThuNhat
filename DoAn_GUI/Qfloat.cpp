@@ -1,5 +1,4 @@
-﻿#include "pch.h"
-#include "Qfloat.h"
+﻿#include "Qfloat.h"
 //Kiểm tra dãy bit toàn bit 1 và 0
 bool KTraBitGiongNhau(string s, char c)
 {
