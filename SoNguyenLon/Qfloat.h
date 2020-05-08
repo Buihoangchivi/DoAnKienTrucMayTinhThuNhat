@@ -15,8 +15,9 @@ private:
 public:
 	Qfloat();
 	Qfloat(string);
-	void ScanQfloat();
-	void PrintQfloat();
+	void ScanQfloat(int);
+	void ScanQfloat(string, int);
+	void PrintQfloat(int);
 	static string BinToDec(string);
 	static string DecToBin(string);
 private:

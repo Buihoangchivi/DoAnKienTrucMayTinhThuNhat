@@ -7,6 +7,23 @@ bool KTraBitGiongNhau(string s, char c)
 			return false;
 	return true;
 }
+bool CheckDataBin(string Bin)
+{
+	if (Bin.size() != QFLOAT_SIZE) //128
+	{
+		//cout << "Du lieu sai!";
+		return false;
+	}
+	for (int i = 0; i < Bin.size(); i++)
+	{
+		if (Bin[i] != '0' && Bin[i] != '1')
+		{
+			//cout << "Du lieu sai!";
+			return false;
+		}
+	}
+	return true;
+}
 //Kiểm tra dữ liệu hợp lệ không
 bool CheckData(string Dec)
 {
@@ -14,7 +31,7 @@ bool CheckData(string Dec)
 	int DemDau = 0;
 	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0]<'0' || Dec[0]>'9')))
 	{
-		cout << "Du lieu sai!";
+		//cout << "Du lieu sai!";
 		return false;
 	}
 	if (Dec[0] == '-')
@@ -26,7 +43,7 @@ bool CheckData(string Dec)
 			DemDauCham++;
 			if (DemDauCham == 2)
 			{
-				cout << "Du lieu sai!";
+				//cout << "Du lieu sai!";
 				return false;
 			}
 		}
@@ -35,13 +52,13 @@ bool CheckData(string Dec)
 			DemDau++;
 			if (DemDau == 2)
 			{
-				cout << "Du lieu sai!";
+				//cout << "Du lieu sai!";
 				return false;
 			}
 		}
 		else if (Dec[i] < '0' || Dec[i]>'9')
 		{
-			cout << "Du lieu sai!";
+			//cout << "Du lieu sai!";
 			return false;
 		}
 	}
@@ -307,13 +324,13 @@ Qfloat::Qfloat(string num)
 		if (check > 1) {
 			switch (check) {
 			case 2:
-				cout << "So khong the chuan hoa!!!";
+				cout << "So khong the chuan hoa!!!" << endl;
 				break;
 			case 3:
-				cout << "So vo cung!!!";
+				cout << "So vo cung!!!" << endl;
 				break;
 			case 4:
-				cout << "So bao loi!!!";
+				cout << "So bao loi!!!" << endl;
 				break;
 			}
 		}
@@ -329,7 +346,7 @@ Qfloat::Qfloat(string num)
 		}
 	}
 	else {
-		cout << "So nhap vuot qua kieu du lieu co the bieu dien";
+		cout << "So nhap vuot qua kieu du lieu co the bieu dien" << endl;
 	}
 }
 
@@ -346,38 +363,56 @@ void Qfloat::setBit(int index, bool bit)
 		data[index / 32] = (1 << (31 - index)) | data[index / 32];
 
 }
-void Qfloat::ScanQfloat()
+void Qfloat::ScanQfloat(int base)
 {
 	string result;
-	int check = 1;
-	do
+	string Num;
+	if (base == 10)
 	{
-		cout << "Nhap Qfloat = ";
-		string num;
-		cin >> num;
-		//Dua bit vao data
-		result = DecToBin(num);
-		if(result != "")
+		int check = 1;
+		do
 		{
-			check = KTTHdacbiet(result);
-			if (check > 1) {
-				switch (check) {
-				case 2:
-					cout << "So khong the chuan hoa!!!";
-					break;
-				case 3:
-					cout << "So vo cung!!!";
-					break;
-				case 4:
-					cout << "So bao loi!!!";
-					break;
+			cout << "Nhap Qfloat = ";
+			cin >> Num;
+			//Dua bit vao data
+			result = DecToBin(Num);
+			if (result != "")
+			{
+				check = KTTHdacbiet(result);
+				if (check > 1) {
+					switch (check) {
+					case 2:
+						cout << "So khong the chuan hoa!!!" << endl;
+						break;
+					case 3:
+						cout << "So vo cung!!!" << endl;
+						break;
+					case 4:
+						cout << "So bao loi!!!" << endl;
+						break;
+					}
 				}
 			}
-		}
-		else {
-			cout << "So nhap vuot qua kieu du lieu co the bieu dien";
-		}
-	} while ((check >1) || (result ==""));
+			else {
+				cout << "So nhap vuot qua kieu du lieu co the bieu dien" << endl;
+			}
+		} while ((check > 1) || (result == ""));
+	}
+	else if (base == 2)
+	{
+		bool check_bin;
+		do
+		{
+			cout << "Nhap Qfloat (day bin day du 128 bit) = ";
+			cin >> Num;
+			check_bin = CheckDataBin(Num);
+			if (check_bin == false)
+			{
+				cout << "Du lieu sai!!!" << endl;
+			}
+		} while (check_bin == false);
+		result = Num;
+	}
 	for (int i = 0; i < QFLOAT_SIZE; i++) {
 		if (result[i] - '0' == 0) {
 			setBit(i, 0);
@@ -387,12 +422,64 @@ void Qfloat::ScanQfloat()
 		}
 	}
 }
+void Qfloat::ScanQfloat(string Num, int base)
+{
+	string result;
+	bool check_bin = true;
+	int check = 0;
+	if (base == 10)
+	{
+		//Dua bit vao data
+		result = DecToBin(Num);
+		if (result != "")
+		{
+			check = KTTHdacbiet(result);
+			if (check > 1) {
+				switch (check) {
+				case 2:
+					cout << "So khong the chuan hoa!!!" << endl;
+					break;
+				case 3:
+					cout << "So vo cung!!!" << endl;
+					break;
+				case 4:
+					cout << "So bao loi!!!" << endl;
+					break;
+				}
+			}
+		}
+		else {
+			cout << "So nhap vuot qua kieu du lieu co the bieu dien" << endl;
+		}
+	}
+	else if (base == 2)
+	{
+		check_bin = CheckDataBin(Num);
+		if (check_bin == false)
+		{
+			cout << "Du lieu sai!!!" << endl;
+		}
+		result = Num;
+	}
+	if (check_bin == true || check == 0)
+	{
+		for (int i = 0; i < QFLOAT_SIZE; i++) {
+			if (result[i] - '0' == 0) {
+				setBit(i, 0);
+			}
+			else {
+				setBit(i, 1);
+			}
+		}
+	}
+}
 
 string Qfloat::DecToBin(string num)
 {
 	bool check_data = CheckData(num);
 	if (check_data == false)
 	{
+		cout << "Du lieu sai!!!" << endl;
 		return "";
 	}
 	//Kiem tra so nhap vao phai 0 khong?
@@ -638,18 +725,11 @@ string Qfloat::BinToDec(string s)
 {
 	ChuanHoaBit(s);
 	//Kiem tra du lieu dua vao
-	if (s.size() != QFLOAT_SIZE) //128
+	bool check_data = CheckDataBin(s);
+	if (check_data == false)
 	{
-		cout << "Du lieu sai!";
+		cout << "Du lieu sai!!!" << endl;
 		return "";
-	}
-	for (int i = 0; i < s.size(); i++)
-	{
-		if (s[i] != '0' && s[i] != '1')
-		{
-			cout << "Du lieu sai!";
-			return "";
-		}
 	}
 	//Kiem tra truong hop dac biet
 	int check = KTTHdacbiet(s);
@@ -658,13 +738,13 @@ string Qfloat::BinToDec(string s)
 		case 1:
 			return "0";
 		case 2:
-			cout << "So khong the chuan hoa!!!";
+			cout << "So khong the chuan hoa!!!" << endl;
 			break;
 		case 3:
-			cout << "So vo cung!!!";
+			cout << "So vo cung!!!" << endl;
 			break;
 		case 4:
-			cout << "So bao loi!!!";
+			cout << "So bao loi!!!" << endl;
 			break;
 		}
 		return "";
@@ -757,7 +837,7 @@ string Qfloat::BinToDec(string s)
 		KetQua = Sign + IntDec + '.' + FracDec;
 	return KetQua;
 }
-void Qfloat::PrintQfloat()
+void Qfloat::PrintQfloat(int base)
 {
 	string s = "";
 	for (int i = 0; i < QFLOAT_SIZE; i++)
@@ -769,8 +849,15 @@ void Qfloat::PrintQfloat()
 		else
 			s += '0';
 	}
-	string result = BinToDec(s);
-	cout << result << endl;
+	if (base == 10)
+	{
+		string result = BinToDec(s);
+		cout << result << endl;
+	}
+	else if (base == 2)
+	{
+		cout << s << endl;
+	}
 }
 Qfloat Qfloat::operator=(Qfloat x)
 {

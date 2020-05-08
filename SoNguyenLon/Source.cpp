@@ -2,7 +2,11 @@
 #include "Qfloat.h"
 int main()
 {
-	cout << Qfloat::DecToBin("1.1999999999999999556")<<endl;
+	Qfloat a;
+	a.ScanQfloat("0.1", 10);
+	a.PrintQfloat(10);
+	a.PrintQfloat(2);
+	//cout << Qfloat::DecToBin("1.1999999999999999556")<<endl;
 	//cout << Qfloat::DecToBin("26.499999986733027")<<endl;
 	//cout << Qfloat::DecToBin("0.0")<<endl;
 	//cout << Qfloat::BinToDec("01000000000000001101011011110011101000001101001010110110110000001110000001011000110011010000011110101100000101001010110010101101")<<endl;
