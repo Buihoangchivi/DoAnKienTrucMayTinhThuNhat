@@ -526,32 +526,37 @@ string ClassQfloat::ConvertDecToBin(string num)
 		//So phan tu phan tri toi da
 		Size_Signif = SIGNIF_SIZE - Exp;
 		Exp += K;
-		int count_size_signif = 0;
-		//Chuyen phan thap phan qua nhi phan
-		while (1) {
-			FracDec = nhan2(FracDec);
-			if (FracDec[0] == '0') {
-				FracBin += '0';
-				if (FracDec == "0") {
-					break;
+		if(Size_Signif>=0) {
+			int count_size_signif = 0;
+			//Chuyen phan thap phan qua nhi phan
+			while (1) {
+				FracDec = nhan2(FracDec);
+				if (FracDec[0] == '0') {
+					FracBin += '0';
+					if (FracDec == "0") {
+						break;
+					}
 				}
-			}
-			else {
+				else {
 
-				FracBin += '1';
-				if (FracDec == "1") {
+					FracBin += '1';
+					if (FracDec == "1") {
+						break;
+					}
+					FracDec[0] = '0';
+				}
+				count_size_signif++;
+				if (count_size_signif == Size_Signif)
+				{
+					if (FracDec != "1") {
+						check_round = true;
+					}
 					break;
 				}
-				FracDec[0] = '0';
 			}
-			count_size_signif++;
-			if (count_size_signif == Size_Signif)
-			{
-				if (FracDec != "1") {
-					check_round = true;
-				}
-				break;
-			}
+		}
+		else {
+			check_round = true;
 		}
 	}
 	//Exp vuot qua khoang gia tri 
