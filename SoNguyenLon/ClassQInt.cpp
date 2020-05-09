@@ -362,7 +362,7 @@ string QInt::convertDecToHex()
 	string ans = "", s1;
 	pair<QInt, QInt> temp;
 	QInt a = *this, b("16");
-	while (a.data[0] != 0 || a.data[1] != 0 || a.data[2] != 0 || a.data[3] != 0)
+	while (a.data[0] != 0 && a.data[1] != 0 && a.data[2] != 0 && a.data[3] != 0)
 	{
 
 		temp = a / b;
@@ -452,9 +452,9 @@ QInt QInt::operator*(QInt x)
 			a = a + x;
 		//Dich phai [A, Q, Q1] 1 don vi
 		q1 = q0;
-		q = q >> 1;
+		q << 1;
 		q.setBit(127, a.getBit(0));
-		a = a >> 1;
+		a << 1;
 
 	}
 	return q;
@@ -470,13 +470,14 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 	if (q.getBit(127) == 1)
 		for (int i = 0; i < 128; i++)
 			a.setBit(i, 1);
+	vector<bool> boo;
 	for (int i = 0; i < 128; i++)
 	{
 
 		//Dich trai [A, Q] 1 bit
-		a = a << 1;
+		a >> 1;
 		a.setBit(0, q.getBit(127));
-		q = q << 1;
+		q >> 1;
 		//Gan B = A
 		b = a;
 		//Voi X la so chia
@@ -511,21 +512,18 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 
 bool QInt::operator<(QInt x)
 {
-	int pos1, pos2;
-	pos1 = this->Vitribitdau();
-	pos2 = x.Vitribitdau();
-	if (pos1 < pos2)
+	if (this->getBit(127) > x.getBit(127))
 		return true;
-	if (pos1 > pos2)
+	else if (this->getBit(127) < x.getBit(127))
 		return false;
-	if(pos1==pos2)
+	else
 	{
-		for (int i = pos1; i >= 0; i--)
+		for (int i = 126; i >= 0; i--)
 		{
-			if (this->getBit(i) > x.getBit(i))
-				return false;
 			if (this->getBit(i) < x.getBit(i))
 				return true;
+			if (this->getBit(i) > x.getBit(i))
+				return false;
 		}
 		return false;
 	}
@@ -533,26 +531,19 @@ bool QInt::operator<(QInt x)
 
 bool QInt::operator>(QInt x)
 {
-	int pos1, pos2;
-	pos1 = this->Vitribitdau();
-	pos2 = x.Vitribitdau();
-	if (pos1 > pos2)
+	if (this->getBit(127) < x.getBit(127))
 		return true;
-	if (pos1 < pos2)
+	if (this->getBit(127) > x.getBit(127))
 		return false;
-	if (pos1 == pos2)
+	for (int i = 126; i >= 0; i--)
 	{
-		for (int i = pos1; i >= 0; i--)
-		{
-			if (this->getBit(i) < x.getBit(i))
-				return false;
-			if (this->getBit(i) > x.getBit(i))
-				return true;
-		}
-		return false;
+		if (this->getBit(i) > x.getBit(i))
+			return true;
+		if (this->getBit(i) < x.getBit(i))
+			return false;
 	}
+	return false;
 }
-
 bool QInt::operator==(QInt x)
 {
 	for (int i = 0; i < 128; i++)
@@ -565,46 +556,37 @@ bool QInt::operator==(QInt x)
 
 bool QInt::operator<=(QInt x)
 {
-	int pos1, pos2;
-	pos1 = this->Vitribitdau();
-	pos2 = x.Vitribitdau();
-	if (pos1 < pos2)
+	if (this->getBit(127) > x.getBit(127))
 		return true;
-	if (pos1 > pos2)
+	else if (this->getBit(127) < x.getBit(127))
 		return false;
-	if (pos1 == pos2)
+	else
 	{
-		for (int i = pos1; i >= 0; i--)
+		for (int i = 126; i >= 0; i--)
 		{
-			if (this->getBit(i) > x.getBit(i))
-				return false;
 			if (this->getBit(i) < x.getBit(i))
 				return true;
+			if (this->getBit(i) > x.getBit(i))
+				return false;
 		}
-		return false;
+		return true;
 	}
 }
 
 bool QInt::operator>=(QInt x)
 {
-	int pos1, pos2;
-	pos1 = this->Vitribitdau();
-	pos2 = x.Vitribitdau();
-	if (pos1 > pos2)
+	if (this->getBit(127) < x.getBit(127))
 		return true;
-	if (pos1 < pos2)
+	if (this->getBit(127) > x.getBit(127))
 		return false;
-	if (pos1 == pos2)
+	for (int i = 126; i >= 0; i--)
 	{
-		for (int i = pos1; i >= 0; i--)
-		{
-			if (this->getBit(i) < x.getBit(i))
-				return false;
-			if (this->getBit(i) > x.getBit(i))
-				return true;
-		}
-		return true;
+		if (this->getBit(i) > x.getBit(i))
+			return true;
+		if (this->getBit(i) < x.getBit(i))
+			return false;
 	}
+	return true;
 }
 
 QInt QInt::operator=(QInt x)
@@ -677,50 +659,75 @@ QInt QInt::operator~()
 	return temp;
 }
 
-int QInt:: Vitribitdau()
-{
-	for (int i = 127; i >= 0; i--)
-	{
-		if (this->getBit(i) != this->getBit(i - 1))
-			return i - 1;
-	}
-}
-QInt QInt::operator<<(int k)
+/*QInt QInt::operator<<(int k)
 {
 
-	QInt temp;
-	for (int i = 0; i < 128 - k; i++)
-		temp.setBit(i + k, this->getBit(i));
-	return temp;
+	for (int i = 0; i < 127; i++)
+		this->setBit(i, this->getBit(i + 1));
+	this->setBit(127, 0);
+	return *this;
 
 }
 
 QInt QInt::operator>>(int k)
 {
-	
+
+	for (int i = 127; i > 0; i--)
+		this->setBit(i, this->getBit(i - 1));
+	this->setBit(0, 0);
+	return *this;
+
+}*/
+
+
+QInt QInt::operator<<(int k)
+{
+	QInt temp;
+	for (int i = 0; i < 128-k; i++)
+	{
+		temp.setBit(i + k, this->getBit(i));
+	}
+	return temp;
+}
+
+QInt QInt::operator>>(int k)
+{
 	QInt temp;
 	for (int i = 0; i < 128 - k; i++)
 		temp.setBit(i, this->getBit(i + k));
 	return temp;
-
 }
-QInt QInt::ror()
+QInt QInt::ror(int k)
 {
-	int temp;
-	temp = this->getBit(0);
-	for (int i = 0; i < 127; i++)
-		this->setBit(i, this->getBit(i + 1));
-	this->setBit(127, temp);
-	return *this;
+	QInt temp;
+	for (int i = 0; i < 128 - k; i++)
+	{
+		temp.setBit(i, this->getBit(i + k));
+	}
+	int i = 0;
+	while (k > 0)
+	{
+		temp.setBit(128-k, i);
+		i++;
+		k--;
+	}
+	return temp;
 }
-QInt QInt::rol()
+QInt QInt::rol(int k)
 {
-	int temp;
-	temp = this->getBit(127);
-	for (int i = 127; i > 0; i--)
-		this->setBit(i, this->getBit(i - 1));
-	this->setBit(0, temp);
-	return *this;
+	QInt temp;
+	for (int i = 0; i < 128 - k; i++)
+	{
+		temp.setBit(i + k, this->getBit(i));
+	}
+	int i = 0;
+	while (k > 0)
+	{
+		temp.setBit(i, this->getBit(128 - k));
+		i++;
+		k--;
+	}
+	return temp;
 }
 
 void QInt::ScanQInt()
