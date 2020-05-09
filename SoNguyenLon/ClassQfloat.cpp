@@ -491,7 +491,7 @@ string ClassQfloat::ConvertDecToBin(string num)
 		}
 		//Khi tim duoc so 1 dau tien thi biet exp, Size_Signif toi da
 		Exp = IntBin.length() - pos_1;
-		Size_Signif = SIGNIF_SIZE - Exp;
+		Size_Signif = SIGNIF_SIZE;
 		Exp += K;
 		int count_size_signif = 0;
 		//Tiep tuc
