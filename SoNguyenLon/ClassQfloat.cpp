@@ -459,13 +459,18 @@ string ClassQfloat::ConvertDecToBin(string num)
 	if (IntBin.length() == 0)
 		IntBin += '0';
 	else
-		pos_1 = 0;
+		pos_1 = 0; //Nếu có phần nguyên thì số 1 phải ở đầu.
+
 	string FracBin = "";
 	string FracDec = "0" + num.substr(pos_dots);
 	int Exp;
 	int Size_Signif;
 	bool check_round = false;
+	//Xet xem vi tri so 1 dau tien o dau
+	//+ So 1 dau tien ở đầu 1xx,0001100101
+	//+ So 1 dau tien chua tim thay 0,00000000001010101....
 	if (pos_1 == -1) {
+		//Vua chuyen thap phan qua nhi phan vao FracBin vua tim so 1 dau tien
 		while (1) {
 			FracDec = nhan2(FracDec);
 			if (FracDec[0] == '0') {
@@ -484,11 +489,12 @@ string ClassQfloat::ConvertDecToBin(string num)
 				}
 			}
 		}
+		//Khi tim duoc so 1 dau tien thi biet exp, Size_Signif toi da
 		Exp = IntBin.length() - pos_1;
 		Size_Signif = SIGNIF_SIZE - Exp;
 		Exp += K;
 		int count_size_signif = 0;
-		//Chuyen phan thap phan qua nhi phan
+		//Tiep tuc
 		while (1) {
 			FracDec = nhan2(FracDec);
 			if (FracDec[0] == '0') {
@@ -512,11 +518,12 @@ string ClassQfloat::ConvertDecToBin(string num)
 				}
 				break;
 			}
-
 		}
 	}
 	else {
+		//Truong hop so 1 dau tien o dau
 		Exp = IntBin.length() - 1;
+		//So phan tu phan tri toi da
 		Size_Signif = SIGNIF_SIZE - Exp;
 		Exp += K;
 		int count_size_signif = 0;
@@ -547,8 +554,10 @@ string ClassQfloat::ConvertDecToBin(string num)
 			}
 		}
 	}
+	//Exp vuot qua khoang gia tri 
 	if (Exp < 0 || Exp > 2 * K)
 		return "";
+
 	//Luu vo bien np
 	string Bin = IntBin + "." + FracBin;
 	//

@@ -43,6 +43,10 @@ void CQfloat::OnBnClickedOk()
 	CString Cnum;
 	editbox->GetWindowText(Cnum);
 	string num = CStringA(Cnum);
+	if(num.length()==0) {
+		MessageBox(_T("Ban chua nhap du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
 	int check_radio = GetCheckedRadioButton(IDC_RADIO1, IDC_RADIO2);
 	ClassQfloat temp;
 	if (check_radio == IDC_RADIO1)
