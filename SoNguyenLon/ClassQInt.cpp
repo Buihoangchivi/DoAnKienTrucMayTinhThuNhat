@@ -452,9 +452,9 @@ QInt QInt::operator*(QInt x)
 			a = a + x;
 		//Dich phai [A, Q, Q1] 1 don vi
 		q1 = q0;
-		q << 1;
+		q = q << 1;
 		q.setBit(127, a.getBit(0));
-		a << 1;
+		a = a << 1;
 
 	}
 	return q;
@@ -475,9 +475,9 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 	{
 
 		//Dich trai [A, Q] 1 bit
-		a >> 1;
+		a = a >> 1;
 		a.setBit(0, q.getBit(127));
-		q >> 1;
+		q = q >> 1;
 		//Gan B = A
 		b = a;
 		//Voi X la so chia
@@ -512,6 +512,7 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 
 bool QInt::operator<(QInt x)
 {
+
 	if (this->getBit(127) > x.getBit(127))
 		return true;
 	else if (this->getBit(127) < x.getBit(127))
@@ -527,10 +528,12 @@ bool QInt::operator<(QInt x)
 		}
 		return false;
 	}
+
 }
 
 bool QInt::operator>(QInt x)
 {
+
 	if (this->getBit(127) < x.getBit(127))
 		return true;
 	if (this->getBit(127) > x.getBit(127))
@@ -543,19 +546,22 @@ bool QInt::operator>(QInt x)
 			return false;
 	}
 	return false;
+
 }
+
 bool QInt::operator==(QInt x)
 {
+
 	for (int i = 0; i < 128; i++)
-	{
 		if (this->getBit(i) != x.getBit(i))
 			return false;
-	}
 	return true;
+
 }
 
 bool QInt::operator<=(QInt x)
 {
+
 	if (this->getBit(127) > x.getBit(127))
 		return true;
 	else if (this->getBit(127) < x.getBit(127))
@@ -571,10 +577,12 @@ bool QInt::operator<=(QInt x)
 		}
 		return true;
 	}
+
 }
 
 bool QInt::operator>=(QInt x)
 {
+
 	if (this->getBit(127) < x.getBit(127))
 		return true;
 	if (this->getBit(127) > x.getBit(127))
@@ -587,67 +595,71 @@ bool QInt::operator>=(QInt x)
 			return false;
 	}
 	return true;
+
 }
 
 QInt QInt::operator=(QInt x)
 {
+
 	for (int i = 0; i < 4; i++)
 		this->data[i] = x.data[i];
 	return *this;
+
 }
 
 QInt QInt::operator&(QInt x)
 {
+
 	QInt temp;
 	char s;
 	for (int i = 0; i < 128; i++)
 	{
 		s = this->getBit(i) + x.getBit(i);
 		if (s == 2)
-		{
 			temp.setBit(i, 1);
-		}
 		else
 			temp.setBit(i, 0);
 	}
 	return temp;
+
 }
 
 QInt QInt::operator|(QInt x)   /// OR
 {
+
 	QInt temp;
 	char s;
 	for (int i = 0; i < 128; i++)
 	{
 		s = this->getBit(i) + x.getBit(i);
 		if (s == 0)
-		{
 			temp.setBit(i, 0);
-		}
 		else
 			temp.setBit(i, 1);
 	}
 	return temp;
+
 }
 QInt QInt::operator^(QInt x)		//XOR
 {
+
 	QInt temp;
 	char s;
 	for (int i = 0; i < 128; i++)
 	{
 		s = this->getBit(i) + x.getBit(i);
 		if (s == 1)
-		{
 			temp.setBit(i, 1);
-		}
 		else
 			temp.setBit(i, 0);
 	}
 	return temp;
+
 }
 
 QInt QInt::operator~()
 {
+
 	QInt temp;
 	for (int i = 0; i < 128; i++)
 	{
@@ -657,53 +669,34 @@ QInt QInt::operator~()
 			temp.setBit(i, 0);
 	}
 	return temp;
-}
-
-/*QInt QInt::operator<<(int k)
-{
-
-	for (int i = 0; i < 127; i++)
-		this->setBit(i, this->getBit(i + 1));
-	this->setBit(127, 0);
-	return *this;
 
 }
-
-QInt QInt::operator>>(int k)
-{
-
-	for (int i = 127; i > 0; i--)
-		this->setBit(i, this->getBit(i - 1));
-	this->setBit(0, 0);
-	return *this;
-
-}*/
-
 
 QInt QInt::operator<<(int k)
 {
+
 	QInt temp;
 	for (int i = 0; i < 128-k; i++)
-	{
 		temp.setBit(i + k, this->getBit(i));
-	}
 	return temp;
+
 }
 
 QInt QInt::operator>>(int k)
 {
+
 	QInt temp;
 	for (int i = 0; i < 128 - k; i++)
 		temp.setBit(i, this->getBit(i + k));
 	return temp;
+
 }
 QInt QInt::ror(int k)
 {
+
 	QInt temp;
 	for (int i = 0; i < 128 - k; i++)
-	{
 		temp.setBit(i, this->getBit(i + k));
-	}
 	int i = 0;
 	while (k > 0)
 	{
@@ -712,14 +705,14 @@ QInt QInt::ror(int k)
 		k--;
 	}
 	return temp;
+
 }
 QInt QInt::rol(int k)
 {
+
 	QInt temp;
 	for (int i = 0; i < 128 - k; i++)
-	{
 		temp.setBit(i + k, this->getBit(i));
-	}
 	int i = 0;
 	while (k > 0)
 	{
@@ -728,6 +721,7 @@ QInt QInt::rol(int k)
 		k--;
 	}
 	return temp;
+
 }
 
 void QInt::ScanQInt()
@@ -768,7 +762,6 @@ void QInt::PrintQInt()
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
-
-
 	cout << ketqua << endl;
+
 }

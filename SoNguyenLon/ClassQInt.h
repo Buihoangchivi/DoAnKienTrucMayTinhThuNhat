@@ -37,8 +37,6 @@ public:
 	QInt operator>>(int k);
 	QInt rol(int k);
 	QInt ror(int k);
-
-
 	void ScanQInt();
 	void PrintQInt();
 };
