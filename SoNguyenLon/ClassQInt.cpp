@@ -362,7 +362,7 @@ string QInt::convertDecToHex()
 	string ans = "", s1;
 	pair<QInt, QInt> temp;
 	QInt a = *this, b("16");
-	while (a.data[0] != 0 && a.data[1] != 0 && a.data[2] != 0 && a.data[3] != 0)
+	while (a.data[0] != 0 || a.data[1] != 0 || a.data[2] != 0 || a.data[3] != 0)
 	{
 
 		temp = a / b;
@@ -452,9 +452,9 @@ QInt QInt::operator*(QInt x)
 			a = a + x;
 		//Dich phai [A, Q, Q1] 1 don vi
 		q1 = q0;
-		q << 1;
+		q = q >> 1;
 		q.setBit(127, a.getBit(0));
-		a << 1;
+		a = a >> 1;
 
 	}
 	return q;
@@ -470,14 +470,13 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 	if (q.getBit(127) == 1)
 		for (int i = 0; i < 128; i++)
 			a.setBit(i, 1);
-	vector<bool> boo;
 	for (int i = 0; i < 128; i++)
 	{
 
 		//Dich trai [A, Q] 1 bit
-		a >> 1;
+		a = a << 1;
 		a.setBit(0, q.getBit(127));
-		q >> 1;
+		q = q << 1;
 		//Gan B = A
 		b = a;
 		//Voi X la so chia
@@ -678,26 +677,6 @@ QInt QInt::operator~()
 	return temp;
 }
 
-/*QInt QInt::operator<<(int k)
-{
-
-	for (int i = 0; i < 127; i++)
-		this->setBit(i, this->getBit(i + 1));
-	this->setBit(127, 0);
-	return *this;
-
-}
-
-QInt QInt::operator>>(int k)
-{
-
-	for (int i = 127; i > 0; i--)
-		this->setBit(i, this->getBit(i - 1));
-	this->setBit(0, 0);
-	return *this;
-
-}*/
-
 int QInt:: Vitribitdau()
 {
 	for (int i = 127; i >= 0; i--)
@@ -708,34 +687,22 @@ int QInt:: Vitribitdau()
 }
 QInt QInt::operator<<(int k)
 {
-	int tmp;
+
 	QInt temp;
-	for (int i = 0; i < k; i++)
-	{
-		temp.setBit(i, 0);
-	}
-	for (int i = 0; i < 128-k; i++)
-	{
-		tmp = this->getBit(i);
-		temp.setBit(i + k, tmp);
-	}
+	for (int i = 0; i < 128 - k; i++)
+		temp.setBit(i + k, this->getBit(i));
 	return temp;
+
 }
 
 QInt QInt::operator>>(int k)
 {
-	int tmp, pos = this->Vitribitdau();
+	
 	QInt temp;
-	for (int i = k; i <= pos; i++)
-	{
-		tmp = this->getBit(i);
-		temp.setBit(i-k, tmp);
-	}
-	for (int i = pos - k + 1; i < 128; i++)
-	{
-		temp.setBit(i, 0);
-	}
+	for (int i = 0; i < 128 - k; i++)
+		temp.setBit(i, this->getBit(i + k));
 	return temp;
+
 }
 QInt QInt::ror()
 {

@@ -38,7 +38,6 @@ public:
 	QInt rol();
 	QInt ror();
 	int Vitribitdau();
-
 	void ScanQInt();
 	void PrintQInt();
 };
