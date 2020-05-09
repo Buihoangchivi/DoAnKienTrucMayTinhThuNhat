@@ -39,5 +39,9 @@ public:
 	QInt ror(int k);
 	void ScanQInt();
 	void PrintQInt();
+	void Scan(string num, int base);
+	string getBin();
+	string getDec();
+	string getHex();
 };
 

@@ -316,7 +316,7 @@ string QInt::convertBinToDec(vector<bool> vbit)
 
 	string ketqua = "0";
 	vector<int> c;
-	reverse(vbit.begin(), vbit.end());
+	//reverse(vbit.begin(), vbit.end());
 	while (vbit.size() < 128)
 	{
 		vbit.push_back(0);
@@ -764,4 +764,50 @@ void QInt::PrintQInt()
 	}
 	cout << ketqua << endl;
 
+}
+
+void QInt::Scan(string num, int base)
+{
+	if (base == 10)
+	{
+		QInt a(num);
+		*this = a;
+	}
+	else if (base == 2)
+	{
+		vector<bool> temp;
+		int count = 0;
+		while (num[count] != '\0')
+		{
+			temp.push_back(num[count]);
+			count++;
+		}
+		QInt a(convertBinToDec(temp));
+	}
+	else if (base == 16)
+	{
+		// convertHexToDec();
+	}
+}
+
+string QInt::getBin()
+{
+	vector<bool> temp = this->convertDecToBin();
+	string rs;
+	for (int i = temp.size() - 1; i >= 0; i--)
+	{
+		rs += temp[i];
+	}
+	return rs;
+}
+
+string QInt::getDec()
+{
+	return this->convertQIntToDec();
+}
+
+string QInt::getHex()
+{
+	string rs;
+	return rs;
 }
