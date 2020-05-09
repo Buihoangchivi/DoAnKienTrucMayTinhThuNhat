@@ -35,9 +35,9 @@ public:
 	QInt operator~();
 	QInt operator<<(int k);
 	QInt operator>>(int k);
-	QInt rol();
-	QInt ror();
-	int Vitribitdau();
+	QInt rol(int k);
+	QInt ror(int k);
+
 
 	void ScanQInt();
 	void PrintQInt();
