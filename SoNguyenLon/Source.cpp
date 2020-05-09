@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "ClassQInt.h"
+
 bool checkBin(string num)
 {
 	int index = 0;
@@ -316,6 +317,11 @@ void ReadFileInt2()
 int main()
 {
 
+	string s;
+	cin >> s;
+	for (int i = 0; i < s.length() / 2; i++)
+		swap(s[i], s[s.length() - i - 1]);
+	cout << QInt::convertHexToDec(s) << endl;
 	return 0;
 
 }

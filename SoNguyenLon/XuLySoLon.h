@@ -7,8 +7,10 @@ using namespace std;
 
 int SoSanh(vector<int> a, vector<int> b);
 void LoaiBoSo0(vector<int>& x);
-inline void Cong(string a, string b, string& c);
-void Tru(vector<int> sotru, vector<int> sobitru, vector<int>& ketqua);
-void Nhan(string a, string b, string& c);
-void Chia(string sochia, string sobichia, string& ketqua);
-inline void LuyThuaCua2(int somu, string& ketqua);
+void Cong(string a, string b, string& ketqua);
+void Tru(string sotru, string sobitru, string& ketqua);
+void Nhan(string a, int b, string& ketqua);
+void Chia(string sochia, int sobichia, string& ketqua);
+string LuyThua(int coso, int somu);
+void ChuanHoa(string& a, string& b);
+void ChuanHoaSo0(string& a);

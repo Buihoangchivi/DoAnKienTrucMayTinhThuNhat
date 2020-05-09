@@ -41,7 +41,7 @@ QInt::QInt(string s)
 	dem++;
 	while (temp != "1")
 	{
-		Chia(temp, "2", temp);
+		Chia(temp, 2, temp);
 		cuoi = temp[temp.size() - 1] - '0';
 		if (ok == 1)
 			setBit(dem, (cuoi + 1) % 2);
@@ -68,140 +68,6 @@ QInt::QInt(string s)
 
 }
 
-// sobichia nhỏ
-
-void ChuanHoa(string &a, string &b)
-{
-	int dodai1 = a.length();
-	int dodai2 = b.length();
-	if (dodai1 >= dodai2)
-	{
-		b.insert(0, dodai1 - dodai2, '0');
-	}
-	else
-	{
-		a.insert(0, dodai2 - dodai1, '0');
-	}
-}
-
-// Bỏ các số 0 ở đầu
-void ChuanHoaSo0(string &a)
-{
-	if (a.length() == 1)
-		return;
-	int i = 0;
-	if (a[i] == '0')
-	{
-		while (a[i] == '0')
-		{
-			a.erase(a.begin() + i);
-
-		}
-	}
-	else
-		return;
-
-
-}
-
-void Cong(string a, string b, string &ketqua)
-{
-	ketqua = "";
-	ChuanHoa(a, b);
-	int temp = 0;
-	for (int i = a.size() - 1; i >= 0; i--)
-	{
-		temp = a[i] - '0' + b[i] - '0' + temp;
-		ketqua.insert(0, 1, (char)(temp % 10 + 48));
-		temp /= 10;
-	}
-	if (temp > 0)
-	{
-		ketqua.insert(0, 1, (char)(temp + 48));
-	}
-	ChuanHoaSo0(ketqua);
-}
-
-void Tru(string sotru, string sobitru, string &ketqua)
-{
-	ketqua = "";
-	int length = sotru.size();
-	while (sobitru.size() < length)
-	{
-		sobitru.insert(0, 1, '0');
-	}
-
-	int sodu = 0;
-	for (int i = length - 1; i >= 0; i--)
-	{
-		if (sotru[i] < sobitru[i] + sodu)
-		{
-			ketqua.push_back((char)(sotru[i] - sobitru[i] - sodu + 10 + 48));
-			sodu = 1;
-		}
-		else
-		{
-			ketqua.push_back((char)(sotru[i] - sobitru[i] - sodu + 48));
-			sodu = 0;
-		}
-	}
-	reverse(ketqua.begin(), ketqua.end());
-
-	ChuanHoaSo0(ketqua);
-}
-
-void Nhan(string a, int b, string &ketqua)
-{
-	ketqua = "";
-	int temp = 0;
-	for (int i = a.size() - 1; i >= 0; i--)
-	{
-		temp = b * (a[i] - '0') + temp;
-		ketqua.insert(0, 1, (char)(temp % 10 + 48));
-		temp /= 10;
-	}
-	if (temp > 0)
-	{
-		ketqua.insert(0, 1, (char)(temp + 48));
-	}
-	ChuanHoaSo0(ketqua);
-}
-
-
-// https://www.geeksforgeeks.org/divide-large-number-represented-string/ (ý tưởng phép chia)
-void Chia(string sochia, int sobichia, string &ketqua)
-{
-	ketqua = "";
-	int i = 0;
-	int temp = sochia[i] - '0';
-	while (temp < sobichia)
-	{
-		temp = temp * 10 + (sochia[++i] - '0');
-	}
-	while (i < sochia.size())
-	{
-		ketqua += (temp / sobichia) + '0';
-		temp = (temp%sobichia) * 10 + sochia[++i] - '0';
-	}
-	if (ketqua.length() == 0)
-	{
-		ketqua = "0";
-	}
-	ChuanHoaSo0(ketqua);
-}
-
-void LuyThuaCua2(int somu, string &ketqua)
-{
-	ketqua = "2";
-	for (int i = 0; i < somu - 1; i++)
-	{
-		Nhan(ketqua, 2, ketqua);
-	}
-	if (somu == 0)
-		ketqua = "1";
-	ChuanHoaSo0(ketqua);
-}
-
 bool QInt::getBit(int i)
 {
 
@@ -222,35 +88,28 @@ void QInt::setBit(int i, bool bit)
 string QInt::convertQIntToDec()
 {
 
-	string ketqua = "0";
+	string ketqua = "0", b;
 	vector<int> c;
-
-
 	for (int i = 0; i < 127; i++)
 	{
 		bool bit = getBit(i);
-		string b;
-		LuyThuaCua2(i, b);
+		b = LuyThua(2, i);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
 	if (getBit(127) == 1)
 	{
-		string temp;
-		LuyThuaCua2(127, temp);
-		Tru(temp, ketqua, ketqua);
+		b = LuyThua(2, 127);
+		Tru(b, ketqua, ketqua);
 		ketqua.insert(0, 1, '-');
 	}
 	else
 	{
 		bool bit = getBit(127);
-		string b;
-		LuyThuaCua2(127, b);
+		b = LuyThua(2, 127);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
-
-
 	return ketqua;
 
 }
@@ -262,59 +121,13 @@ vector<bool> QInt::convertDecToBin()
 	for (int i = 127; i >= 0; i--)
 		rs.push_back(this->getBit(i));
 	return rs;
-	/*vector<bool> rs;
-	string temp = s;
-	bool dau = 0;
-	bool ok = 0;
-	if (temp[0] == '-')
-	{
-		dau = 1;
-		temp.erase(temp.begin());
-	}
-	int cuoi = temp[temp.size() - 1] - '0';
-	int dem = 0;
-	rs.push_back(cuoi % 2);
-	if (dau == 1 && cuoi % 2 == 1)
-	{
-		ok = 1;
-	}
-
-	dem++;
-	while (temp != "1")
-	{
-		Chia(temp, 2, temp);
-		cuoi = temp[temp.size() - 1] - '0';
-		if (ok == 1)
-			rs.push_back((cuoi + 1) % 2);
-		else
-			rs.push_back(cuoi % 2);
-		if (dau == 1 && cuoi % 2 == 1)
-			ok = 1;
-		dem++;
-	}
-
-	while (dem < 128)
-	{
-		if (dau == 1 && ok == 1)
-		{
-			rs.push_back(1);
-		}
-		else
-		{
-			rs.push_back(0);
-		}
-
-		dem++;
-	}
-	reverse(rs.begin(), rs.end());
-	return rs;*/
 
 }
 
 string QInt::convertBinToDec(vector<bool> vbit)
 {
 
-	string ketqua = "0";
+	string ketqua = "0", b;
 	vector<int> c;
 	//reverse(vbit.begin(), vbit.end());
 	while (vbit.size() < 128)
@@ -324,23 +137,20 @@ string QInt::convertBinToDec(vector<bool> vbit)
 	for (int i = 0; i < 128; i++)
 	{
 		bool bit = vbit[i];
-		string b;
-		LuyThuaCua2(i, b);
+		b = LuyThua(2, i);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
 	if (vbit[127] == 1)
 	{
-		string temp;
-		LuyThuaCua2(127, temp);
-		Tru(temp, ketqua, ketqua);
+		b = LuyThua(2, 127);
+		Tru(b, ketqua, ketqua);
 		ketqua.insert(0, 1, '-');
 	}
 	else
 	{
 		bool bit = vbit[127];
-		string b;
-		LuyThuaCua2(127, b);
+		b = LuyThua(2, 127);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
@@ -375,6 +185,36 @@ string QInt::convertDecToHex()
 
 	}
 	return ans;
+
+}
+
+string QInt::convertHexToDec(string s)
+{
+	
+	string ketqua = "0", b;
+	vector<int> c;
+	int ch = 0;
+	bool ok = true;
+	if (s[s.length() - 1] == '-') //Kiem tra xem s co am hay khong
+	{
+
+		ok = false; //Neu am thi danh dau false
+		s.erase(s.end() - 1); //Va xoa dau am, xu ly s nhu 1 so duong
+
+	}
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s[i] >= '0' && s[i] <= '9') //So du tu 0 den 9 (tuong ung tu 0 den 9 trong he hex)
+			ch = (int)(s[i] - '0');
+		else if (toupper(s[i]) >= 'A' && toupper(s[i]) <= 'F') //So du tu 10 den 15 (tuong ung tu A den F trong he hex)
+			ch = (int)(toupper(s[i]) - 'A') + 10;
+		b = LuyThua(16, i); //b = 16 ^ i
+		Nhan(b, ch, b); // b = b * ch
+		Cong(ketqua, b, ketqua); //ketqua = ketqua * b
+	}
+	if (!ok) //Neu s la so am thi them dau am vao dau ketqua
+		ketqua.insert(ketqua.begin(), '-');
+	return ketqua;
 
 }
 
@@ -737,32 +577,7 @@ void QInt::ScanQInt()
 void QInt::PrintQInt()
 {
 
-	string ketqua = "0";
-	vector<int> c;
-	for (int i = 0; i < 127; i++)
-	{
-		bool bit = getBit(i);
-		string b;
-		LuyThuaCua2(i, b);
-		Nhan(b, bit, b);
-		Cong(ketqua, b, ketqua);
-	}
-	if (getBit(127) == 1)
-	{
-		string temp;
-		LuyThuaCua2(127, temp);
-		Tru(temp, ketqua, ketqua);
-		ketqua.insert(0, 1, '-');
-	}
-	else
-	{
-		bool bit = getBit(127);
-		string b;
-		LuyThuaCua2(127, b);
-		Nhan(b, bit, b);
-		Cong(ketqua, b, ketqua);
-	}
-	cout << ketqua << endl;
+	cout << this->convertQIntToDec() << endl;
 
 }
 
