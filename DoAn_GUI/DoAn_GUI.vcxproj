@@ -183,7 +183,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\DoAnKienTrucMayTinhThuNhat\SoNguyenLon\Qfloat.h" />
+    <ClInclude Include="ClassQfloat.h" />
     <ClInclude Include="CQfloat.h" />
     <ClInclude Include="DoAn_GUI.h" />
     <ClInclude Include="DoAn_GUIDlg.h" />
@@ -191,9 +191,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="XuLySoLon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\DoAnKienTrucMayTinhThuNhat\SoNguyenLon\Qfloat.cpp" />
+    <ClCompile Include="ClassQfloat.cpp" />
     <ClCompile Include="CQfloat.cpp" />
     <ClCompile Include="DoAn_GUI.cpp" />
     <ClCompile Include="DoAn_GUIDlg.cpp" />
@@ -203,6 +204,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="XuLySoLon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DoAnGUI.rc" />

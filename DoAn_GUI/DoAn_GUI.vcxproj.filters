@@ -36,7 +36,10 @@
     <ClInclude Include="CQfloat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\DoAnKienTrucMayTinhThuNhat\SoNguyenLon\Qfloat.h">
+    <ClInclude Include="ClassQfloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XuLySoLon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,7 +56,10 @@
     <ClCompile Include="CQfloat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\DoAnKienTrucMayTinhThuNhat\SoNguyenLon\Qfloat.cpp">
+    <ClCompile Include="ClassQfloat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XuLySoLon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
