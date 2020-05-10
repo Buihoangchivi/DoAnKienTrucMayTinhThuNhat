@@ -6,9 +6,11 @@ class QInt
 {
 
 private:
-	int data[4];
+	//int data[4];
+	int *data = new int[4];
 public:
 	QInt();
+	~QInt();
 	QInt(string s);
 	bool getBit(int i);
 	void setBit(int i, bool bit);

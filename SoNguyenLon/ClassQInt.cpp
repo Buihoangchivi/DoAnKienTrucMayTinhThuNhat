@@ -8,6 +8,11 @@ QInt::QInt()
 
 }
 
+QInt::~QInt()
+{
+
+}
+
 QInt::QInt(string s)
 {
 	
