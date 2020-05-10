@@ -116,16 +116,6 @@ void Chia(string sochia, int sobichia, string& ketqua)
 	ChuanHoaSo0(ketqua);
 }
 
-string LuyThua(int coso, int somu)
-{
-
-	string ketqua = "1";
-	for (int i = 0; i < somu; i++)
-		Nhan(ketqua, coso, ketqua);
-	return ketqua;
-
-}
-
 // sobichia nhỏ
 void ChuanHoa(string& a, string& b)
 {

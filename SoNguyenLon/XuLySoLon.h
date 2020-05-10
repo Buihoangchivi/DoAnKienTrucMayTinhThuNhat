@@ -11,6 +11,5 @@ void Cong(string a, string b, string& ketqua);
 void Tru(string sotru, string sobitru, string& ketqua);
 void Nhan(string a, int b, string& ketqua);
 void Chia(string sochia, int sobichia, string& ketqua);
-string LuyThua(int coso, int somu);
 void ChuanHoa(string& a, string& b);
 void ChuanHoaSo0(string& a);
