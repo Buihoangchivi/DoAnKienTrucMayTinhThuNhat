@@ -146,7 +146,10 @@ void ReadFileInt()
 						temp.push_back(a[j] - '0');
 					}
 					// Xuất dãy thập lục phân
+					QInt tmp(qint.convertBinToDec(temp));
+					qint = tmp;
 					cout << qint.convertBinToHex(temp);
+
 				}
 				// Thập lục -> Nhị
 				else if (p1 == "16" && p2 == "2")
@@ -178,7 +181,9 @@ void ReadFileInt()
 						cout << "Invalid!!!" << endl;
 						continue;
 					}
-					// Nếu hợp lệ thìxuất dãy thập lục pah6n
+					// Nếu hợp lệ thìxuất dãy thập lục phân
+					QInt tmp(a);
+					qint = a;
 					cout << qint.convertDecToHex();
 				}
 				// Thập lục -> Thập
@@ -214,6 +219,31 @@ void ReadFileInt()
 						temp.push_back(a[j] - '0');
 					}
 					string tmp = qint.convertBinToDec(temp);
+					qint = tmp;
+				}
+				else if (p1 == "10")
+				{
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkDec(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì tính toán luôn
+					QInt tmp(a);
+					qint = tmp;
+				}
+				else if (p1 == "16")
+				{
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkHex(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+					string DEC = qint.convertHexToDec(a);
+					QInt tmp(DEC);
 					qint = tmp;
 				}
 				QInt rs = ~qint;
@@ -273,7 +303,6 @@ void ReadFileInt()
 						cout << "Invalid!!!" << endl;
 						continue;
 					}
-					// Hợp lệ thì chuyển sang thập phân
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
 					string DEC = qint.convertHexToDec(a);
 					QInt tmp(DEC);
