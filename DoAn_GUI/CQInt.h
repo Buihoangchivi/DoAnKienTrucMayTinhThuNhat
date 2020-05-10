@@ -33,4 +33,5 @@ public:
 	afx_msg void OnBnClickedBe();
 	afx_msg void OnBnClickedBang();
 	afx_msg void OnBnClickedBebang();
+	afx_msg void OnBnClickedCancel();
 };

@@ -41,6 +41,7 @@ BEGIN_MESSAGE_MAP(CQInt, CDialogEx)
 	ON_BN_CLICKED(IDC_Be, &CQInt::OnBnClickedBe)
 	ON_BN_CLICKED(IDC_Bang, &CQInt::OnBnClickedBang)
 	ON_BN_CLICKED(IDC_BeBang, &CQInt::OnBnClickedBebang)
+	ON_BN_CLICKED(IDCANCEL, &CQInt::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
 
@@ -572,4 +573,11 @@ void CQInt::OnBnClickedBang()
 void CQInt::OnBnClickedBebang()
 {
 	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedCancel()
+{
+	// TODO: Add your control notification handler code here
+	CDialogEx::OnCancel();
 }
