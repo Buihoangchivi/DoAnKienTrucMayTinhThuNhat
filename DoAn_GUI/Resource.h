@@ -35,7 +35,6 @@
 #define IDC_K                           1042
 #define IDC_KQDec2                      1043
 #define IDC_KQBin2                      1044
-
 #define IDC_Cong                        2000
 #define IDC_Tru                         2001
 #define IDC_Nhan                        2002
@@ -48,7 +47,6 @@
 #define IDC_DichPhai                    2009
 #define IDC_XoayTrai                    2010
 #define IDC_XoayPhai                    2011
-//
 #define IDC_Lon                         2012
 #define IDC_Be                          2013
 #define IDC_Bang                        2014

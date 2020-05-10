@@ -33,6 +33,14 @@ BEGIN_MESSAGE_MAP(CQInt, CDialogEx)
 	ON_BN_CLICKED(ID_ChuyenDoi2, &CQInt::OnBnClickedChuyendoi2)
 	ON_BN_CLICKED(ID_TinhToan, &CQInt::OnBnClickedTinhtoan)
 	ON_BN_CLICKED(IDC_SoSanh, &CQInt::OnBnClickedSosanh)
+	ON_BN_CLICKED(IDC_Cong, &CQInt::OnBnClickedCong)
+	ON_BN_CLICKED(IDC_Xor, &CQInt::OnBnClickedXor)
+	ON_BN_CLICKED(IDC_Not, &CQInt::OnBnClickedNot)
+	ON_BN_CLICKED(IDC_DichPhai, &CQInt::OnBnClickedDichphai)
+	ON_BN_CLICKED(IDC_XoayTrai, &CQInt::OnBnClickedXoaytrai)
+	ON_BN_CLICKED(IDC_Be, &CQInt::OnBnClickedBe)
+	ON_BN_CLICKED(IDC_Bang, &CQInt::OnBnClickedBang)
+	ON_BN_CLICKED(IDC_BeBang, &CQInt::OnBnClickedBebang)
 END_MESSAGE_MAP()
 
 
@@ -381,4 +389,51 @@ void CQInt::OnBnClickedSosanh()
 	label_bin1->SetWindowText(L"0");
 	label_bin2->SetWindowText(L"0");
 	label_hex->SetWindowText(L"0");
+}
+
+void CQInt::OnBnClickedCong()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedXor()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedNot()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedDichphai()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedXoaytrai()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedBe()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedBang()
+{
+	// TODO: Add your control notification handler code here
+}
+
+
+void CQInt::OnBnClickedBebang()
+{
+	// TODO: Add your control notification handler code here
 }
