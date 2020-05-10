@@ -491,14 +491,22 @@ int main()
 	//	swap(s[i], s[s.length() - i - 1]);
 	//cout << QInt::convertHexToDec(s) << endl;
 	//ReadFileInt();
-	//vector<bool> a;
-	//string s;
-	//cin >> s;
-	//for (int i = s.length() - 1; i >= 0; i--)
-	//	a.push_back((int)(s[i] - '0'));
+	/*vector<bool> a;
+	string s;
+	cin >> s;
+	for (int i = s.length() - 1; i >= 0; i--)
+		a.push_back((int)(s[i] - '0'));*/
 	//QInt b(a);
 	//b.PrintQInt();
 	//cout << b.convertDecToHex() << endl;
+	/*vector<bool> a;
+	string s;
+	cin >> s;
+	for (int i = s.length() - 1; i >= 0; i--)
+		a.push_back((int)(s[i] - '0'));
+	cout << QInt::convertBinToDec(a) << endl;*/
+	QInt a("18");
+	cout << a.getBin() << endl;
 	return 0;
 
 }
