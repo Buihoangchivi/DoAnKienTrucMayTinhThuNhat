@@ -139,13 +139,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassQInt.cpp" />
-    <ClCompile Include="ClassQfloat.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="XuLyFile.cpp" />
     <ClCompile Include="XuLySoLon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassQInt.h" />
-    <ClInclude Include="ClassQfloat.h" />
+    <ClInclude Include="XuLyFile.h" />
     <ClInclude Include="XuLySoLon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

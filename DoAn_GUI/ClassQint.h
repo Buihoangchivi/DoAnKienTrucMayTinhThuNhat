@@ -1,6 +1,5 @@
-
 #pragma once
-#include "XuLySoLon.h"
+#include "XuLySoNguyenLon.h"
 #include <iostream>
 
 class QInt

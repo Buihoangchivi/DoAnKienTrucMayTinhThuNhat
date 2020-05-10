@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ClassQInt.h"
 #include "XuLySoLon.h"
 

@@ -1,4 +1,5 @@
-﻿#include "XuLySoLon.h"
+﻿#include "pch.h"
+#include "XuLySoNguyenLon.h"
 
 int SoSanh(vector<int> a, vector<int> b)
 {
@@ -16,7 +17,7 @@ int SoSanh(vector<int> a, vector<int> b)
 	return 0;
 }
 
-void LoaiBoSo0(vector<int>& x)
+void LoaiBoSo_0(vector<int>& x)
 {
 	while (x[x.size() - 1] == 0 && x.size() > 1)
 	{
@@ -39,7 +40,7 @@ void Cong(string a, string b, string& ketqua)
 	{
 		ketqua.insert(0, 1, (char)(temp + 48));
 	}
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo_0(ketqua);
 }
 
 void Tru(string sotru, string sobitru, string& ketqua)
@@ -67,7 +68,7 @@ void Tru(string sotru, string sobitru, string& ketqua)
 	}
 	reverse(ketqua.begin(), ketqua.end());
 
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo_0(ketqua);
 }
 
 void Nhan(string a, int b, string& ketqua)
@@ -90,8 +91,7 @@ void Nhan(string a, int b, string& ketqua)
 		temp /= 10;
 
 	}
-	ChuanHoaSo0(ketqua);
-
+	ChuanHoaSo_0(ketqua);
 }
 
 // https://www.geeksforgeeks.org/divide-large-number-represented-string/ (ý tưởng phép chia)
@@ -113,7 +113,7 @@ void Chia(string sochia, int sobichia, string& ketqua)
 	{
 		ketqua = "0";
 	}
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo_0(ketqua);
 }
 
 string LuyThua(int coso, int somu)
@@ -142,7 +142,7 @@ void ChuanHoa(string& a, string& b)
 }
 
 // Bỏ các số 0 ở đầu
-void ChuanHoaSo0(string& a)
+void ChuanHoaSo_0(string& a)
 {
 	if (a.length() == 1)
 		return;
@@ -157,4 +157,6 @@ void ChuanHoaSo0(string& a)
 	}
 	else
 		return;
+
+
 }

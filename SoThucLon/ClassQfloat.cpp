@@ -29,7 +29,7 @@ bool CheckData(string Dec)
 {
 	int DemDauCham = 0;
 	int DemDau = 0;
-	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0]<'0' || Dec[0]>'9')))
+	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0] < '0' || Dec[0]>'9')))
 	{
 		//cout << "Du lieu sai!";
 		return false;
@@ -65,9 +65,9 @@ bool CheckData(string Dec)
 	return true;
 }
 //Ktra trường hợp đặc biệt khi chuyển từ nhị phân sang số chấm động
-int KTTHdacbiet (string np) {
+int KTTHdacbiet(string np) {
 	string strExp = np.substr(SIGN_SIZE, EXP_SIZE);
-	string strSignif = np.substr(SIGN_SIZE + EXP_SIZE,SIGNIF_SIZE);
+	string strSignif = np.substr(SIGN_SIZE + EXP_SIZE, SIGNIF_SIZE);
 	if (KTraBitGiongNhau(strExp, '0'))
 	{
 		if (KTraBitGiongNhau(strSignif, '0'))
@@ -299,8 +299,8 @@ string ClassQfloat::ConvertBinToDec(string s)
 	}
 	//Kiem tra truong hop dac biet
 	int check = KTTHdacbiet(s);
-	if(check >0) {
-		switch(check) {
+	if (check > 0) {
+		switch (check) {
 		case 1:
 			return "0";
 		case 2:
@@ -321,7 +321,7 @@ string ClassQfloat::ConvertBinToDec(string s)
 	string Sign = "";
 	if (strSign == "1")
 		Sign = "-";
-	
+
 	//Tính giá trị Exp;
 	string ExpDec = "0";
 	string temp = "1";
@@ -527,7 +527,7 @@ string ClassQfloat::ConvertDecToBin(string num)
 		//So phan tu phan tri toi da
 		Size_Signif = SIGNIF_SIZE - Exp;
 		Exp += K;
-		if(Size_Signif>=0) {
+		if (Size_Signif >= 0) {
 			int count_size_signif = 0;
 			//Chuyen phan thap phan qua nhi phan
 			while (1) {

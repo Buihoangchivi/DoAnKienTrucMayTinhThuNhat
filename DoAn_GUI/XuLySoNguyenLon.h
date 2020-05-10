@@ -6,11 +6,11 @@
 using namespace std;
 
 int SoSanh(vector<int> a, vector<int> b);
-void LoaiBoSo0(vector<int>& x);
+void LoaiBoSo_0(vector<int>& x);
 void Cong(string a, string b, string& ketqua);
 void Tru(string sotru, string sobitru, string& ketqua);
 void Nhan(string a, int b, string& ketqua);
 void Chia(string sochia, int sobichia, string& ketqua);
 string LuyThua(int coso, int somu);
 void ChuanHoa(string& a, string& b);
-void ChuanHoaSo0(string& a);
+void ChuanHoaSo_0(string& a);

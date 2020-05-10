@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoNguyenLon", "SoNguyenLon\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DoAn_GUI", "DoAn_GUI\DoAn_GUI.vcxproj", "{FD57E257-7C5E-4ECE-ABA8-020CD2837636}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoThucLon", "SoThucLon\SoThucLon.vcxproj", "{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{FD57E257-7C5E-4ECE-ABA8-020CD2837636}.Release|x64.Build.0 = Release|x64
 		{FD57E257-7C5E-4ECE-ABA8-020CD2837636}.Release|x86.ActiveCfg = Release|Win32
 		{FD57E257-7C5E-4ECE-ABA8-020CD2837636}.Release|x86.Build.0 = Release|Win32
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Debug|x64.ActiveCfg = Debug|x64
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Debug|x64.Build.0 = Debug|x64
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Debug|x86.ActiveCfg = Debug|Win32
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Debug|x86.Build.0 = Debug|Win32
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Release|x64.ActiveCfg = Release|x64
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Release|x64.Build.0 = Release|x64
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Release|x86.ActiveCfg = Release|Win32
+		{FDC544E4-1DCC-42F8-ACAD-CE8B9693EA1D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

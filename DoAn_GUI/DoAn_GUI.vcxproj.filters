@@ -45,6 +45,12 @@
     <ClInclude Include="CQInt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClassQint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XuLySoNguyenLon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DoAn_GUI.cpp">
@@ -66,6 +72,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CQInt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassQint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XuLySoNguyenLon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
-#include "ClassQInt.h"
 #include "ClassQfloat.h"
+
 void ReadFileFlt()
 {
 	freopen("input.txt", "r", stdin);
@@ -40,7 +40,6 @@ void ReadFileFlt()
 }
 int main()
 {
-	
 	ReadFileFlt();
 	return 0;
 }

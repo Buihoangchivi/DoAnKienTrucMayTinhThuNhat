@@ -11,7 +11,7 @@ using namespace std;
 class ClassQfloat
 {
 private:
-	int *data= new int[4];
+	int* data = new int[4];
 public:
 	ClassQfloat();
 	ClassQfloat(string);
