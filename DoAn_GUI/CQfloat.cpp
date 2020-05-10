@@ -1,11 +1,11 @@
-// CQfloat.cpp : implementation file
+﻿// CQfloat.cpp : implementation file
 //
 
 #include "pch.h"
 #include "DoAn_GUI.h"
 #include "CQfloat.h"
 #include "afxdialogex.h"
-#include "ClassQfloat.h"
+#include "ClassQfloat_GUI.h"
 
 // CQfloat dialog
 
@@ -37,6 +37,64 @@ END_MESSAGE_MAP()
 
 // CQfloat message handlers
 
+bool CheckDataBin1(string Bin)
+{
+	if (Bin.size() != QFLOAT_SIZE) //128
+	{
+		//cout << "Du lieu sai!";
+		return false;
+	}
+	for (int i = 0; i < Bin.size(); i++)
+	{
+		if (Bin[i] != '0' && Bin[i] != '1')
+		{
+			//cout << "Du lieu sai!";
+			return false;
+		}
+	}
+	return true;
+}
+//Kiểm tra dữ liệu hợp lệ không
+bool CheckData1(string Dec)
+{
+	int DemDauCham = 0;
+	int DemDau = 0;
+	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0] < '0' || Dec[0]>'9')))
+	{
+		//cout << "Du lieu sai!";
+		return false;
+	}
+	if (Dec[0] == '-')
+		DemDau = 1;
+	for (int i = 1; i < Dec.size(); i++)
+	{
+		if (Dec[i] == '.')
+		{
+			DemDauCham++;
+			if (DemDauCham == 2)
+			{
+				//cout << "Du lieu sai!";
+				return false;
+			}
+		}
+		else if (Dec[i] == '-')
+		{
+			DemDau++;
+			if (DemDau == 2)
+			{
+				//cout << "Du lieu sai!";
+				return false;
+			}
+		}
+		else if (Dec[i] < '0' || Dec[i]>'9')
+		{
+			//cout << "Du lieu sai!";
+			return false;
+		}
+	}
+	return true;
+}
+//
 void CQfloat::OnBnClickedOk()
 {
 	CEdit* editbox = (CEdit*)GetDlgItem(IDC_EDIT1);
@@ -48,20 +106,53 @@ void CQfloat::OnBnClickedOk()
 		return;
 	}
 	int check_radio = GetCheckedRadioButton(IDC_RADIO1, IDC_RADIO2);
-	ClassQfloat temp;
-	if (check_radio == IDC_RADIO1)
+	if (check_radio == IDC_RADIO1) {
+		bool check_dec = true;
+		check_dec = CheckData1(num);
+		if(!check_dec)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 10;
+	}
 	else if(check_radio == IDC_RADIO2)
+	{
+		bool check_bin = true;
+		check_bin = CheckDataBin1(num);
+		if (!check_bin)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 2;
+	}
 	else {
 		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	temp.ScanQfloat(num, check_radio);
+	//Nhap va kiem tra truong hop dac biet
+	int check;
+	ClassQfloat temp;
+	temp.ScanQfloat(num, check_radio,check);
+	if (check > 1) {
+		switch (check) {
+		case 2:
+			MessageBox(_T("So khong the chuan hoa!!!"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		case 3:
+			MessageBox(_T("So vo cung!!!"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		case 4:
+			MessageBox(_T("So bao loi!!!"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
+	}
+	//Xuat ket qua
+	//Dec
 	CString result_dec1 = _T("");
 	CString result_dec2 = _T("");
-	string dec = temp.BinToDec();
-	
+	string dec = temp.getDec();	
 	if(dec.length()<=64) {
 		result_dec1 = dec.c_str();
 		CWnd* label_dec1 = GetDlgItem(IDC_STATIC_DEC1);
@@ -77,10 +168,10 @@ void CQfloat::OnBnClickedOk()
 		CWnd* label_dec2 = GetDlgItem(IDC_STATIC_DEC2);
 		label_dec2->SetWindowText(result_dec2);
 	}
-	//
+	//Bin
 	CString result_bin1 = _T("");
 	CString result_bin2 = _T("");
-	string bin = temp.DectoBin();
+	string bin = temp.getBin();
 	result_bin1 = bin.substr(0,64).c_str();
 	result_bin2 = bin.substr(64).c_str();
 	//

@@ -1,4 +1,5 @@
 #include "ClassQfloat.h"
+#include <time.h>
 
 void ReadFileFlt()
 {
@@ -9,6 +10,8 @@ void ReadFileFlt()
 	int num = atoi(str.c_str());
 	for (int i = 0; i < num; i++)
 	{
+		double bd = clock();
+		//
 		getline(cin, str);
 		string p1, p2, a;
 		int start = 0, end = 0;
@@ -36,6 +39,9 @@ void ReadFileFlt()
 		ClassQfloat F;
 		F.ScanQfloat(a, s1);
 		F.PrintQfloat(s2);
+		//
+		double kt = clock();
+		cout << double(kt - bd) / CLOCKS_PER_SEC << endl;
 	}
 }
 int main()

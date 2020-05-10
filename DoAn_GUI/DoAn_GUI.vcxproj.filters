@@ -36,19 +36,19 @@
     <ClInclude Include="CQfloat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassQfloat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="XuLySoLon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CQInt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassQint.h">
+    <ClInclude Include="XuLySoNguyenLon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XuLySoNguyenLon.h">
+    <ClInclude Include="ClassQfloat_GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassQint_GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,19 +65,19 @@
     <ClCompile Include="CQfloat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClassQfloat.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="XuLySoLon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CQInt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClassQint.cpp">
+    <ClCompile Include="XuLySoNguyenLon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="XuLySoNguyenLon.cpp">
+    <ClCompile Include="ClassQfloat_GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassQint_GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

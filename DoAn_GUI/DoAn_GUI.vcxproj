@@ -23,7 +23,7 @@
     <ProjectGuid>{D224CEC6-E6EE-483B-B499-5654C092AD11}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
     <RootNamespace>DoAnGUI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -183,8 +183,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ClassQfloat.h" />
-    <ClInclude Include="ClassQint.h" />
+    <ClInclude Include="ClassQfloat_GUI.h" />
+    <ClInclude Include="ClassQint_GUI.h" />
     <ClInclude Include="CQfloat.h" />
     <ClInclude Include="CQInt.h" />
     <ClInclude Include="DoAn_GUI.h" />
@@ -197,8 +197,8 @@
     <ClInclude Include="XuLySoNguyenLon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClassQfloat.cpp" />
-    <ClCompile Include="ClassQint.cpp" />
+    <ClCompile Include="ClassQfloat_GUI.cpp" />
+    <ClCompile Include="ClassQint_GUI.cpp" />
     <ClCompile Include="CQfloat.cpp" />
     <ClCompile Include="CQInt.cpp" />
     <ClCompile Include="DoAn_GUI.cpp" />

@@ -1,4 +1,5 @@
-﻿#include "ClassQInt.h"
+#include "pch.h"
+#include "ClassQInt_GUI.h"
 #include "XuLySoLon.h"
 
 QInt::QInt()
@@ -13,9 +14,9 @@ QInt::~QInt()
 
 }
 
-QInt::QInt(string s): QInt()
+QInt::QInt(string s) : QInt()
 {
-	
+
 	string temp = s;
 	bool dau = 0;
 	bool ok = 0;
@@ -202,7 +203,7 @@ string QInt::convertDecToHex()
 
 string QInt::convertHexToDec(string s)
 {
-	
+
 	string ketqua = "0", b;
 	vector<int> c;
 	int ch = 0;
@@ -530,7 +531,7 @@ QInt QInt::operator<<(int k)
 {
 
 	QInt temp;
-	for (int i = 0; i < 128-k; i++)
+	for (int i = 0; i < 128 - k; i++)
 		temp.setBit(i + k, this->getBit(i));
 	return temp;
 
@@ -554,7 +555,7 @@ QInt QInt::ror(int k)
 	int i = 0;
 	while (k > 0)
 	{
-		temp.setBit(128-k, i);
+		temp.setBit(128 - k, i);
 		i++;
 		k--;
 	}
@@ -580,7 +581,7 @@ QInt QInt::rol(int k)
 
 void QInt::ScanQInt()
 {
-	
+
 	string qint;
 	getline(cin, qint);
 	QInt a(qint);
@@ -625,9 +626,12 @@ string QInt::getBin()
 {
 	vector<bool> temp = this->convertDecToBin();
 	string rs;
-	for (int i = temp.size() - 1; i >= 0; i--)
+	for (int i = 0; i < temp.size(); i++)
 	{
-		rs += temp[i]+'0';
+		if (temp[i])
+			rs += '1';
+		else
+			rs += '0';
 	}
 	return rs;
 }
