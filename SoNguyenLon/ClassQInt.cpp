@@ -207,7 +207,7 @@ string QInt::convertDecToHex()
 
 string QInt::convertHexToDec(string s)
 {
-	
+
 	string ketqua = "0", b, luythua = "1";
 	vector<int> c;
 	int ch = 0;
@@ -607,33 +607,39 @@ void QInt::Scan(string num, int base)
 		QInt a(num);
 		*this = a;
 	}
-	else if (base == 2)
+	else
 	{
-		vector<bool> temp;
-		int count = 0;
-		while (num[count] != '\0')
+
+		for (int i = 0; i < num.length() / 2; i++)
+		swap(num[i], num[num.length() - i - 1]);
+		if (base == 2)
 		{
-			temp.push_back(num[count]);
-			count++;
+			vector<bool> temp;
+			int count = 0;
+			while (num[count] != '\0')
+			{
+				temp.push_back((bool)(num[count] - '0'));
+				count++;
+			}
+			QInt a(convertBinToDec(temp));
+			*this = a;
 		}
-		QInt a(convertBinToDec(temp));
-		*this = a;
+		else if (base == 16)
+		{
+			QInt a(convertHexToDec(num));
+			*this = a;
+		}
+
 	}
-	else if (base == 16)
-	{
-		QInt a(convertHexToDec(num));
-		*this = a;
-	}
+		
 }
 
 string QInt::getBin()
 {
 	vector<bool> temp = this->convertDecToBin();
-	string rs;
-	for (int i = temp.size() - 1; i >= 0; i--)
-	{
-		rs += temp[i]+'0';
-	}
+	string rs = "";
+	for (int i = 0; i < temp.size(); i++)
+		rs += (char)(temp[i] + '0');
 	return rs;
 }
 
