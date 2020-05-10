@@ -74,6 +74,14 @@ QInt::QInt(string s) : QInt()
 
 }
 
+QInt::QInt(vector<bool> vbit)
+{
+
+	for (int i = 0; i < vbit.size(); i++)
+		this->setBit(i, vbit[i]);
+
+}
+
 bool QInt::getBit(int i)
 {
 
@@ -107,7 +115,6 @@ string QInt::convertQIntToDec()
 	}
 	if (getBit(127) == 1)
 	{
-		//b = LuyThua(2, 127);
 		Nhan(b, 2, b);
 		Tru(b, ketqua, ketqua);
 		ketqua.insert(0, 1, '-');
@@ -115,7 +122,6 @@ string QInt::convertQIntToDec()
 	else
 	{
 		bool bit = getBit(127);
-		//b = LuyThua(2, 127);
 		Nhan(b, 2, b);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
@@ -154,7 +160,6 @@ string QInt::convertBinToDec(vector<bool> vbit)
 	}
 	if (vbit[127] == 1)
 	{
-		//b = LuyThua(2, 127);
 		Nhan(b, 2, b);
 		Tru(b, ketqua, ketqua);
 		ketqua.insert(0, 1, '-');
@@ -162,7 +167,6 @@ string QInt::convertBinToDec(vector<bool> vbit)
 	else
 	{
 		bool bit = vbit[127];
-		//b = LuyThua(2, 127);
 		Nhan(b, 2, b);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
@@ -184,8 +188,9 @@ string QInt::convertDecToHex()
 
 	string ans = "", s1;
 	pair<QInt, QInt> temp;
-	QInt a = *this, b("16");
-	while (a.data[0] != 0 && a.data[1] != 0 && a.data[2] != 0 && a.data[3] != 0)
+	QInt a, b("16");
+	a = *this;
+	while (a.data[0] != 0 || a.data[1] != 0 || a.data[2] != 0 || a.data[3] != 0)
 	{
 
 		temp = a / b;
@@ -204,7 +209,7 @@ string QInt::convertDecToHex()
 string QInt::convertHexToDec(string s)
 {
 
-	string ketqua = "0", b;
+	string ketqua = "0", b, luythua = "1";
 	vector<int> c;
 	int ch = 0;
 	bool ok = true;
@@ -221,9 +226,9 @@ string QInt::convertHexToDec(string s)
 			ch = (int)(s[i] - '0');
 		else if (toupper(s[i]) >= 'A' && toupper(s[i]) <= 'F') //So du tu 10 den 15 (tuong ung tu A den F trong he hex)
 			ch = (int)(toupper(s[i]) - 'A') + 10;
-		b = LuyThua(16, i); //b = 16 ^ i
-		Nhan(b, ch, b); // b = b * ch
+		Nhan(luythua, ch, b); // b = b * ch
 		Cong(ketqua, b, ketqua); //ketqua = ketqua * b
+		Nhan(luythua, 16, luythua); //luythua = 16 ^ (i + 1)
 	}
 	if (!ok) //Neu s la so am thi them dau am vao dau ketqua
 		ketqua.insert(ketqua.begin(), '-');
@@ -626,12 +631,9 @@ string QInt::getBin()
 {
 	vector<bool> temp = this->convertDecToBin();
 	string rs;
-	for (int i = 0; i < temp.size(); i++)
+	for (int i = temp.size() - 1; i >= 0; i--)
 	{
-		if (temp[i])
-			rs += '1';
-		else
-			rs += '0';
+		rs += temp[i] + '0';
 	}
 	return rs;
 }

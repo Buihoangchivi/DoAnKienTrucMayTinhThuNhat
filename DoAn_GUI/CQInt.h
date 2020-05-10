@@ -23,4 +23,6 @@ protected:
 public:
 	afx_msg void OnBnClickedChuyendoi1();
 	afx_msg void OnBnClickedChuyendoi2();
+	afx_msg void OnBnClickedTinhtoan();
+	afx_msg void OnBnClickedSosanh();
 };
