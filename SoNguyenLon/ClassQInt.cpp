@@ -93,25 +93,29 @@ void QInt::setBit(int i, bool bit)
 string QInt::convertQIntToDec()
 {
 
-	string ketqua = "0", b;
+	string ketqua = "0";
 	vector<int> c;
+	string b = "1", b1;
 	for (int i = 0; i < 127; i++)
 	{
 		bool bit = getBit(i);
-		b = LuyThua(2, i);
-		Nhan(b, bit, b);
-		Cong(ketqua, b, ketqua);
+		if (i > 0)
+			Nhan(b, 2, b);
+		Nhan(b, bit, b1);
+		Cong(ketqua, b1, ketqua);
 	}
 	if (getBit(127) == 1)
 	{
-		b = LuyThua(2, 127);
+		//b = LuyThua(2, 127);
+		Nhan(b, 2, b);
 		Tru(b, ketqua, ketqua);
 		ketqua.insert(0, 1, '-');
 	}
 	else
 	{
 		bool bit = getBit(127);
-		b = LuyThua(2, 127);
+		//b = LuyThua(2, 127);
+		Nhan(b, 2, b);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
@@ -132,30 +136,33 @@ vector<bool> QInt::convertDecToBin()
 string QInt::convertBinToDec(vector<bool> vbit)
 {
 
-	string ketqua = "0", b;
+	string ketqua = "0";
 	vector<int> c;
-	//reverse(vbit.begin(), vbit.end());
 	while (vbit.size() < 128)
 	{
 		vbit.push_back(0);
 	}
+	string b = "1", b1;
 	for (int i = 0; i < 128; i++)
 	{
 		bool bit = vbit[i];
-		b = LuyThua(2, i);
-		Nhan(b, bit, b);
-		Cong(ketqua, b, ketqua);
+		if (i > 0)
+			Nhan(b, 2, b);
+		Nhan(b, bit, b1);
+		Cong(ketqua, b1, ketqua);
 	}
 	if (vbit[127] == 1)
 	{
-		b = LuyThua(2, 127);
+		//b = LuyThua(2, 127);
+		Nhan(b, 2, b);
 		Tru(b, ketqua, ketqua);
 		ketqua.insert(0, 1, '-');
 	}
 	else
 	{
 		bool bit = vbit[127];
-		b = LuyThua(2, 127);
+		//b = LuyThua(2, 127);
+		Nhan(b, 2, b);
 		Nhan(b, bit, b);
 		Cong(ketqua, b, ketqua);
 	}
@@ -584,7 +591,7 @@ void QInt::ScanQInt()
 void QInt::PrintQInt()
 {
 
-	cout << this->convertQIntToDec() << endl;
+	cout << this->convertQIntToDec();
 
 }
 

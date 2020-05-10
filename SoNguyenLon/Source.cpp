@@ -89,110 +89,136 @@ void ReadFileInt()
 			p2 = str_temp[1];
 			a = str_temp[2];
 			QInt qint;
-			// Thập -> Nhị
-			if (p1 == "10" && p2 == "2")
+			if (p2 != "~")
 			{
-				// Kiểm tra dữ liệu có hợp lệ?
-				if (!checkDec(a))
+				// Thập -> Nhị
+				if (p1 == "10" && p2 == "2")
 				{
-					cout << "Invalid!!!" << endl;
-					continue;
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkDec(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
+					QInt tmp(a);
+					qint = tmp;
+					vector<bool> temp = qint.convertDecToBin();
+					for (int i = 0; i < temp.size(); i++)
+					{
+						cout << temp[i];
+					}
 				}
-				// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
-				QInt tmp(a);
-				qint = tmp;
-				vector<bool> temp = qint.convertDecToBin();
-				for (int i = 0; i < temp.size(); i++)
+				// Nhị -> Thập
+				else if (p1 == "2" && p2 == "10")
 				{
-					cout << temp[i];
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkBin(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì chuyển nhị phân vào trong vector<bool> 
+					vector<bool> temp;
+					for (int j = a.size() - 1; j >= 0; j--)
+					{
+						temp.push_back(a[j] - '0');
+					}
+					// Xuất dãy thập phân
+					//cout << qint.convertBinToDec(temp);
+					string lul = qint.convertBinToDec(temp);
+					cout << lul;
+				}
+				// Nhị -> Thập Lục
+				else if (p1 == "2" && p2 == "16")
+				{
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkBin(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
+					vector<bool> temp;
+					for (int j = a.size() - 1; j >= 0; j--)
+					{
+						temp.push_back(a[j] - '0');
+					}
+					// Xuất dãy thập lục phân
+					cout << qint.convertBinToHex(temp);
+				}
+				// Thập lục -> Nhị
+				else if (p1 == "16" && p2 == "2")
+				{
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkHex(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+					string DEC = qint.convertHexToDec(a);
+					// Đưa vào qint
+					QInt tmp(DEC);
+					qint = tmp;
+					// Xuất dãy nhị phân
+					vector<bool> temp = qint.convertDecToBin();
+					for (int i = 0; i < temp.size(); i++)
+					{
+						cout << temp[i];
+					}
+				}
+				// Thập -> Thập lục
+				else if (p1 == "10" && p2 == "16")
+				{
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkDec(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thìxuất dãy thập lục pah6n
+					cout << qint.convertDecToHex();
+				}
+				// Thập lục -> Thập
+				else if (p1 == "16" && p2 == "10")
+				{
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkHex(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+					string DEC = qint.convertHexToDec(a);
+					QInt tmp(DEC);
+					qint = tmp;
+					qint.PrintQInt();
 				}
 			}
-			// Nhị -> Thập
-			else if (p1 == "2" && p2 == "10")
+			else
 			{
-				// Kiểm tra dữ liệu có hợp lệ?
-				if (!checkBin(a))
+				if (p1 == "2")
 				{
-					cout << "Invalid!!!" << endl;
-					continue;
+					// Kiểm tra dữ liệu có hợp lệ?
+					if (!checkBin(a))
+					{
+						cout << "Invalid!!!" << endl;
+						continue;
+					}
+					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
+					vector<bool> temp;
+					for (int j = a.size() - 1; j >= 0; j--)
+					{
+						temp.push_back(a[j] - '0');
+					}
+					string tmp = qint.convertBinToDec(temp);
+					qint = tmp;
 				}
-				// Nếu hợp lệ thì chuyển nhị phân vào trong vector<bool> 
-				vector<bool> temp;
-				for (int j = a.size() - 1; j >= 0; j--)
-				{
-					temp.push_back(a[j] - '0');
-				}
-				// Xuất dãy thập phân
-				//cout << qint.convertBinToDec(temp);
-				string lul = qint.convertBinToDec(temp);
-				cout << lul;
+				QInt rs = ~qint;
+				rs.PrintQInt();
 			}
-			// Nhị -> Thập Lục
-			else if (p1 == "2" && p2 == "16")
-			{
-				// Kiểm tra dữ liệu có hợp lệ?
-				if (!checkBin(a))
-				{
-					cout << "Invalid!!!" << endl;
-					continue;
-				}
-				// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
-				vector<bool> temp;
-				for (int j = a.size() - 1; j >= 0; j--)
-				{
-					temp.push_back(a[j] - '0');
-				}
-				// Xuất dãy thập lục phân
-				cout << qint.convertBinToHex(temp);
-			}
-			// Thập lục -> Nhị
-			else if (p1 == "16" && p2 == "2")
-			{
-				// Kiểm tra dữ liệu có hợp lệ?
-				if (!checkHex(a))
-				{
-					cout << "Invalid!!!" << endl;
-					continue;
-				}
-				// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-				string DEC = qint.convertHexToDec(a);
-				// Đưa vào qint
-				QInt tmp(DEC);
-				qint = tmp;
-				// Xuất dãy nhị phân
-				vector<bool> temp = qint.convertDecToBin();
-				for (int i = 0; i < temp.size(); i++)
-				{
-					cout << temp[i];
-				}
-			}
-			// Thập -> Thập lục
-			else if (p1 == "10" && p2 == "16")
-			{
-				// Kiểm tra dữ liệu có hợp lệ?
-				if (!checkDec(a))
-				{
-					cout << "Invalid!!!" << endl;
-					continue;
-				}
-				// Nếu hợp lệ thìxuất dãy thập lục pah6n
-				cout << qint.convertDecToHex();
-			}
-			// Thập lục -> Thập
-			else if (p1 == "16" && p2 == "10")
-			{
-				// Kiểm tra dữ liệu có hợp lệ?
-				if (!checkHex(a))
-				{
-					cout << "Invalid!!!" << endl;
-					continue;
-				}
-				// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-				string DEC = qint.convertHexToDec(a);
-				QInt tmp(DEC);
-				qint = tmp;
-				qint.PrintQInt();
-			}
+
 		}
 		// Thực hiện tính toán
 		else if (str_temp.size() == 4)
@@ -409,11 +435,11 @@ void ReadFileInt()
 					QInt rs = qint1 ^ qint2;
 					rs.PrintQInt();
 				}
-				else if (b == "~")
+				/*else if (b == "~")
 				{
 					QInt rs = ~qint1;
 					rs.PrintQInt();
-				}
+				}*/
 			}
 		}
 		cout << endl;
