@@ -89,6 +89,7 @@ void ReadFileInt()
 			p2 = str_temp[1];
 			a = str_temp[2];
 			QInt qint;
+			// Dấu ~ là trường hợp đặc biệt, xử lý riêng
 			if (p2 != "~")
 			{
 				// Thập -> Nhị
@@ -247,7 +248,8 @@ void ReadFileInt()
 					{
 						temp.push_back(a[j] - '0');
 					}
-					qint.convertBinToDec(temp);
+					QInt tmp(qint.convertBinToDec(temp));
+					qint = tmp;
 				}
 				// Thập phân
 				else if (p == "10")
@@ -259,6 +261,8 @@ void ReadFileInt()
 						continue;
 					}
 					// Thập phân ta có thể tính toán được mà không cần chuyển
+					QInt tmp(a);
+					qint = tmp;
 				}
 				// Thập lục
 				else if (p == "16")
@@ -328,8 +332,10 @@ void ReadFileInt()
 					{
 						temp1.push_back(c[j] - '0');
 					}
-					qint1.convertBinToDec(temp1);
-					qint1.convertBinToDec(temp2);
+					QInt tmp1(qint1.convertBinToDec(temp1));
+					QInt tmp2(qint2.convertBinToDec(temp2));
+					qint1 = tmp1;
+					qint2 = tmp2;
 				}
 				// Thập phân
 				else if (p == "10")
