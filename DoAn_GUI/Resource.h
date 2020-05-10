@@ -14,34 +14,17 @@
 #define IDC_RADIO1                      1002
 #define IDC_RADIO2                      1003
 #define IDC_STATIC1                     1004
-#define IDC_Tru                         1005
 #define IDC_STATIC_DEC                  1006
 #define IDC_STATIC_DEC1                 1006
-#define IDC_Nhan                        1006
 #define IDC_STATIC_BIN1                 1007
-#define IDC_Chia                        1007
 #define IDC_STATIC_BIN2                 1008
-#define IDC_Lon                         1008
 #define IDC_STATIC_DEC2                 1009
-#define IDC_Be                          1009
 #define ID_ChuyenDoi2                   1010
 #define IDC_SoThu1                      1011
 #define IDC_Dec                         1012
 #define IDC_Bin                         1013
 #define IDC_Hex                         1014
 #define IDC_SoThu2                      1015
-#define IDC_Bang                        1016
-#define IDC_Or                          1017
-#define IDC_Xor                         1018
-#define IDC_And                         1019
-#define IDC_BeBang                      1020
-#define IDC_LonBang                     1021
-#define IDC_Not                         1022
-#define IDC_DichTrai                    1023
-#define IDC_DichPhai                    1024
-#define IDC_XoayTrai                    1025
-#define IDC_XoayPhai                    1026
-#define IDC_Cong                        1034
 #define IDC_KQDec                       1035
 #define IDC_KQDec1                      1036
 #define IDC_KQBin                       1037
@@ -52,6 +35,25 @@
 #define IDC_K                           1042
 #define IDC_KQDec2                      1043
 #define IDC_KQBin2                      1044
+
+#define IDC_Cong                        2000
+#define IDC_Tru                         2001
+#define IDC_Nhan                        2002
+#define IDC_Chia                        2003
+#define IDC_And                         2004
+#define IDC_Or                          2005
+#define IDC_Xor                         2006
+#define IDC_Not                         2007
+#define IDC_DichTrai                    2008
+#define IDC_DichPhai                    2009
+#define IDC_XoayTrai                    2010
+#define IDC_XoayPhai                    2011
+//
+#define IDC_Lon                         2012
+#define IDC_Be                          2013
+#define IDC_Bang                        2014
+#define IDC_LonBang                     2015
+#define IDC_BeBang                      2016
 
 // Next default values for new objects
 // 
