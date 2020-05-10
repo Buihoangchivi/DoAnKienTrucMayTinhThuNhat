@@ -13,7 +13,7 @@ QInt::~QInt()
 
 }
 
-QInt::QInt(string s)
+QInt::QInt(string s): QInt()
 {
 	
 	string temp = s;
@@ -280,7 +280,8 @@ QInt QInt::operator*(QInt x)
 	//Q la so bi chia
 	//X la so chia
 	//A ban dau khoi tao gom 128 bit 0
-	QInt a("0"), q = *this;
+	QInt a("0"), q;
+	q = *this;
 	//Q1 duoc hieu nhu la bit -1 cua Q
 	//Q0 chinh la bit 0 cua Q
 	bool q1 = 0, q0;
@@ -297,9 +298,9 @@ QInt QInt::operator*(QInt x)
 			a = a + x;
 		//Dich phai [A, Q, Q1] 1 don vi
 		q1 = q0;
-		q = q << 1;
+		q = q >> 1;
 		q.setBit(127, a.getBit(0));
-		a = a << 1;
+		a = a >> 1;
 
 	}
 	return q;
@@ -309,7 +310,8 @@ QInt QInt::operator*(QInt x)
 pair<QInt, QInt> QInt::operator/(QInt x)
 {
 
-	QInt a, b, q = *this;
+	QInt a, b, q;
+	q = *this;
 	//Neu So bi chia Q > 0 thi A = 128 bit 0
 	//Nguoc lai neu Q < 0 thi A = 128 bit 1
 	if (q.getBit(127) == 1)
@@ -320,9 +322,9 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 	{
 
 		//Dich trai [A, Q] 1 bit
-		a = a >> 1;
+		a = a << 1;
 		a.setBit(0, q.getBit(127));
-		q = q >> 1;
+		q = q << 1;
 		//Gan B = A
 		b = a;
 		//Voi X la so chia
