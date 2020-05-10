@@ -183,8 +183,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ClassQfloat.h" />
-    <ClInclude Include="ClassQint.h" />
+    <ClInclude Include="ClassQfloat_GUI.h" />
+    <ClInclude Include="ClassQint_GUI.h" />
     <ClInclude Include="CQfloat.h" />
     <ClInclude Include="CQInt.h" />
     <ClInclude Include="DoAn_GUI.h" />
@@ -197,8 +197,8 @@
     <ClInclude Include="XuLySoNguyenLon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClassQfloat.cpp" />
-    <ClCompile Include="ClassQint.cpp" />
+    <ClCompile Include="ClassQfloat_GUI.cpp" />
+    <ClCompile Include="ClassQint_GUI.cpp" />
     <ClCompile Include="CQfloat.cpp" />
     <ClCompile Include="CQInt.cpp" />
     <ClCompile Include="DoAn_GUI.cpp" />

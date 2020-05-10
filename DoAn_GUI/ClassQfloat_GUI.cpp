@@ -1,4 +1,5 @@
-﻿#include "ClassQfloat.h"
+﻿#include "pch.h"
+#include "ClassQfloat_GUI.h"
 //Kiểm tra dãy bit toàn bit 1 và 0
 bool KTraBitGiongNhau(string s, char c)
 {
@@ -202,36 +203,11 @@ void ClassQfloat::ScanQfloat(int base)
 				cout << "Du lieu sai!!!" << endl;
 			}
 		} while (check_bin == false);
+		
 		result = Num;
-	}
-	for (int i = 0; i < QFLOAT_SIZE; i++) {
-		if (result[i] - '0' == 0) {
-			setBit(i, 0);
-		}
-		else {
-			setBit(i, 1);
-		}
-	}
-}
-void ClassQfloat::ScanQfloat(string Num, int base)
-{
-	string result;
-	bool check_bin = true;
-	bool check_dec = true;
-	int check = 0;
-	if (base == 10)
-	{
-		//Dua bit vao data
-		check_dec = CheckData(Num);
-		if (check_dec == false)
-		{
-			cout << "Du lieu sai";
-			return;
-		}
-		result = ConvertDecToBin(Num);
 		if (result != "")
 		{
-			check = KTTHdacbiet(result);
+			int check = KTTHdacbiet(result);
 			if (check > 1) {
 				switch (check) {
 				case 2:
@@ -250,6 +226,42 @@ void ClassQfloat::ScanQfloat(string Num, int base)
 			cout << "So nhap vuot qua kieu du lieu co the bieu dien" << endl;
 		}
 	}
+	for (int i = 0; i < QFLOAT_SIZE; i++) {
+		if (result[i] - '0' == 0) {
+			setBit(i, 0);
+		}
+		else {
+			setBit(i, 1);
+		}
+	}
+}
+void ClassQfloat::ScanQfloat(string Num, int base, int &check)
+{
+	string result;
+	bool check_bin = true;
+	bool check_dec = true;
+	check = 0;
+	if (base == 10)
+	{
+		//Dua bit vao data
+		check_dec = CheckData(Num);
+		if (check_dec == false)
+		{
+			cout << "Du lieu sai";
+			return;
+		}
+		result = ConvertDecToBin(Num);
+		if (result != "")
+		{
+			check = KTTHdacbiet(result);
+			if (check > 1) {
+				return;
+			}
+		}
+		else {
+			cout << "So nhap vuot qua kieu du lieu co the bieu dien" << endl;
+		}
+	}
 	else if (base == 2)
 	{
 		check_bin = CheckDataBin(Num);
@@ -259,6 +271,16 @@ void ClassQfloat::ScanQfloat(string Num, int base)
 			return;
 		}
 		result = Num;
+		if (result != "")
+		{
+			check = KTTHdacbiet(result);
+			if (check > 1) {
+				return;
+			}
+		}
+		else {
+			cout << "So nhap vuot qua kieu du lieu co the bieu dien" << endl;
+		}
 	}
 	if (check_bin == true || check == 0)
 	{

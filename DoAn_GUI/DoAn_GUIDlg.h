@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 // CDoAnGUIDlg dialog
 class CDoAnGUIDlg : public CDialogEx
 {
