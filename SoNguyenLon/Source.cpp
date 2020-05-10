@@ -1,7 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "ClassQInt.h"
 
-// Hàm đọc file và xuất file
+// Hàm đọc file và xuất file	
 void ReadFileInt()
 {
 	freopen("input.txt", "r", stdin);
@@ -103,10 +103,14 @@ void ReadFileInt()
 						temp.push_back(a[j] - '0');
 					}
 					// Xuất dãy thập lục phân
-					QInt tmp(qint.convertBinToDec(temp));
+					/*QInt tmp(qint.convertBinToDec(temp));
+					qint = tmp;
+					cout << qint.convertBinToHex(temp);*/
+
+
+					QInt tmp(temp);
 					qint = tmp;
 					cout << qint.convertBinToHex(temp);
-
 				}
 				// Thập lục -> Nhị
 				else if (p1 == "16" && p2 == "2")
@@ -175,8 +179,11 @@ void ReadFileInt()
 					{
 						temp.push_back(a[j] - '0');
 					}
-					string tmp = qint.convertBinToDec(temp);
-					qint = tmp;
+					/*string tmp = qint.convertBinToDec(temp);
+					qint = tmp;*/
+
+					QInt tmp(temp);
+					qint = temp;
 				}
 				else if (p1 == "10")
 				{
@@ -235,7 +242,9 @@ void ReadFileInt()
 					{
 						temp.push_back(a[j] - '0');
 					}
-					QInt tmp(qint.convertBinToDec(temp));
+					//QInt tmp(qint.convertBinToDec(temp));
+
+					QInt tmp(temp);
 					qint = tmp;
 				}
 				// Thập phân
@@ -316,10 +325,14 @@ void ReadFileInt()
 					}
 					for (int j = c.size() - 1; j >= 0; j--)
 					{
-						temp1.push_back(c[j] - '0');
+						temp2.push_back(c[j] - '0');
 					}
-					QInt tmp1(qint1.convertBinToDec(temp1));
+					/*QInt tmp1(qint1.convertBinToDec(temp1));
 					QInt tmp2(qint2.convertBinToDec(temp2));
+					qint1 = tmp1;
+					qint2 = tmp2;*/
+					QInt tmp1(temp1);
+					QInt tmp2(temp2);
 					qint1 = tmp1;
 					qint2 = tmp2;
 				}
@@ -427,11 +440,6 @@ void ReadFileInt()
 					QInt rs = qint1 ^ qint2;
 					rs.PrintQInt();
 				}
-				/*else if (b == "~")
-				{
-					QInt rs = ~qint1;
-					rs.PrintQInt();
-				}*/
 			}
 		}
 		cout << endl;
