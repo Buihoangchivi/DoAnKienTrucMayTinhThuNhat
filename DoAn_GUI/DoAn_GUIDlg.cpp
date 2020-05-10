@@ -8,6 +8,7 @@
 #include "DoAn_GUIDlg.h"
 #include "afxdialogex.h"
 #include "CQfloat.h"
+#include "CQInt.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,6 +34,7 @@ BEGIN_MESSAGE_MAP(CDoAnGUIDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON2, &CDoAnGUIDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON1, &CDoAnGUIDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -93,5 +95,12 @@ HCURSOR CDoAnGUIDlg::OnQueryDragIcon()
 void CDoAnGUIDlg::OnBnClickedButton2()
 {
 	CQfloat* dialog = new CQfloat();
+	dialog->DoModal();
+}
+
+
+void CDoAnGUIDlg::OnBnClickedButton1()
+{
+	CQInt* dialog = new CQInt();
 	dialog->DoModal();
 }

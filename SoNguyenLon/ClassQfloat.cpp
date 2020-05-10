@@ -243,6 +243,7 @@ void ClassQfloat::ScanQfloat(string Num, int base)
 		if (check_bin == false)
 		{
 			cout << "Du lieu sai!!!" << endl;
+			return;
 		}
 		result = Num;
 	}
@@ -293,7 +294,7 @@ string ClassQfloat::ConvertBinToDec(string s)
 	bool check_data = CheckDataBin(s);
 	if (check_data == false)
 	{
-		cout << "Du lieu sai!!!" << endl;
+		cout << "Du lieu sai!!!";
 		return "";
 	}
 	//Kiem tra truong hop dac biet
@@ -303,13 +304,13 @@ string ClassQfloat::ConvertBinToDec(string s)
 		case 1:
 			return "0";
 		case 2:
-			cout << "So khong the chuan hoa!!!" << endl;
+			cout << "So khong the chuan hoa!!!";
 			break;
 		case 3:
-			cout << "So vo cung!!!" << endl;
+			cout << "So vo cung!!!";
 			break;
 		case 4:
-			cout << "So bao loi!!!" << endl;
+			cout << "So bao loi!!!";
 			break;
 		}
 		return "";

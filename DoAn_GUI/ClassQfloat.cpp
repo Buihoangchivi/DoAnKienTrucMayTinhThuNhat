@@ -30,7 +30,7 @@ bool CheckData(string Dec)
 {
 	int DemDauCham = 0;
 	int DemDau = 0;
-	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0] < '0' || Dec[0]>'9')))
+	if (Dec.size() == 0 || (Dec[0] != '-' && (Dec[0]<'0' || Dec[0]>'9')))
 	{
 		//cout << "Du lieu sai!";
 		return false;
@@ -295,7 +295,7 @@ string ClassQfloat::ConvertBinToDec(string s)
 	bool check_data = CheckDataBin(s);
 	if (check_data == false)
 	{
-		cout << "Du lieu sai!!!" << endl;
+		cout << "Du lieu sai!!!";
 		return "";
 	}
 	//Kiem tra truong hop dac biet
@@ -305,13 +305,13 @@ string ClassQfloat::ConvertBinToDec(string s)
 		case 1:
 			return "0";
 		case 2:
-			cout << "So khong the chuan hoa!!!" << endl;
+			cout << "So khong the chuan hoa!!!";
 			break;
 		case 3:
-			cout << "So vo cung!!!" << endl;
+			cout << "So vo cung!!!";
 			break;
 		case 4:
-			cout << "So bao loi!!!" << endl;
+			cout << "So bao loi!!!";
 			break;
 		}
 		return "";
@@ -461,13 +461,18 @@ string ClassQfloat::ConvertDecToBin(string num)
 	if (IntBin.length() == 0)
 		IntBin += '0';
 	else
-		pos_1 = 0;
+		pos_1 = 0; //Nếu có phần nguyên thì số 1 phải ở đầu.
+
 	string FracBin = "";
 	string FracDec = "0" + num.substr(pos_dots);
 	int Exp;
 	int Size_Signif;
 	bool check_round = false;
+	//Xet xem vi tri so 1 dau tien o dau
+	//+ So 1 dau tien ở đầu 1xx,0001100101
+	//+ So 1 dau tien chua tim thay 0,00000000001010101....
 	if (pos_1 == -1) {
+		//Vua chuyen thap phan qua nhi phan vao FracBin vua tim so 1 dau tien
 		while (1) {
 			FracDec = nhan2(FracDec);
 			if (FracDec[0] == '0') {
@@ -486,11 +491,12 @@ string ClassQfloat::ConvertDecToBin(string num)
 				}
 			}
 		}
+		//Khi tim duoc so 1 dau tien thi biet exp, Size_Signif toi da
 		Exp = IntBin.length() - pos_1;
-		Size_Signif = SIGNIF_SIZE - Exp;
+		Size_Signif = SIGNIF_SIZE;
 		Exp += K;
 		int count_size_signif = 0;
-		//Chuyen phan thap phan qua nhi phan
+		//Tiep tuc
 		while (1) {
 			FracDec = nhan2(FracDec);
 			if (FracDec[0] == '0') {
@@ -514,43 +520,51 @@ string ClassQfloat::ConvertDecToBin(string num)
 				}
 				break;
 			}
-
 		}
 	}
 	else {
+		//Truong hop so 1 dau tien o dau
 		Exp = IntBin.length() - 1;
+		//So phan tu phan tri toi da
 		Size_Signif = SIGNIF_SIZE - Exp;
 		Exp += K;
-		int count_size_signif = 0;
-		//Chuyen phan thap phan qua nhi phan
-		while (1) {
-			FracDec = nhan2(FracDec);
-			if (FracDec[0] == '0') {
-				FracBin += '0';
-				if (FracDec == "0") {
-					break;
+		if (Size_Signif >= 0) {
+			int count_size_signif = 0;
+			//Chuyen phan thap phan qua nhi phan
+			while (1) {
+				FracDec = nhan2(FracDec);
+				if (FracDec[0] == '0') {
+					FracBin += '0';
+					if (FracDec == "0") {
+						break;
+					}
 				}
-			}
-			else {
+				else {
 
-				FracBin += '1';
-				if (FracDec == "1") {
+					FracBin += '1';
+					if (FracDec == "1") {
+						break;
+					}
+					FracDec[0] = '0';
+				}
+				count_size_signif++;
+				if (count_size_signif == Size_Signif)
+				{
+					if (FracDec != "1") {
+						check_round = true;
+					}
 					break;
 				}
-				FracDec[0] = '0';
-			}
-			count_size_signif++;
-			if (count_size_signif == Size_Signif)
-			{
-				if (FracDec != "1") {
-					check_round = true;
-				}
-				break;
 			}
 		}
+		else {
+			check_round = true;
+		}
 	}
+	//Exp vuot qua khoang gia tri 
 	if (Exp < 0 || Exp > 2 * K)
 		return "";
+
 	//Luu vo bien np
 	string Bin = IntBin + "." + FracBin;
 	//

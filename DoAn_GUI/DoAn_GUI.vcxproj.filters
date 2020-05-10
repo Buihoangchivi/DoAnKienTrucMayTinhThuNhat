@@ -42,6 +42,9 @@
     <ClInclude Include="XuLySoLon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CQInt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DoAn_GUI.cpp">
@@ -60,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="XuLySoLon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CQInt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
