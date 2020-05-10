@@ -1,4 +1,4 @@
-// CQInt.cpp : implementation file
+﻿// CQInt.cpp : implementation file
 //
 
 #include "pch.h"
@@ -46,7 +46,48 @@ END_MESSAGE_MAP()
 
 // CQInt message handlers
 
+// Hàm kiểm tra dãy nhị phân có hợp lệ không
+bool checkBin(string num)
+{
+	int index = 0;
+	while (num[index] != '\0')
+	{
+		if (num[index] != '0' && num[index] != '1')
+			return false;
+		index++;
+	}
+	return true;
+}
 
+// Hàm kiểm tra dãy thập phân có hợp lệ không
+bool checkDec(string num)
+{
+	int index = 0;
+	if (num[index] == '-')
+		index++;
+	while (num[index] != '\0')
+	{
+		if (num[index] < 48 || num[index]>57)
+			return false;
+		index++;
+	}
+	return true;
+}
+
+// Hàm kiểm tra dãy thập lục phân có hợp lệ không
+bool checkHex(string num)
+{
+	int index = 0;
+	if (num[index] == '-')
+		index++;
+	while (num[index] != '\0')
+	{
+		if ((num[index] < 48 || num[index]>57) && (num[index] < 65 || num[index]>70))
+			return false;
+		index++;
+	}
+	return true;
+}
 void CQInt::OnBnClickedChuyendoi1()
 {
 	CEdit* editbox = (CEdit*)GetDlgItem(IDC_SoThu1);
@@ -59,13 +100,34 @@ void CQInt::OnBnClickedChuyendoi1()
 	}
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
+		bool check_dec = true;
+		check_dec = checkDec(num);
+		if (!check_dec)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 10;
 	}
 	else if (check_radio == IDC_Bin)
 	{
+		bool check_bin = true;
+		check_bin = checkBin(num);
+		if (!check_bin)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 2;
 	}
-	else if(check_radio==IDC_Hex){
+	else if (check_radio == IDC_Hex) {
+		bool check_hex = true;
+		check_hex = checkHex(num);
+		if (!check_hex)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 16;
 	}
 	else {
@@ -127,13 +189,34 @@ void CQInt::OnBnClickedChuyendoi2()
 	}
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
+		bool check_dec = true;
+		check_dec = checkDec(num);
+		if (!check_dec)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 10;
 	}
 	else if (check_radio == IDC_Bin)
 	{
+		bool check_bin = true;
+		check_bin = checkBin(num);
+		if (!check_bin)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 2;
 	}
 	else if (check_radio == IDC_Hex) {
+		bool check_hex = true;
+		check_hex = checkHex(num);
+		if (!check_hex)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 16;
 	}
 	else {
@@ -205,13 +288,40 @@ void CQInt::OnBnClickedTinhtoan()
 	}
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
+		bool check_dec1 = true;
+		bool check_dec2 = true;
+		check_dec1 = checkDec(num1);
+		check_dec2 = checkDec(num2);
+		if (!check_dec1 && !check_dec2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 10;
 	}
 	else if (check_radio == IDC_Bin)
 	{
+		bool check_bin1 = true;
+		bool check_bin2 = true;
+		check_bin1 = checkBin(num1);
+		check_bin2 = checkBin(num2);
+		if (!check_bin1 && !check_bin2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 2;
 	}
 	else if (check_radio == IDC_Hex) {
+		bool check_hex1 = true;
+		bool check_hex2 = true;
+		check_hex1 = checkHex(num1);
+		check_hex2 = checkHex(num2);
+		if (!check_hex1 && !check_hex2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 16;
 	}
 	else {
@@ -310,7 +420,6 @@ void CQInt::OnBnClickedTinhtoan()
 	label_hex1->SetWindowText(result_hex1);
 }
 
-
 void CQInt::OnBnClickedSosanh()
 {
 	//So thu nhat
@@ -333,13 +442,40 @@ void CQInt::OnBnClickedSosanh()
 	}
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
+		bool check_dec1 = true;
+		bool check_dec2 = true;
+		check_dec1 = checkDec(num1);
+		check_dec2 = checkDec(num2);
+		if (!check_dec1 && !check_dec2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 10;
 	}
 	else if (check_radio == IDC_Bin)
 	{
+		bool check_bin1 = true;
+		bool check_bin2 = true;
+		check_bin1 = checkBin(num1);
+		check_bin2 = checkBin(num2);
+		if (!check_bin1 && !check_bin2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 2;
 	}
 	else if (check_radio == IDC_Hex) {
+		bool check_hex1 = true;
+		bool check_hex2 = true;
+		check_hex1 = checkHex(num1);
+		check_hex2 = checkHex(num2);
+		if (!check_hex1 && !check_hex2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 		check_radio = 16;
 	}
 	else {

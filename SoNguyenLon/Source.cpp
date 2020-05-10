@@ -1,49 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "ClassQInt.h"
 
-// Hàm kiểm tra dãy nhị phân có hợp lệ không
-bool checkBin(string num)
-{
-	int index = 0;
-	while (num[index] != '\0')
-	{
-		if (num[index] != '0' && num[index] != '1')
-			return 0;
-		index++;
-	}
-	return 1;
-}
-
-// Hàm kiểm tra dãy thập phân có hợp lệ không
-bool checkDec(string num)
-{
-	int index = 0;
-	if (num[index] == '-')
-		index++;
-	while (num[index] != '\0')
-	{
-		if (num[index] < 48 || num[index]>57)
-			return 0;
-		index++;
-	}
-	return 1;
-}
-
-// Hàm kiểm tra dãy thập lục phân có hợp lệ không
-bool checkHex(string num)
-{
-	int index = 0;
-	if (num[index] == '-')
-		index++;
-	while (num[index] != '\0')
-	{
-		if ((num[index] < 48 || num[index]>57) && (num[index] < 65 || num[index]>70))
-			return 0;
-		index++;
-	}
-	return 1;
-}
-
 // Hàm đọc file và xuất file
 void ReadFileInt()
 {
