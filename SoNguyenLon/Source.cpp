@@ -88,7 +88,7 @@ void ReadFileInt()
 			p1 = str_temp[0];
 			p2 = str_temp[1];
 			a = str_temp[2];
-			QInt qint(a);
+			QInt qint;
 			// Thập -> Nhị
 			if (p1 == "10" && p2 == "2")
 			{
@@ -99,6 +99,8 @@ void ReadFileInt()
 					continue;
 				}
 				// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
+				QInt tmp(a);
+				qint = tmp;
 				vector<bool> temp = qint.convertDecToBin();
 				for (int i = 0; i < temp.size(); i++)
 				{
@@ -146,7 +148,23 @@ void ReadFileInt()
 			// Thập lục -> Nhị
 			else if (p1 == "16" && p2 == "2")
 			{
-				// Chưa làm :v 
+				// Kiểm tra dữ liệu có hợp lệ?
+				if (!checkHex(a))
+				{
+					cout << "Invalid!!!" << endl;
+					continue;
+				}
+				// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+				string DEC = qint.convertHexToDec(a);
+				// Đưa vào qint
+				QInt tmp(DEC);
+				qint = tmp;
+				// Xuất dãy nhị phân
+				vector<bool> temp = qint.convertDecToBin();
+				for (int i = 0; i < temp.size(); i++)
+				{
+					cout << temp[i];
+				}
 			}
 			// Thập -> Thập lục
 			else if (p1 == "10" && p2 == "16")
@@ -163,7 +181,17 @@ void ReadFileInt()
 			// Thập lục -> Thập
 			else if (p1 == "16" && p2 == "10")
 			{
-				// Chưa có :v 
+				// Kiểm tra dữ liệu có hợp lệ?
+				if (!checkHex(a))
+				{
+					cout << "Invalid!!!" << endl;
+					continue;
+				}
+				// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+				string DEC = qint.convertHexToDec(a);
+				QInt tmp(DEC);
+				qint = tmp;
+				qint.PrintQInt();
 			}
 		}
 		// Thực hiện tính toán
@@ -216,7 +244,10 @@ void ReadFileInt()
 						continue;
 					}
 					// Hợp lệ thì chuyển sang thập phân
-					// Chưa làm :v 
+					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+					string DEC = qint.convertHexToDec(a);
+					QInt tmp(DEC);
+					qint = tmp;
 				}
 				else
 				{
@@ -300,7 +331,13 @@ void ReadFileInt()
 						continue;
 					}
 					// Hợp lệ thì chuyển a và c sang thập phân 
-					// Chưa làm :v 
+					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
+					string DEC1 = qint1.convertHexToDec(a);
+					QInt tmp1(DEC1);
+					qint1 = tmp1;
+					string DEC2 = qint2.convertHexToDec(c);
+					QInt tmp2(DEC2);
+					qint2 = tmp2;
 				}
 				else
 				{

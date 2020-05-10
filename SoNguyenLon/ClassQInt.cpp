@@ -605,10 +605,12 @@ void QInt::Scan(string num, int base)
 			count++;
 		}
 		QInt a(convertBinToDec(temp));
+		*this = a;
 	}
 	else if (base == 16)
 	{
-		// convertHexToDec();
+		QInt a(convertHexToDec(num));
+		*this = a;
 	}
 }
 
@@ -630,6 +632,5 @@ string QInt::getDec()
 
 string QInt::getHex()
 {
-	string rs;
-	return rs;
+	return this->convertDecToHex();
 }
