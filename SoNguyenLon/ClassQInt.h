@@ -19,7 +19,7 @@ public:
 	vector<bool> convertDecToBin();
 	static string convertBinToDec(vector<bool> bit);
 	static string convertBinToHex(vector<bool> bit);
-	string convertDecToHex();	
+	string convertDecToHex();
 	static string convertHexToDec(string s);
 	QInt operator+(QInt x);
 	QInt oppositeNumber();
@@ -41,9 +41,9 @@ public:
 	QInt operator>>(int k);
 	QInt rol(int k);
 	QInt ror(int k);
-	void ScanQInt();
+	bool ScanQInt(string s);
 	void PrintQInt();
-	void Scan(string num, int base);
+	bool Scan(string num, int base);
 	string getBin();
 	string getDec();
 	string getHex();

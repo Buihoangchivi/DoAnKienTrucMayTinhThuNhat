@@ -583,14 +583,74 @@ QInt QInt::rol(int k)
 
 }
 
-void QInt::ScanQInt()
+bool QInt::ScanQInt(string s)
 {
-	
-	string qint;
+
+	/*string qint;
 	getline(cin, qint);
 	QInt a(qint);
-	*this = a;
+	*this = a;*/
 
+	string temp = s;
+	bool dau = 0;
+	bool ok = 0;
+	if (temp[0] == '-')
+	{
+		dau = 1;
+		temp.erase(temp.begin());
+	}
+	int cuoi = temp[temp.size() - 1] - '0';
+	int dem = 0;
+	setBit(dem, cuoi % 2);
+	if (dau == 1 && cuoi % 2 == 1)
+	{
+		ok = 1;
+	}
+
+	//Xoa so 0 du thua o dau chuoi
+	while (temp.length() > 1 && temp[0] == '0')
+		temp.erase(temp.begin());
+	//Kiem tra chuoi nhap vao co phai la so 0 hay khong
+	if (temp[0] == '0')
+	{
+
+		data[0] = data[1] = data[2] = data[3] = 0;
+		return true;
+
+	}
+	dem++;
+	while (temp != "1")
+	{
+		Chia(temp, 2, temp);
+		cuoi = temp[temp.size() - 1] - '0';
+		if (ok == 1)
+			setBit(dem, (cuoi + 1) % 2);
+		else
+			setBit(dem, (cuoi) % 2);
+		if (dau == 1 && cuoi % 2 == 1)
+			ok = 1;
+		dem++;
+		if (dem > 128 && temp != "1")
+		{
+			return false;
+		}
+
+	}
+
+	while (dem < 128)
+	{
+		if (dau == 1 && ok == 1)
+		{
+			setBit(dem, 1);
+		}
+		else
+		{
+			setBit(dem, 0);
+		}
+
+		dem++;
+	}
+	return true;
 }
 
 void QInt::PrintQInt()
@@ -600,20 +660,27 @@ void QInt::PrintQInt()
 
 }
 
-void QInt::Scan(string num, int base)
+bool QInt::Scan(string num, int base)
 {
 	if (base == 10)
 	{
-		QInt a(num);
-		*this = a;
+		/*QInt a(num);
+		*this = a;*/
+		if (!this->ScanQInt(num))
+			return false;
+		else
+			return true;
 	}
 	else
 	{
-
 		for (int i = 0; i < num.length() / 2; i++)
-		swap(num[i], num[num.length() - i - 1]);
+			swap(num[i], num[num.length() - i - 1]);
 		if (base == 2)
 		{
+			if (num.size() > 127)
+			{
+				return false;
+			}
 			vector<bool> temp;
 			int count = 0;
 			while (num[count] != '\0')
@@ -621,17 +688,23 @@ void QInt::Scan(string num, int base)
 				temp.push_back((bool)(num[count] - '0'));
 				count++;
 			}
-			QInt a(convertBinToDec(temp));
+			QInt a(temp);
 			*this = a;
+			return true;
 		}
 		else if (base == 16)
 		{
-			QInt a(convertHexToDec(num));
-			*this = a;
+			/*QInt a(convertHexToDec(num));
+			*this = a;*/
+			string temp = convertHexToDec(num);
+			if (!this->ScanQInt(temp))
+				return false;
+			else
+				return true;
 		}
 
 	}
-		
+
 }
 
 string QInt::getBin()

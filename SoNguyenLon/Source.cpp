@@ -102,13 +102,29 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
-					QInt tmp(a);
+					/*QInt tmp(a);
 					qint = tmp;
 					vector<bool> temp = qint.convertDecToBin();
 					for (int i = 0; i < temp.size(); i++)
 					{
 						cout << temp[i];
+					}*/
+
+
+					if (!qint.Scan(a, 10))
+					{
+						cout << "Overflow!!!";
+						continue;
 					}
+					else
+					{
+						vector<bool> temp = qint.convertDecToBin();
+						for (int i = 0; i < temp.size(); i++)
+						{
+							cout << temp[i];
+						}
+					}
+
 				}
 				// Nhị -> Thập
 				else if (p1 == "2" && p2 == "10")
@@ -120,14 +136,20 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển nhị phân vào trong vector<bool> 
-					vector<bool> temp;
+					/*vector<bool> temp;
 					for (int j = a.size() - 1; j >= 0; j--)
 					{
 						temp.push_back(a[j] - '0');
+					}*/
+
+
+					if (!qint.Scan(a, 2))
+					{
+						cout << "Overflow!!!";
+						continue;
 					}
 					// Xuất dãy thập phân
-					//cout << qint.convertBinToDec(temp);
-					string lul = qint.convertBinToDec(temp);
+					string lul = qint.convertQIntToDec();
 					cout << lul;
 				}
 				// Nhị -> Thập Lục
@@ -140,10 +162,16 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
-					vector<bool> temp;
+					/*vector<bool> temp;
 					for (int j = a.size() - 1; j >= 0; j--)
 					{
 						temp.push_back(a[j] - '0');
+					}*/
+
+					if (!qint.Scan(a, 2))
+					{
+						cout << "Overflow!!!";
+						continue;
 					}
 					// Xuất dãy thập lục phân
 					/*QInt tmp(qint.convertBinToDec(temp));
@@ -151,9 +179,16 @@ void ReadFileInt()
 					cout << qint.convertBinToHex(temp);*/
 
 
-					QInt tmp(temp);
+					/*QInt tmp(temp);
 					qint = tmp;
-					cout << qint.convertBinToHex(temp);
+					cout << qint.convertBinToHex(temp);*/
+					vector<bool> temp;
+					for (int j = a.size() - 1; j >= 0; j--)
+					{
+						temp.push_back(a[j] - '0');
+					}
+					string lul = qint.convertBinToHex(temp);
+					cout << lul;
 				}
 				// Thập lục -> Nhị
 				else if (p1 == "16" && p2 == "2")
@@ -165,10 +200,17 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-					string DEC = qint.convertHexToDec(a);
+					if (!qint.Scan(a, 16))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
+					//string DEC = qint.convertHexToDec(a);
 					// Đưa vào qint
-					QInt tmp(DEC);
-					qint = tmp;
+					/*QInt tmp(DEC);
+					qint = tmp;*/
+
+
 					// Xuất dãy nhị phân
 					vector<bool> temp = qint.convertDecToBin();
 					for (int i = 0; i < temp.size(); i++)
@@ -185,9 +227,14 @@ void ReadFileInt()
 						cout << "Invalid!!!" << endl;
 						continue;
 					}
+					if (!qint.Scan(a, 10))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
 					// Nếu hợp lệ thìxuất dãy thập lục phân
-					QInt tmp(a);
-					qint = a;
+					/*QInt tmp(a);
+					qint = temp;*/
 					cout << qint.convertDecToHex();
 				}
 				// Thập lục -> Thập
@@ -200,9 +247,14 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-					string DEC = qint.convertHexToDec(a);
+					if (!qint.Scan(a, 16))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
+					/*string DEC = qint.convertHexToDec(a);
 					QInt tmp(DEC);
-					qint = tmp;
+					qint = tmp;*/
 					qint.PrintQInt();
 				}
 			}
@@ -217,16 +269,22 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
-					vector<bool> temp;
+					/*vector<bool> temp;
 					for (int j = a.size() - 1; j >= 0; j--)
 					{
 						temp.push_back(a[j] - '0');
+					}*/
+
+					if (!qint.Scan(a, 2))
+					{
+						cout << "Overflow!!!";
+						continue;
 					}
 					/*string tmp = qint.convertBinToDec(temp);
 					qint = tmp;*/
 
-					QInt tmp(temp);
-					qint = temp;
+					/*QInt tmp(temp);
+					qint = temp;*/
 				}
 				else if (p1 == "10")
 				{
@@ -236,9 +294,14 @@ void ReadFileInt()
 						cout << "Invalid!!!" << endl;
 						continue;
 					}
+					if (!qint.Scan(a, 10))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
 					// Nếu hợp lệ thì tính toán luôn
-					QInt tmp(a);
-					qint = tmp;
+					/*QInt tmp(a);
+					qint = tmp;*/
 				}
 				else if (p1 == "16")
 				{
@@ -249,9 +312,14 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-					string DEC = qint.convertHexToDec(a);
+					if (!qint.Scan(a, 16))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
+					/*string DEC = qint.convertHexToDec(a);
 					QInt tmp(DEC);
-					qint = tmp;
+					qint = tmp;*/
 				}
 				QInt rs = ~qint;
 				rs.PrintQInt();
@@ -280,15 +348,21 @@ void ReadFileInt()
 						continue;
 					}
 					// Hợp lệ thì chuyển sang thập phân
-					vector<bool> temp;
+					/*vector<bool> temp;
 					for (int j = a.size() - 1; j >= 0; j--)
 					{
 						temp.push_back(a[j] - '0');
+					}*/
+
+					if (!qint.Scan(a, 2))
+					{
+						cout << "Overflow!!!";
+						continue;
 					}
 					//QInt tmp(qint.convertBinToDec(temp));
 
-					QInt tmp(temp);
-					qint = tmp;
+					/*QInt tmp(temp);
+					qint = tmp;*/
 				}
 				// Thập phân
 				else if (p == "10")
@@ -300,8 +374,14 @@ void ReadFileInt()
 						continue;
 					}
 					// Thập phân ta có thể tính toán được mà không cần chuyển
-					QInt tmp(a);
-					qint = tmp;
+					/*QInt tmp(a);
+					qint = tmp;*/
+
+					if (!qint.Scan(a, 10))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
 				}
 				// Thập lục
 				else if (p == "16")
@@ -313,9 +393,14 @@ void ReadFileInt()
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-					string DEC = qint.convertHexToDec(a);
+					/*string DEC = qint.convertHexToDec(a);
 					QInt tmp(DEC);
-					qint = tmp;
+					qint = tmp;*/
+					if (!qint.Scan(a, 16))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
 				}
 				else
 				{
@@ -361,7 +446,7 @@ void ReadFileInt()
 						continue;
 					}
 					// Hợp lệ thì chuyển a và c sang thập phân
-					vector<bool> temp1, temp2;
+					/*vector<bool> temp1, temp2;
 					for (int j = a.size() - 1; j >= 0; j--)
 					{
 						temp1.push_back(a[j] - '0');
@@ -369,15 +454,26 @@ void ReadFileInt()
 					for (int j = c.size() - 1; j >= 0; j--)
 					{
 						temp2.push_back(c[j] - '0');
+					}*/
+
+					if (!qint1.Scan(a, 2))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
+					if (!qint2.Scan(c, 2))
+					{
+						cout << "Overflow!!!";
+						continue;
 					}
 					/*QInt tmp1(qint1.convertBinToDec(temp1));
 					QInt tmp2(qint2.convertBinToDec(temp2));
 					qint1 = tmp1;
 					qint2 = tmp2;*/
-					QInt tmp1(temp1);
+					/*QInt tmp1(temp1);
 					QInt tmp2(temp2);
 					qint1 = tmp1;
-					qint2 = tmp2;
+					qint2 = tmp2;*/
 				}
 				// Thập phân
 				else if (p == "10")
@@ -389,10 +485,22 @@ void ReadFileInt()
 						continue;
 					}
 					// Thập phân thì có thể tính toán được
-					QInt tmp1(a);
+				/*	QInt tmp1(a);
 					QInt tmp2(c);
 					qint1 = tmp1;
-					qint2 = tmp2;
+					qint2 = tmp2;*/
+
+					if (!qint1.Scan(a, 10))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
+
+					if (!qint2.Scan(c, 10))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
 
 				}
 				// Thập lục phân
@@ -406,12 +514,23 @@ void ReadFileInt()
 					}
 					// Hợp lệ thì chuyển a và c sang thập phân 
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
-					string DEC1 = qint1.convertHexToDec(a);
+					/*string DEC1 = qint1.convertHexToDec(a);
 					QInt tmp1(DEC1);
 					qint1 = tmp1;
 					string DEC2 = qint2.convertHexToDec(c);
 					QInt tmp2(DEC2);
-					qint2 = tmp2;
+					qint2 = tmp2;*/
+
+					if (!qint1.Scan(a, 16))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
+					if (!qint2.Scan(c, 16))
+					{
+						cout << "Overflow!!!";
+						continue;
+					}
 				}
 				else
 				{
@@ -498,7 +617,7 @@ int main()
 	//for (int i = 0; i < s.length() / 2; i++)
 	//	swap(s[i], s[s.length() - i - 1]);
 	//cout << QInt::convertHexToDec(s) << endl;
-	//ReadFileInt();
+	ReadFileInt();
 	/*vector<bool> a;
 	string s;
 	cin >> s;
@@ -513,8 +632,6 @@ int main()
 	for (int i = s.length() - 1; i >= 0; i--)
 		a.push_back((int)(s[i] - '0'));
 	cout << QInt::convertBinToDec(a) << endl;*/
-	QInt a("18");
-	cout << a.getBin() << endl;
 	return 0;
 
 }
