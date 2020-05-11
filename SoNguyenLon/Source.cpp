@@ -33,8 +33,6 @@ bool checkDec(string num)
 bool checkHex(string num)
 {
 	int index = 0;
-	if (num[index] == '-')
-		index++;
 	while (num[index] != '\0')
 	{
 		if ((num[index] < 48 || num[index]>57) && (num[index] < 65 || num[index]>70))
@@ -617,7 +615,7 @@ int main()
 	//for (int i = 0; i < s.length() / 2; i++)
 	//	swap(s[i], s[s.length() - i - 1]);
 	//cout << QInt::convertHexToDec(s) << endl;
-	ReadFileInt();
+	//ReadFileInt();
 	/*vector<bool> a;
 	string s;
 	cin >> s;
@@ -632,6 +630,7 @@ int main()
 	for (int i = s.length() - 1; i >= 0; i--)
 		a.push_back((int)(s[i] - '0'));
 	cout << QInt::convertBinToDec(a) << endl;*/
+	cout << checkHex("1a123");
 	return 0;
 
 }
