@@ -178,34 +178,42 @@ string QInt::convertBinToDec(vector<bool> vbit)
 string QInt::convertBinToHex(vector<bool> bit)
 {
 
-	QInt a(QInt::convertBinToDec(bit));
-	return a.convertDecToHex();
+	pair<string, char> a[] = { {"0000", '0'}, {"0001", '1'}, {"0010", '2'}, {"0011", '3'},
+	{"0100", '4'}, {"0101", '5'}, {"0110", '6'}, {"0111", '7'},
+	{"1000", '8'}, {"1001", '9'}, {"1010", 'A'}, {"1011", 'B'},
+	{"1100", 'C'}, {"1101", 'D'}, {"1110", 'E'}, {"1111", 'F'} };
+	string s = "", temp;
+	while (bit.size() < 128)
+		bit.push_back(0);
+	for (int i = 127; i >= 0; i -= 4)
+	{
+
+		temp = "";
+		for (int j = i; j > i - 4; j--)
+			temp += (char)(bit[j] + '0');
+		for (int j = 0; j < 16; j++)
+			if (temp == a[j].first)
+			{
+
+				s += a[j].second;
+				break;
+
+			}
+
+	}
+	return s;
 
 }
 
 string QInt::convertDecToHex()
 {
 
-	string ans = "", s1;
-	pair<QInt, QInt> temp;
-	QInt a, b("16");
-	a = *this;
-	while (a.data[0] != 0 || a.data[1] != 0 || a.data[2] != 0 || a.data[3] != 0)
-	{
-
-		temp = a / b;
-		s1 = temp.second.convertQIntToDec(); //So du
-		if (s1.length() == 1) //So du tu 0 den 9 (tuong ung tu 0 den 9 trong he hex)
-			ans = s1 + ans;
-		else //So du tu 10 den 15 (tuong ung tu A den F trong he hex)
-			ans = (char)(s1[1] + 'A' - '0') + ans;
-		a = temp.first; //Thuong
-
-	}
-	return ans;
+	vector<bool> a;
+	for (int i = 0; i < 128; i++)
+		a.push_back(getBit(i));
+	return QInt::convertBinToHex(a);
 
 }
-
 string QInt::convertHexToDec(string s)
 {
 

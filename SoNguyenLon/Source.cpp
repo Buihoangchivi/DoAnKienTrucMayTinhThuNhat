@@ -621,16 +621,20 @@ int main()
 	cin >> s;
 	for (int i = s.length() - 1; i >= 0; i--)
 		a.push_back((int)(s[i] - '0'));*/
-	//QInt b(a);
-	//b.PrintQInt();
-	//cout << b.convertDecToHex() << endl;
-	/*vector<bool> a;
+		//QInt b(a);
+		//b.PrintQInt();
+		//cout << b.convertDecToHex() << endl;
+		/*vector<bool> a;
+		string s;
+		cin >> s;
+		for (int i = s.length() - 1; i >= 0; i--)
+			a.push_back((int)(s[i] - '0'));
+		cout << QInt::convertBinToDec(a) << endl;*/
+	/*QInt a;
 	string s;
 	cin >> s;
-	for (int i = s.length() - 1; i >= 0; i--)
-		a.push_back((int)(s[i] - '0'));
-	cout << QInt::convertBinToDec(a) << endl;*/
-	cout << checkHex("1a123");
+	a.ScanQInt(s);
+	cout << a.convertDecToHex() << endl;*/
 	return 0;
 
 }
