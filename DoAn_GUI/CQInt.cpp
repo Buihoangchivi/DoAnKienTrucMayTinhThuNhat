@@ -304,10 +304,17 @@ void CQInt::OnBnClickedTinhtoan()
 	if(check_tinhtoan>=IDC_DichTrai && check_tinhtoan<=IDC_XoayPhai) {
 		if (check_radio == IDC_Dec) {
 			bool check_dec1 = true;
+			bool check_dec2 = true;
 			check_dec1 = checkDec(num1);
+			check_dec2 = checkDec(num2);
 			if (!check_dec1)
 			{
-				MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+				MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			if (!check_dec2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
 				return;
 			}
 			check_radio = 10;
@@ -316,9 +323,16 @@ void CQInt::OnBnClickedTinhtoan()
 		{
 			bool check_bin1 = true;
 			check_bin1 = checkBin(num1);
+			bool check_dec2 = true;
+			check_dec2 = checkDec(num2);
 			if (!check_bin1)
 			{
-				MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+				MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			if (!check_dec2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
 				return;
 			}
 			check_radio = 2;
@@ -326,9 +340,16 @@ void CQInt::OnBnClickedTinhtoan()
 		else if (check_radio == IDC_Hex) {
 			bool check_hex1 = true;
 			check_hex1 = checkHex(num1);
+			bool check_dec2 = true;
+			check_dec2 = checkDec(num2);
 			if (!check_hex1)
 			{
-				MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+				MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Hex)"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			if (!check_dec2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
 				return;
 			}
 			check_radio = 16;
@@ -353,9 +374,14 @@ void CQInt::OnBnClickedTinhtoan()
 			bool check_dec2 = true;
 			check_dec1 = checkDec(num1);
 			check_dec2 = checkDec(num2);
-			if (!check_dec1 || !check_dec2)
+			if (!check_dec1)
 			{
-				MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+				MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			if (!check_dec2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
 				return;
 			}
 			check_radio = 10;
@@ -366,9 +392,14 @@ void CQInt::OnBnClickedTinhtoan()
 			bool check_bin2 = true;
 			check_bin1 = checkBin(num1);
 			check_bin2 = checkBin(num2);
-			if (!check_bin1 || !check_bin2)
+			if (!check_bin1)
 			{
-				MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+				MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Bin)"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			if (!check_bin2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Bin)"), _T("Error"), MB_ICONERROR | MB_OK);
 				return;
 			}
 			check_radio = 2;
@@ -378,9 +409,14 @@ void CQInt::OnBnClickedTinhtoan()
 			bool check_hex2 = true;
 			check_hex1 = checkHex(num1);
 			check_hex2 = checkHex(num2);
-			if (!check_hex1 || !check_hex2)
+			if (!check_hex1)
 			{
-				MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+				MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Hex)"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			if (!check_hex2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Hex)"), _T("Error"), MB_ICONERROR | MB_OK);
 				return;
 			}
 			check_radio = 16;
@@ -525,9 +561,14 @@ void CQInt::OnBnClickedSosanh()
 		bool check_dec2 = true;
 		check_dec1 = checkDec(num1);
 		check_dec2 = checkDec(num2);
-		if (!check_dec1 || !check_dec2)
+		if (!check_dec1)
 		{
-			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
+		if (!check_dec2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Dec)"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
 		}
 		check_radio = 10;
@@ -538,9 +579,14 @@ void CQInt::OnBnClickedSosanh()
 		bool check_bin2 = true;
 		check_bin1 = checkBin(num1);
 		check_bin2 = checkBin(num2);
-		if (!check_bin1 || !check_bin2)
+		if (!check_bin1)
 		{
-			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+			MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Bin)"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
+		if (!check_bin2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Bin)"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
 		}
 		check_radio = 2;
@@ -550,9 +596,14 @@ void CQInt::OnBnClickedSosanh()
 		bool check_hex2 = true;
 		check_hex1 = checkHex(num1);
 		check_hex2 = checkHex(num2);
-		if (!check_hex1 || !check_hex2)
+		if (!check_hex1)
 		{
-			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+			MessageBox(_T("Ban da nhap sai du lieu (so thu nhat he Hex)"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
+		if (!check_hex2)
+		{
+			MessageBox(_T("Ban da nhap sai du lieu (so thu hai he Hex)"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
 		}
 		check_radio = 16;
