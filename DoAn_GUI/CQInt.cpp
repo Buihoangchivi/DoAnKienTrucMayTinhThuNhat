@@ -27,7 +27,6 @@ void CQInt::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 }
 
-
 BEGIN_MESSAGE_MAP(CQInt, CDialogEx)
 	ON_BN_CLICKED(ID_ChuyenDoi1, &CQInt::OnBnClickedChuyendoi1)
 	ON_BN_CLICKED(ID_ChuyenDoi2, &CQInt::OnBnClickedChuyendoi2)
@@ -304,7 +303,7 @@ void CQInt::OnBnClickedTinhtoan()
 		bool check_dec2 = true;
 		check_dec1 = checkDec(num1);
 		check_dec2 = checkDec(num2);
-		if (!check_dec1 && !check_dec2)
+		if (!check_dec1 || !check_dec2)
 		{
 			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
@@ -317,7 +316,7 @@ void CQInt::OnBnClickedTinhtoan()
 		bool check_bin2 = true;
 		check_bin1 = checkBin(num1);
 		check_bin2 = checkBin(num2);
-		if (!check_bin1 && !check_bin2)
+		if (!check_bin1 || !check_bin2)
 		{
 			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
@@ -329,7 +328,7 @@ void CQInt::OnBnClickedTinhtoan()
 		bool check_hex2 = true;
 		check_hex1 = checkHex(num1);
 		check_hex2 = checkHex(num2);
-		if (!check_hex1 && !check_hex2)
+		if (!check_hex1 || !check_hex2)
 		{
 			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
@@ -477,7 +476,7 @@ void CQInt::OnBnClickedSosanh()
 		bool check_dec2 = true;
 		check_dec1 = checkDec(num1);
 		check_dec2 = checkDec(num2);
-		if (!check_dec1 && !check_dec2)
+		if (!check_dec1 || !check_dec2)
 		{
 			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
@@ -490,7 +489,7 @@ void CQInt::OnBnClickedSosanh()
 		bool check_bin2 = true;
 		check_bin1 = checkBin(num1);
 		check_bin2 = checkBin(num2);
-		if (!check_bin1 && !check_bin2)
+		if (!check_bin1 || !check_bin2)
 		{
 			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
@@ -502,7 +501,7 @@ void CQInt::OnBnClickedSosanh()
 		bool check_hex2 = true;
 		check_hex1 = checkHex(num1);
 		check_hex2 = checkHex(num2);
-		if (!check_hex1 && !check_hex2)
+		if (!check_hex1 || !check_hex2)
 		{
 			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
