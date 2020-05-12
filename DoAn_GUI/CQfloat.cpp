@@ -95,9 +95,10 @@ bool CheckData1(string Dec)
 	}
 	return true;
 }
-//
+//Hàm xử lí sự kiện khi nhấn nút OK
 void CQfloat::OnBnClickedOk()
 {
+	//Lấy giá trị nhập
 	CEdit* editbox = (CEdit*)GetDlgItem(IDC_EDIT1);
 	CString Cnum;
 	editbox->GetWindowText(Cnum);
@@ -106,7 +107,7 @@ void CQfloat::OnBnClickedOk()
 		MessageBox(_T("Ban chua nhap du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-
+	//Kiểm tra hệ biểu diễn
 	int check_radio = GetCheckedRadioButton(IDC_RADIO1, IDC_RADIO2);
 	if (check_radio == IDC_RADIO1) {
 		bool check_dec = true;
@@ -133,7 +134,7 @@ void CQfloat::OnBnClickedOk()
 		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	//Nhap va kiem tra truong hop dac biet
+	//Đưa giá trị vào và kiểm tra trường hợp đặc biệt
 	int check;
 	ClassQfloat temp;
 	temp.ScanQfloat(num, check_radio,check);
@@ -183,8 +184,7 @@ void CQfloat::OnBnClickedOk()
 	label_bin2->SetWindowText(result_bin2);
 }
 
-
-
+//Xử lí sự kiện khi nhấn nút RESET
 void CQfloat::OnBnClickedReset()
 {
 	CWnd* label_bin1 = GetDlgItem(IDC_STATIC_BIN1);

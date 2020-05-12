@@ -81,16 +81,22 @@ bool checkHex(string num)
 	}
 	return true;
 }
+
+//Hàm xử lý khi click chuột vào nút chuyển đổi 1
 void CQInt::OnBnClickedChuyendoi1()
 {
+	//Lấy giá trị được nhập
 	CEdit* editbox = (CEdit*)GetDlgItem(IDC_SoThu1);
 	CString Cnum;
 	editbox->GetWindowText(Cnum);
 	string num = CStringA(Cnum);
+	//Kiểm tra đã nhập dữ liệu chưa
 	if (num.length() == 0) {
 		MessageBox(_T("Ban chua nhap du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+
+	//Kiểm tra hệ biểu diễn giá trị nhập
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
 		bool check_dec = true;
@@ -127,9 +133,13 @@ void CQInt::OnBnClickedChuyendoi1()
 		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	//Nhap du lieu
+	//Đưa giá trị vừa nhập vào QInt
 	QInt temp;
-	temp.Scan(num, check_radio);
+	if (!temp.Scan(num, check_radio)) {
+		MessageBox(_T("Ban nhap so thu nhat vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
+	//Xuất kết quả hệ Dec
 	CString result_dec1 = _T("");
 	CString result_dec2 = _T("");
 	string dec = temp.getDec();
@@ -148,19 +158,19 @@ void CQInt::OnBnClickedChuyendoi1()
 		CWnd* label_dec2 = GetDlgItem(IDC_KQDec2);
 		label_dec2->SetWindowText(result_dec2);
 	}
-	//Bin
+	//Xuất kết quả hệ Bin
 	CString result_bin1 = _T("");
 	CString result_bin2 = _T("");
 	string bin = temp.getBin();
 	result_bin1 = bin.substr(0, 64).c_str();
 	result_bin2 = bin.substr(64).c_str();
-	//
+
 	CWnd* label_bin1 = GetDlgItem(IDC_KQBin1);
 	label_bin1->SetWindowText(result_bin1);
 	CWnd* label_bin2 = GetDlgItem(IDC_KQBin2);
 	label_bin2->SetWindowText(result_bin2);
 
-	//Hex
+	//Xuất kết quả hệ Hex
 	CString result_hex1 = _T("");
 	string hex = temp.getHex();
 	result_hex1 = hex.substr(0, 64).c_str();
@@ -169,17 +179,21 @@ void CQInt::OnBnClickedChuyendoi1()
 	label_hex1->SetWindowText(result_hex1);
 }
 
-
+//Hàm xử lý khi click chuột vào nút chuyển đổi 2
 void CQInt::OnBnClickedChuyendoi2()
 {
+	//Lấy giá trị được nhập
 	CEdit* editbox = (CEdit*)GetDlgItem(IDC_SoThu2);
 	CString Cnum;
 	editbox->GetWindowText(Cnum);
 	string num = CStringA(Cnum);
+	//Kiểm tra đã nhập dữ liệu chưa
 	if (num.length() == 0) {
 		MessageBox(_T("Ban chua nhap du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+
+	//Kiểm tra hệ biểu diễn giá trị nhập
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
 		bool check_dec = true;
@@ -216,9 +230,13 @@ void CQInt::OnBnClickedChuyendoi2()
 		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	//Nhap du lieu
+	//Đưa giá trị vừa nhập vào QInt
 	QInt temp;
-	temp.Scan(num, check_radio);
+	if (!temp.Scan(num, check_radio)) {
+		MessageBox(_T("Ban nhap so thu hai vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
+	//Xuất kết quả hệ Dec
 	CString result_dec1 = _T("");
 	CString result_dec2 = _T("");
 	string dec = temp.getDec();
@@ -237,19 +255,19 @@ void CQInt::OnBnClickedChuyendoi2()
 		CWnd* label_dec2 = GetDlgItem(IDC_KQDec2);
 		label_dec2->SetWindowText(result_dec2);
 	}
-	//Bin
+	//Xuất kết quả hệ Bin
 	CString result_bin1 = _T("");
 	CString result_bin2 = _T("");
 	string bin = temp.getBin();
 	result_bin1 = bin.substr(0, 64).c_str();
 	result_bin2 = bin.substr(64).c_str();
-	//
+
 	CWnd* label_bin1 = GetDlgItem(IDC_KQBin1);
 	label_bin1->SetWindowText(result_bin1);
 	CWnd* label_bin2 = GetDlgItem(IDC_KQBin2);
 	label_bin2->SetWindowText(result_bin2);
 
-	//Hex
+	//Xuất kết quả hệ Hex
 	CString result_hex1 = _T("");
 	string hex = temp.getHex();
 	result_hex1 = hex.substr(0, 64).c_str();
@@ -258,10 +276,10 @@ void CQInt::OnBnClickedChuyendoi2()
 	label_hex1->SetWindowText(result_hex1);
 }
 
-
+//Hàm xử lí sự kiện khi nhấn nút tính toán
 void CQInt::OnBnClickedTinhtoan()
 {
-	//So thu nhat
+	//Lấy dữ liệu số thứ nhất
 	CEdit* editbox1 = (CEdit*)GetDlgItem(IDC_SoThu1);
 	CString Cnum1;
 	editbox1->GetWindowText(Cnum1);
@@ -270,7 +288,7 @@ void CQInt::OnBnClickedTinhtoan()
 		MessageBox(_T("Ban chua nhap du lieu so thu nhat"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	//So thu hai
+	//Lấy dữ liệu số thứ hai
 	CEdit* editbox2 = (CEdit*)GetDlgItem(IDC_SoThu2);
 	CString Cnum2;
 	editbox2->GetWindowText(Cnum2);
@@ -279,6 +297,7 @@ void CQInt::OnBnClickedTinhtoan()
 		MessageBox(_T("Ban chua nhap du lieu so thu hai"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+	//Kiểm tra hệ biểu diễn
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
 		bool check_dec1 = true;
@@ -321,13 +340,21 @@ void CQInt::OnBnClickedTinhtoan()
 		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+	//Đưa dữ liệu vào QInt
 	QInt a;
-	a.Scan(num1, check_radio);
+	if( !a.Scan(num1, check_radio)) {
+		MessageBox(_T("Ban nhap so thu nhat vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
 	QInt b;
-	b.Scan(num2, check_radio);
+	if (!b.Scan(num2, check_radio)) {
+		MessageBox(_T("Ban nhap so thu hai vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
+	
+	//Thực hiện tính toán dựa vào lựa chọn tính toán
 	QInt result;
 	int temp;
-	pair<QInt, QInt> kq;
 	int check_tinhtoan = GetCheckedRadioButton(IDC_Cong, IDC_XoayPhai);
 	switch(check_tinhtoan)
 	{
@@ -341,8 +368,10 @@ void CQInt::OnBnClickedTinhtoan()
 		result = a * b;
 		break;
 	case IDC_Chia:
-		kq = a / b;
-		result = kq.first;
+		result = a / b;
+		break;
+	case IDC_DU:
+		result = a % b;
 		break;
 	case IDC_And:
 		result = a & b;
@@ -376,7 +405,8 @@ void CQInt::OnBnClickedTinhtoan()
 		MessageBox(_T("Ban chua chon phep tinh toan"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	//Xuat ket qua
+
+	//Xuất kết quả
 	CString result_dec1 = _T("");
 	CString result_dec2 = _T("");
 	string dec = result.getDec();
@@ -419,9 +449,10 @@ void CQInt::OnBnClickedTinhtoan()
 	label_sosanh->SetWindowText(L"");
 }
 
+//Hàm xử lí sự kiện khi nhấn nút so sánh
 void CQInt::OnBnClickedSosanh()
 {
-	//So thu nhat
+	//Lấy dữ liệu số thứ nhất
 	CEdit* editbox1 = (CEdit*)GetDlgItem(IDC_SoThu1);
 	CString Cnum1;
 	editbox1->GetWindowText(Cnum1);
@@ -430,7 +461,7 @@ void CQInt::OnBnClickedSosanh()
 		MessageBox(_T("Ban chua nhap du lieu so thu nhat"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
-	//So thu hai
+	//Lấy dữ liệu số thứ hai
 	CEdit* editbox2 = (CEdit*)GetDlgItem(IDC_SoThu2);
 	CString Cnum2;
 	editbox2->GetWindowText(Cnum2);
@@ -439,6 +470,7 @@ void CQInt::OnBnClickedSosanh()
 		MessageBox(_T("Ban chua nhap du lieu so thu hai"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+	//Kiểm tra hệ biểu diễn
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
 	if (check_radio == IDC_Dec) {
 		bool check_dec1 = true;
@@ -481,10 +513,18 @@ void CQInt::OnBnClickedSosanh()
 		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+	//Đưa dữ liệu vào QInt
 	QInt a;
-	a.Scan(num1, check_radio);
+	if (!a.Scan(num1, check_radio)) {
+		MessageBox(_T("Ban nhap so thu nhat vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
 	QInt b;
-	b.Scan(num2, check_radio);
+	if (!b.Scan(num2, check_radio)) {
+		MessageBox(_T("Ban nhap so thu hai vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
+	}
+	//Thực hiện so sánh
 	int check_tinhtoan = GetCheckedRadioButton(IDC_Lon,IDC_BeBang);
 	bool check= false;
 	switch(check_tinhtoan) {
@@ -512,11 +552,13 @@ void CQInt::OnBnClickedSosanh()
 		MessageBox(_T("Ban chua chon phep so sanh"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+	//Xuất kết quả
 	CWnd* label_sosanh = GetDlgItem(IDC_KQSoSanh);
 	if(check)
 		label_sosanh->SetWindowText(L"TRUE");
 	else
 		label_sosanh->SetWindowText(L"FALSE");
+	//
 	CWnd* label_dec1 = GetDlgItem(IDC_KQDec1);
 	CWnd* label_dec2 = GetDlgItem(IDC_KQDec2);
 	CWnd* label_bin1 = GetDlgItem(IDC_KQBin1);
@@ -529,6 +571,7 @@ void CQInt::OnBnClickedSosanh()
 	label_hex->SetWindowText(L"0");
 }
 
+//Hàm xử lí sự kiện khi nhấn nút reset giá trị về 0 và rỗng
 void CQInt::OnBnClickedReset()
 {
 	CWnd* label_dec1 = GetDlgItem(IDC_KQDec1);
