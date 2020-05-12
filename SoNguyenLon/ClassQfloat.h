@@ -16,7 +16,7 @@ public:
 	ClassQfloat();
 	ClassQfloat(string);
 	void ScanQfloat(int);
-	void ScanQfloat(string, int, int&);
+	void ScanQfloat(string, int);
 	void PrintQfloat(int);
 	static string ConvertBinToDec(string);
 	static string ConvertDecToBin(string);

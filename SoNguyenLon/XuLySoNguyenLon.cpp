@@ -1,4 +1,4 @@
-﻿#include "XuLySoLon.h"
+﻿#include "XuLySoNguyenLon.h"
 
 int SoSanh(vector<int> a, vector<int> b)
 {
@@ -39,7 +39,7 @@ void Cong(string a, string b, string& ketqua)
 	{
 		ketqua.insert(0, 1, (char)(temp + 48));
 	}
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo0_Qint(ketqua);
 }
 
 void Tru(string sotru, string sobitru, string& ketqua)
@@ -67,7 +67,7 @@ void Tru(string sotru, string sobitru, string& ketqua)
 	}
 	reverse(ketqua.begin(), ketqua.end());
 
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo0_Qint(ketqua);
 }
 
 void Nhan(string a, int b, string& ketqua)
@@ -90,7 +90,7 @@ void Nhan(string a, int b, string& ketqua)
 		temp /= 10;
 
 	}
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo0_Qint(ketqua);
 
 }
 
@@ -113,7 +113,7 @@ void Chia(string sochia, int sobichia, string& ketqua)
 	{
 		ketqua = "0";
 	}
-	ChuanHoaSo0(ketqua);
+	ChuanHoaSo0_Qint(ketqua);
 }
 
 // sobichia nhỏ
@@ -132,7 +132,7 @@ void ChuanHoa(string& a, string& b)
 }
 
 // Bỏ các số 0 ở đầu
-void ChuanHoaSo0(string& a)
+void ChuanHoaSo0_Qint(string& a)
 {
 	if (a.length() == 1)
 		return;
@@ -147,6 +147,4 @@ void ChuanHoaSo0(string& a)
 	}
 	else
 		return;
-
-
 }

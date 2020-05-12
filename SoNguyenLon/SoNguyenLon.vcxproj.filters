@@ -21,7 +21,13 @@
     <ClCompile Include="ClassQInt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="XuLySoLon.cpp">
+    <ClCompile Include="XuLySoNguyenLon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassQfloat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XuLySoThucLon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +35,13 @@
     <ClInclude Include="ClassQInt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XuLySoLon.h">
+    <ClInclude Include="XuLySoNguyenLon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassQfloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XuLySoThucLon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "ClassQInt_GUI.h"
-#include "XuLySoLon.h"
+#include "XuLySoNguyenLon.h"
 
 QInt::QInt()
 {

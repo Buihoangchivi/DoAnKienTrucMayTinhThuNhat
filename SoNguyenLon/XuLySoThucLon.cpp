@@ -1,5 +1,4 @@
-﻿#include "pch.h"
-#include "XuLySoLon.h"
+﻿#include "XuLySoThucLon.h"
 //Đảo chuỗi
 string reverse(string s) {
 	string result;
@@ -189,7 +188,7 @@ void ChuanHoaTP(string& a, string& b)
 	}
 }
 
-void ChuanHoaSo0(string& a)
+void ChuanHoaSo0_Qfloat(string& a)
 {
 	int i = 0;
 	if (a[i] == '0')

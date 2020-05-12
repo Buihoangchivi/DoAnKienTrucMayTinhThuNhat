@@ -1,5 +1,5 @@
 ﻿#include "ClassQInt.h"
-#include "XuLySoLon.h"
+#include "XuLySoNguyenLon.h"
 
 QInt::QInt()
 {
