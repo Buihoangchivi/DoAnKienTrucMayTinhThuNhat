@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "ClassQInt_GUI.h"
 #include "XuLySoLon.h"
 
@@ -20,6 +20,7 @@ QInt::QInt(string s) : QInt()
 	string temp = s;
 	bool dau = 0;
 	bool ok = 0;
+	// Nếu là số âm thì ta chuyển sang số dương xử lý rôi chuyển lại âm sau
 	if (temp[0] == '-')
 	{
 		dau = 1;
@@ -45,19 +46,24 @@ QInt::QInt(string s) : QInt()
 
 	}
 	dem++;
+	// Các quá trình chia 2 để setBit vào data, ta lưu ý rằng đổi dãy bit từ âm sang dương thì chỉ cần đổi 0 -> 1, 1-> 0
+	// Các bit cho tới khi gặp bit 1 đầu tiên từ phải sang
 	while (temp != "1")
 	{
 		Chia(temp, 2, temp);
 		cuoi = temp[temp.size() - 1] - '0';
+		// Trường hợp số ăm
 		if (ok == 1)
 			setBit(dem, (cuoi + 1) % 2);
+		// Trường hợp số dương
 		else
 			setBit(dem, (cuoi) % 2);
+		// Kiểm tra có phải số âm không
 		if (dau == 1 && cuoi % 2 == 1)
 			ok = 1;
 		dem++;
 	}
-
+	// chèn đủ 128 bit
 	while (dem < 128)
 	{
 		if (dau == 1 && ok == 1)
@@ -99,12 +105,14 @@ void QInt::setBit(int i, bool bit)
 
 }
 
+
 string QInt::convertQIntToDec()
 {
 
 	string ketqua = "0";
 	vector<int> c;
 	string b = "1", b1;
+	// Thao tác giống như ta thao tác hệ cơ số q tổng quát
 	for (int i = 0; i < 127; i++)
 	{
 		bool bit = getBit(i);
@@ -113,6 +121,7 @@ string QInt::convertQIntToDec()
 		Nhan(b, bit, b1);
 		Cong(ketqua, b1, ketqua);
 	}
+	// Xử lý cho số âm
 	if (getBit(127) == 1)
 	{
 		Nhan(b, 2, b);
@@ -142,7 +151,7 @@ vector<bool> QInt::convertDecToBin()
 
 string QInt::convertBinToDec(vector<bool> vbit)
 {
-
+	// Thao tác như convertQIntToDec nhưng ko dùng tới data mà dùng vector<bool>
 	string ketqua = "0";
 	vector<int> c;
 	while (vbit.size() < 128)
@@ -201,6 +210,8 @@ string QInt::convertBinToHex(vector<bool> bit)
 			}
 
 	}
+	while (s.length() > 1 && s[0] == '0')
+		s.erase(s.begin());
 	return s;
 
 }
@@ -214,6 +225,7 @@ string QInt::convertDecToHex()
 	return QInt::convertBinToHex(a);
 
 }
+
 string QInt::convertHexToDec(string s)
 {
 
@@ -328,7 +340,7 @@ QInt QInt::operator*(QInt x)
 
 }
 
-pair<QInt, QInt> QInt::operator/(QInt x)
+QInt QInt::operator/(QInt x)
 {
 
 	QInt a, b, q;
@@ -372,9 +384,54 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 	//Q la thuong neu Q va X cung dau
 	//Nguoc lai Q la bu 2 cua thuong neu Q va X trai dau
 	if (this->getBit(127) == x.getBit(127))
-		return pair<QInt, QInt>(q, a);
+		return q;
 	else
-		return pair<QInt, QInt>(q.oppositeNumber(), a);
+		return q.oppositeNumber();
+
+}
+
+QInt QInt::operator%(QInt x)
+{
+
+	QInt a, b, q;
+	q = *this;
+	//Neu So bi chia Q > 0 thi A = 128 bit 0
+	//Nguoc lai neu Q < 0 thi A = 128 bit 1
+	if (q.getBit(127) == 1)
+		for (int i = 0; i < 128; i++)
+			a.setBit(i, 1);
+	vector<bool> boo;
+	for (int i = 0; i < 128; i++)
+	{
+
+		//Dich trai [A, Q] 1 bit
+		a = a << 1;
+		a.setBit(0, q.getBit(127));
+		q = q << 1;
+		//Gan B = A
+		b = a;
+		//Voi X la so chia
+		//Neu A, X trai dau ==> A = A + X 
+		//Nguoc lai A, X cung dau ==> A = A - X
+		if (a.getBit(127) != x.getBit(127))
+			a = a + x;
+		else
+			a = a - x;
+		//Neu A, B cung dau ==> Q0 = 1
+		//Nguoc lai A, B trai dau ==> Q0 = 0, A = B
+		if (a.getBit(127) == b.getBit(127))
+			q.setBit(0, 1);
+		else
+		{
+
+			q.setBit(0, 0);
+			a = b;
+
+		}
+
+	}
+	//A la so du
+	return a;
 
 }
 
@@ -592,14 +649,69 @@ QInt QInt::rol(int k)
 
 }
 
-void QInt::ScanQInt()
+
+bool QInt::ScanQInt(string s)
 {
+	string temp = s;
+	bool dau = 0;
+	bool ok = 0;
+	if (temp[0] == '-')
+	{
+		dau = 1;
+		temp.erase(temp.begin());
+	}
+	int cuoi = temp[temp.size() - 1] - '0';
+	int dem = 0;
+	setBit(dem, cuoi % 2);
+	if (dau == 1 && cuoi % 2 == 1)
+	{
+		ok = 1;
+	}
 
-	string qint;
-	getline(cin, qint);
-	QInt a(qint);
-	*this = a;
+	//Xoa so 0 du thua o dau chuoi
+	while (temp.length() > 1 && temp[0] == '0')
+		temp.erase(temp.begin());
+	//Kiem tra chuoi nhap vao co phai la so 0 hay khong
+	if (temp[0] == '0')
+	{
 
+		data[0] = data[1] = data[2] = data[3] = 0;
+		return true;
+
+	}
+	dem++;
+	while (temp != "1")
+	{
+		Chia(temp, 2, temp);
+		cuoi = temp[temp.size() - 1] - '0';
+		if (ok == 1)
+			setBit(dem, (cuoi + 1) % 2);
+		else
+			setBit(dem, (cuoi) % 2);
+		if (dau == 1 && cuoi % 2 == 1)
+			ok = 1;
+		dem++;
+		if (dem > 128 && temp != "1")
+		{
+			return false;
+		}
+
+	}
+
+	while (dem < 128)
+	{
+		if (dau == 1 && ok == 1)
+		{
+			setBit(dem, 1);
+		}
+		else
+		{
+			setBit(dem, 0);
+		}
+
+		dem++;
+	}
+	return true;
 }
 
 void QInt::PrintQInt()
@@ -609,20 +721,26 @@ void QInt::PrintQInt()
 
 }
 
-void QInt::Scan(string num, int base)
+bool QInt::Scan(string num, int base)
 {
 	if (base == 10)
 	{
-		QInt a(num);
-		*this = a;
+		if (!this->ScanQInt(num))
+			return false;
+		else
+			return true;
 	}
 	else
 	{
-
+		// Đảo ngược chuỗi vì ta đưa các dữ liệu này vào ngược
 		for (int i = 0; i < num.length() / 2; i++)
 			swap(num[i], num[num.length() - i - 1]);
 		if (base == 2)
 		{
+			if (num.size() > 127)
+			{
+				return false;
+			}
 			vector<bool> temp;
 			int count = 0;
 			while (num[count] != '\0')
@@ -630,16 +748,21 @@ void QInt::Scan(string num, int base)
 				temp.push_back((bool)(num[count] - '0'));
 				count++;
 			}
-			QInt a(convertBinToDec(temp));
+			QInt a(temp);
 			*this = a;
+			return true;
 		}
 		else if (base == 16)
 		{
-			QInt a(convertHexToDec(num));
-			*this = a;
+			string temp = convertHexToDec(num);
+			if (!this->ScanQInt(temp))
+				return false;
+			else
+				return true;
 		}
 
 	}
+
 }
 
 string QInt::getBin()

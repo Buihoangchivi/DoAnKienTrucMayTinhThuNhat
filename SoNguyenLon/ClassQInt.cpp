@@ -339,7 +339,7 @@ QInt QInt::operator*(QInt x)
 
 }
 
-pair<QInt, QInt> QInt::operator/(QInt x)
+QInt QInt::operator/(QInt x)
 {
 
 	QInt a, b, q;
@@ -383,9 +383,54 @@ pair<QInt, QInt> QInt::operator/(QInt x)
 	//Q la thuong neu Q va X cung dau
 	//Nguoc lai Q la bu 2 cua thuong neu Q va X trai dau
 	if (this->getBit(127) == x.getBit(127))
-		return pair<QInt, QInt>(q, a);
+		return q;
 	else
-		return pair<QInt, QInt>(q.oppositeNumber(), a);
+		return q.oppositeNumber();
+
+}
+
+QInt QInt::operator%(QInt x)
+{
+	
+	QInt a, b, q;
+	q = *this;
+	//Neu So bi chia Q > 0 thi A = 128 bit 0
+	//Nguoc lai neu Q < 0 thi A = 128 bit 1
+	if (q.getBit(127) == 1)
+		for (int i = 0; i < 128; i++)
+			a.setBit(i, 1);
+	vector<bool> boo;
+	for (int i = 0; i < 128; i++)
+	{
+
+		//Dich trai [A, Q] 1 bit
+		a = a << 1;
+		a.setBit(0, q.getBit(127));
+		q = q << 1;
+		//Gan B = A
+		b = a;
+		//Voi X la so chia
+		//Neu A, X trai dau ==> A = A + X 
+		//Nguoc lai A, X cung dau ==> A = A - X
+		if (a.getBit(127) != x.getBit(127))
+			a = a + x;
+		else
+			a = a - x;
+		//Neu A, B cung dau ==> Q0 = 1
+		//Nguoc lai A, B trai dau ==> Q0 = 0, A = B
+		if (a.getBit(127) == b.getBit(127))
+			q.setBit(0, 1);
+		else
+		{
+
+			q.setBit(0, 0);
+			a = b;
+
+		}
+
+	}
+	//A la so du
+	return a;
 
 }
 

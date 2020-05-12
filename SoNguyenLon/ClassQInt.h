@@ -27,7 +27,8 @@ public:
 	QInt operator-(QInt x);
 	QInt operator*(QInt x);
 	//Cap gia tri QInt tra ve trong phep chia la cap thuong va so du
-	pair<QInt, QInt> operator/(QInt x);
+	QInt operator/(QInt x);
+	QInt operator%(QInt x);
 	bool operator<(QInt x);
 	bool operator>(QInt x);
 	bool operator==(QInt x);

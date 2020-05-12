@@ -444,11 +444,9 @@ void ReadFileInt()
 				}
 				else if (b == "/")
 				{
-					// Chia thì lưu thương và số dư 
-					pair<QInt, QInt> rs = qint1 / qint2;
-					rs.first.PrintQInt();
-					cout << " ";
-					rs.second.PrintQInt();
+					// Chia thì lưu thương
+					QInt rs = qint1 / qint2;
+					rs.PrintQInt();
 				}
 				else if (b == "<")
 				{

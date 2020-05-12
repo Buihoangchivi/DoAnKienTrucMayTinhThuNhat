@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "XuLySoNguyenLon.h"
 #include <iostream>
 
@@ -11,6 +11,7 @@ private:
 public:
 	QInt();
 	~QInt();
+	// Hàm để khởi tạo khi dữ liệu đã hợp lệ, dễ dàng tính toán
 	QInt(string s);
 	QInt(vector<bool> vbit);
 	bool getBit(int i);
@@ -26,7 +27,8 @@ public:
 	QInt operator-(QInt x);
 	QInt operator*(QInt x);
 	//Cap gia tri QInt tra ve trong phep chia la cap thuong va so du
-	pair<QInt, QInt> operator/(QInt x);
+	QInt operator/(QInt x);
+	QInt operator%(QInt x);
 	bool operator<(QInt x);
 	bool operator>(QInt x);
 	bool operator==(QInt x);
@@ -41,9 +43,10 @@ public:
 	QInt operator>>(int k);
 	QInt rol(int k);
 	QInt ror(int k);
-	void ScanQInt();
+	// Hàm dùng để đưa dữ liệu vào data và kiểm tra có tràn dữ liệu hay không
+	bool ScanQInt(string s);
 	void PrintQInt();
-	void Scan(string num, int base);
+	bool Scan(string num, int base);
 	string getBin();
 	string getDec();
 	string getHex();
