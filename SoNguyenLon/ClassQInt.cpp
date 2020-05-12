@@ -19,6 +19,7 @@ QInt::QInt(string s) : QInt()
 	string temp = s;
 	bool dau = 0;
 	bool ok = 0;
+	// Nếu là số âm thì ta chuyển sang số dương xử lý rôi chuyển lại âm sau
 	if (temp[0] == '-')
 	{
 		dau = 1;
@@ -44,19 +45,24 @@ QInt::QInt(string s) : QInt()
 
 	}
 	dem++;
+	// Các quá trình chia 2 để setBit vào data, ta lưu ý rằng đổi dãy bit từ âm sang dương thì chỉ cần đổi 0 -> 1, 1-> 0
+	// Các bit cho tới khi gặp bit 1 đầu tiên từ phải sang
 	while (temp != "1")
 	{
 		Chia(temp, 2, temp);
 		cuoi = temp[temp.size() - 1] - '0';
+		// Trường hợp số ăm
 		if (ok == 1)
 			setBit(dem, (cuoi + 1) % 2);
+		// Trường hợp số dương
 		else
 			setBit(dem, (cuoi) % 2);
+		// Kiểm tra có phải số âm không
 		if (dau == 1 && cuoi % 2 == 1)
 			ok = 1;
 		dem++;
 	}
-
+	// chèn đủ 128 bit
 	while (dem < 128)
 	{
 		if (dau == 1 && ok == 1)
@@ -98,12 +104,14 @@ void QInt::setBit(int i, bool bit)
 
 }
 
+
 string QInt::convertQIntToDec()
 {
 
 	string ketqua = "0";
 	vector<int> c;
 	string b = "1", b1;
+	// Thao tác giống như ta thao tác hệ cơ số q tổng quát
 	for (int i = 0; i < 127; i++)
 	{
 		bool bit = getBit(i);
@@ -112,6 +120,7 @@ string QInt::convertQIntToDec()
 		Nhan(b, bit, b1);
 		Cong(ketqua, b1, ketqua);
 	}
+	// Xử lý cho số âm
 	if (getBit(127) == 1)
 	{
 		Nhan(b, 2, b);
@@ -141,7 +150,7 @@ vector<bool> QInt::convertDecToBin()
 
 string QInt::convertBinToDec(vector<bool> vbit)
 {
-
+	// Thao tác như convertQIntToDec nhưng ko dùng tới data mà dùng vector<bool>
 	string ketqua = "0";
 	vector<int> c;
 	while (vbit.size() < 128)
@@ -200,6 +209,8 @@ string QInt::convertBinToHex(vector<bool> bit)
 			}
 
 	}
+	while (s.length() > 1 && s[0] == '0')
+		s.erase(s.begin());
 	return s;
 
 }
@@ -592,14 +603,9 @@ QInt QInt::rol(int k)
 
 }
 
+
 bool QInt::ScanQInt(string s)
 {
-
-	/*string qint;
-	getline(cin, qint);
-	QInt a(qint);
-	*this = a;*/
-
 	string temp = s;
 	bool dau = 0;
 	bool ok = 0;
@@ -673,8 +679,6 @@ bool QInt::Scan(string num, int base)
 {
 	if (base == 10)
 	{
-		/*QInt a(num);
-		*this = a;*/
 		if (!this->ScanQInt(num))
 			return false;
 		else
@@ -682,6 +686,7 @@ bool QInt::Scan(string num, int base)
 	}
 	else
 	{
+		// Đảo ngược chuỗi vì ta đưa các dữ liệu này vào ngược
 		for (int i = 0; i < num.length() / 2; i++)
 			swap(num[i], num[num.length() - i - 1]);
 		if (base == 2)
@@ -703,8 +708,6 @@ bool QInt::Scan(string num, int base)
 		}
 		else if (base == 16)
 		{
-			/*QInt a(convertHexToDec(num));
-			*this = a;*/
 			string temp = convertHexToDec(num);
 			if (!this->ScanQInt(temp))
 				return false;
