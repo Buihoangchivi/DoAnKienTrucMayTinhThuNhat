@@ -211,6 +211,7 @@ void ReadFileInt()
 				}
 				else
 				{
+					// Khác hệ 2,10,16
 					cout << "Du lieu khong hop le!!!" << endl;
 					continue;
 				}
@@ -261,6 +262,12 @@ void ReadFileInt()
 						cout << "Tran du lieu!!!";
 						continue;
 					}
+				}
+				else
+				{
+					// Khác hệ 2,10,16
+					cout << "Du lieu khong hop le!!!" << endl;
+					continue;
 				}
 				QInt rs = ~qint;
 				rs.PrintQInt();
@@ -508,11 +515,8 @@ void ReadFileInt()
 void ReadFileFlt()
 {
 	string str;
-	//getline(cin, str);
-	//int num = atoi(str.c_str());
 	while (getline(cin, str))
 	{
-		//
 		string p1, p2, a;
 		int start = 0, end = 0;
 		while (str[end] != ' ')
@@ -539,7 +543,6 @@ void ReadFileFlt()
 		ClassQfloat F;
 		F.ScanQfloat(a, s1);
 		F.PrintQfloat(s2);
-		//
 	}
 
 }
