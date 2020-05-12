@@ -559,7 +559,7 @@ void ReadFile(string input, string output, int type)
 	}
 	else
 	{
-		cout << "Wrong type!!!!" << endl;
+		cout << "Nhap sai kieu!!!!" << endl;
 	}
 }
 
