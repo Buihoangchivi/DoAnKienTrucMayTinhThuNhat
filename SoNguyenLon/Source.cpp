@@ -1,5 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include "ClassQInt.h"
+#include "ClassQfloat.h"
 
 // Hàm kiểm tra dãy nhị phân có hợp lệ không
 bool checkBin(string num)
@@ -42,11 +43,9 @@ bool checkHex(string num)
 	return 1;
 }
 
-// Hàm đọc file và xuất file	
+// Hàm đọc file và xuất file
 void ReadFileInt()
 {
-	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
 	string str;
 	while (getline(cin, str))
 	{
@@ -93,13 +92,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkDec(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
 					if (!qint.Scan(a, 10))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					else
@@ -117,13 +116,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkBin(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
-					// Nếu hợp lệ thì chuyển nhị phân vào trong vector<bool> 
+					// Nếu hợp lệ thì chuyển nhị phân vào trong vector<bool>
 					if (!qint.Scan(a, 2))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					// Xuất dãy thập phân
@@ -136,13 +135,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkBin(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
 					if (!qint.Scan(a, 2))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					// Xuất dãy thập lục phân
@@ -160,13 +159,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkHex(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
 					if (!qint.Scan(a, 16))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					// Xuất dãy nhị phân
@@ -182,13 +181,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkDec(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thìxuất dãy thập lục phân
 					if (!qint.Scan(a, 10))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					cout << qint.convertDecToHex();
@@ -199,13 +198,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkHex(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
 					if (!qint.Scan(a, 16))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					qint.PrintQInt();
@@ -218,13 +217,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkBin(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì đưa dãy nhị phân vào vector<bool>
 					if (!qint.Scan(a, 2))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -233,13 +232,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkDec(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì tính toán luôn
 					if (!qint.Scan(a, 10))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -248,13 +247,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkHex(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
 					if (!qint.Scan(a, 16))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -281,13 +280,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkBin(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Hợp lệ thì chuyển sang thập phân
 					if (!qint.Scan(a, 2))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -297,13 +296,13 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkDec(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Thập phân ta có thể tính toán được mà không cần chuyển
 					if (!qint.Scan(a, 10))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -313,20 +312,20 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkHex(a))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Nếu hợp lệ thì chuyển dãy thập lục phân sang thập phân
 					if (!qint.Scan(a, 16))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
 				else
 				{
 					// khác hệ 2,10,16
-					cout << "Invalid!!!" << endl;
+					cout << "Du lieu khong hop le!!!" << endl;
 					continue;
 				}
 				// number là số int, thể hiện cho các phép toán <<, >>, ror, rol
@@ -363,18 +362,18 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkBin(a) || !checkBin(c))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Hợp lệ thì chuyển a và c sang thập phân
 					if (!qint1.Scan(a, 2))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					if (!qint2.Scan(c, 2))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -384,18 +383,18 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkDec(a) || !checkDec(c))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
 					// Thập phân thì có thể tính toán được
 					if (!qint1.Scan(a, 10))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					if (!qint2.Scan(c, 10))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
@@ -405,25 +404,25 @@ void ReadFileInt()
 					// Kiểm tra dữ liệu có hợp lệ?
 					if (!checkHex(a) || !checkHex(c))
 					{
-						cout << "Invalid!!!" << endl;
+						cout << "Du lieu khong hop le!!!" << endl;
 						continue;
 					}
-					// Hợp lệ thì chuyển a và c sang thập phân 
+					// Hợp lệ thì chuyển a và c sang thập phân
 					if (!qint1.Scan(a, 16))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 					if (!qint2.Scan(c, 16))
 					{
-						cout << "Overflow!!!";
+						cout << "Tran du lieu!!!";
 						continue;
 					}
 				}
 				else
 				{
 					// Khác hệ 2,10,16
-					cout << "Invalid!!!" << endl;
+					cout << "Du lieu khong hop le!!!" << endl;
 					continue;
 				}
 				// Phép toán
@@ -446,6 +445,12 @@ void ReadFileInt()
 				{
 					// Chia thì lưu thương
 					QInt rs = qint1 / qint2;
+					rs.PrintQInt();
+				}
+				else if (b == "%")
+				{
+					// Lưu dư
+					QInt rs = qint1 % qint2;
 					rs.PrintQInt();
 				}
 				else if (b == "<")
@@ -495,34 +500,71 @@ void ReadFileInt()
 
 }
 
-int main()
+void ReadFileFlt()
+{
+	string str;
+	//getline(cin, str);
+	//int num = atoi(str.c_str());
+	while (getline(cin, str))
+	{
+		//
+		string p1, p2, a;
+		int start = 0, end = 0;
+		while (str[end] != ' ')
+		{
+			end++;
+		}
+		p1 = str.substr(start, end - start);
+		start = end;
+		end++;
+		while (str[end] != ' ')
+		{
+			end++;
+		}
+
+		p2 = str.substr(start + 1, end - start - 1);
+		start = end;
+		while (str[end] != '\0')
+		{
+			end++;
+		}
+		a = str.substr(start + 1, end - start);
+		int s1 = atoi(p1.c_str());
+		int s2 = atoi(p2.c_str());
+		ClassQfloat F;
+		F.ScanQfloat(a, s1);
+		F.PrintQfloat(s2);
+		//
+	}
+
+}
+
+void ReadFile(string input, string output, int type)
 {
 
-	//string s;
-	//cin >> s;
-	//for (int i = 0; i < s.length() / 2; i++)
-	//	swap(s[i], s[s.length() - i - 1]);
-	//cout << QInt::convertHexToDec(s) << endl;
-	ReadFileInt();
-	/*vector<bool> a;
-	string s;
-	cin >> s;
-	for (int i = s.length() - 1; i >= 0; i--)
-		a.push_back((int)(s[i] - '0'));*/
-		//QInt b(a);
-		//b.PrintQInt();
-		//cout << b.convertDecToHex() << endl;
-		/*vector<bool> a;
-		string s;
-		cin >> s;
-		for (int i = s.length() - 1; i >= 0; i--)
-			a.push_back((int)(s[i] - '0'));
-		cout << QInt::convertBinToDec(a) << endl;*/
-	/*QInt a;
-	string s;
-	cin >> s;
-	a.ScanQInt(s);
-	cout << a.convertDecToHex() << endl;*/
+	freopen(input.c_str(), "r", stdin);
+	freopen(output.c_str(), "w", stdout);
+	if (type == 1)
+	{
+		ReadFileInt();
+	}
+	else if (type == 2)
+	{
+		ReadFileFlt();
+	}
+	else
+	{
+		cout << "Wrong type!!!!" << endl;
+	}
+}
+
+int main()
+{
+	string input, output;
+	cin >> input >> output;
+	int type;
+	cin >> type;
+	ReadFile(input, output, type);
 	return 0;
 
 }
