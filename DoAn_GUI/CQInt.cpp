@@ -33,15 +33,7 @@ BEGIN_MESSAGE_MAP(CQInt, CDialogEx)
 	ON_BN_CLICKED(ID_ChuyenDoi2, &CQInt::OnBnClickedChuyendoi2)
 	ON_BN_CLICKED(ID_TinhToan, &CQInt::OnBnClickedTinhtoan)
 	ON_BN_CLICKED(IDC_SoSanh, &CQInt::OnBnClickedSosanh)
-	ON_BN_CLICKED(IDC_Cong, &CQInt::OnBnClickedCong)
-	ON_BN_CLICKED(IDC_Xor, &CQInt::OnBnClickedXor)
-	ON_BN_CLICKED(IDC_Not, &CQInt::OnBnClickedNot)
-	ON_BN_CLICKED(IDC_DichPhai, &CQInt::OnBnClickedDichphai)
-	ON_BN_CLICKED(IDC_XoayTrai, &CQInt::OnBnClickedXoaytrai)
-	ON_BN_CLICKED(IDC_Be, &CQInt::OnBnClickedBe)
-	ON_BN_CLICKED(IDC_Bang, &CQInt::OnBnClickedBang)
-	ON_BN_CLICKED(IDC_BeBang, &CQInt::OnBnClickedBebang)
-	ON_BN_CLICKED(IDCANCEL, &CQInt::OnBnClickedCancel)
+	ON_BN_CLICKED(IDRESET, &CQInt::OnBnClickedReset)
 END_MESSAGE_MAP()
 
 
@@ -380,6 +372,9 @@ void CQInt::OnBnClickedTinhtoan()
 		temp = atoi(num2.c_str());
 		result = a.ror(temp);
 		break;
+	default:
+		MessageBox(_T("Ban chua chon phep tinh toan"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
 	}
 	//Xuat ket qua
 	CString result_dec1 = _T("");
@@ -419,6 +414,9 @@ void CQInt::OnBnClickedTinhtoan()
 	//
 	CWnd* label_hex1 = GetDlgItem(IDC_KQHex);
 	label_hex1->SetWindowText(result_hex1);
+	//
+	CWnd* label_sosanh = GetDlgItem(IDC_KQSoSanh);
+	label_sosanh->SetWindowText(L"");
 }
 
 void CQInt::OnBnClickedSosanh()
@@ -510,6 +508,9 @@ void CQInt::OnBnClickedSosanh()
 		if (a <= b)
 			check = true;
 		break;
+	default:
+		MessageBox(_T("Ban chua chon phep so sanh"), _T("Error"), MB_ICONERROR | MB_OK);
+		return;
 	}
 	CWnd* label_sosanh = GetDlgItem(IDC_KQSoSanh);
 	if(check)
@@ -528,56 +529,22 @@ void CQInt::OnBnClickedSosanh()
 	label_hex->SetWindowText(L"0");
 }
 
-void CQInt::OnBnClickedCong()
+void CQInt::OnBnClickedReset()
 {
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedXor()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedNot()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedDichphai()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedXoaytrai()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedBe()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedBang()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedBebang()
-{
-	// TODO: Add your control notification handler code here
-}
-
-
-void CQInt::OnBnClickedCancel()
-{
-	// TODO: Add your control notification handler code here
-	CDialogEx::OnCancel();
+	CWnd* label_dec1 = GetDlgItem(IDC_KQDec1);
+	CWnd* label_dec2 = GetDlgItem(IDC_KQDec2);
+	CWnd* label_bin1 = GetDlgItem(IDC_KQBin1);
+	CWnd* label_bin2 = GetDlgItem(IDC_KQBin2);
+	CWnd* label_hex = GetDlgItem(IDC_KQHex);
+	CWnd* label_sosanh = GetDlgItem(IDC_KQSoSanh);
+	label_dec1->SetWindowText(L"0");
+	label_dec2->SetWindowText(L"0");
+	label_bin1->SetWindowText(L"0");
+	label_bin2->SetWindowText(L"0");
+	label_hex->SetWindowText(L"0");
+	label_sosanh->SetWindowText(L"");
+	CEdit* editbox1 = (CEdit*)GetDlgItem(IDC_SoThu1);
+	editbox1->SetWindowText(L"");
+	CEdit* editbox2 = (CEdit*)GetDlgItem(IDC_SoThu2);
+	editbox2->SetWindowText(L"");
 }

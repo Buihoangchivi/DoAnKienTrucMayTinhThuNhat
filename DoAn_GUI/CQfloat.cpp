@@ -32,6 +32,7 @@ void CQfloat::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CQfloat, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CQfloat::OnBnClickedOk)
+	ON_BN_CLICKED(IDC_RESET, &CQfloat::OnBnClickedReset)
 END_MESSAGE_MAP()
 
 
@@ -105,6 +106,7 @@ void CQfloat::OnBnClickedOk()
 		MessageBox(_T("Ban chua nhap du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
 		return;
 	}
+
 	int check_radio = GetCheckedRadioButton(IDC_RADIO1, IDC_RADIO2);
 	if (check_radio == IDC_RADIO1) {
 		bool check_dec = true;
@@ -179,4 +181,20 @@ void CQfloat::OnBnClickedOk()
 	label_bin1->SetWindowText(result_bin1);
 	CWnd* label_bin2 = GetDlgItem(IDC_STATIC_BIN2);
 	label_bin2->SetWindowText(result_bin2);
+}
+
+
+
+void CQfloat::OnBnClickedReset()
+{
+	CWnd* label_bin1 = GetDlgItem(IDC_STATIC_BIN1);
+	CWnd* label_bin2 = GetDlgItem(IDC_STATIC_BIN2);
+	CWnd* label_dec1 = GetDlgItem(IDC_STATIC_DEC1);
+	CWnd* label_dec2 = GetDlgItem(IDC_STATIC_DEC2);
+	label_bin1->SetWindowText(L"0");
+	label_bin2->SetWindowText(L"0");
+	label_dec1->SetWindowText(L"0");
+	label_dec2->SetWindowText(L"");
+	CEdit* editbox1 = (CEdit*)GetDlgItem(IDC_EDIT1);
+	editbox1->SetWindowText(L"");
 }

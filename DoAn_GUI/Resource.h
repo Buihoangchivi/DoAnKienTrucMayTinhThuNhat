@@ -33,7 +33,9 @@
 #define IDC_KQSoSanh                    1040
 #define IDC_SoSanh                      1041
 #define IDC_K                           1042
+#define IDRESET                         1042
 #define IDC_KQDec2                      1043
+#define IDC_RESET                       1043
 #define IDC_KQBin2                      1044
 #define IDC_Cong                        2000
 #define IDC_Tru                         2001
@@ -59,7 +61,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        136
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1042
+#define _APS_NEXT_CONTROL_VALUE         1044
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
