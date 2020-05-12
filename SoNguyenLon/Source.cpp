@@ -209,6 +209,11 @@ void ReadFileInt()
 					}
 					qint.PrintQInt();
 				}
+				else
+				{
+					cout << "Du lieu khong hop le!!!" << endl;
+					continue;
+				}
 			}
 			else
 			{
@@ -543,7 +548,7 @@ void ReadFile(string input, string output, int type)
 {
 
 	freopen(input.c_str(), "r", stdin);
-	freopen(output.c_str(), "w", stdout);
+	//freopen(output.c_str(), "w", stdout);
 	if (type == 1)
 	{
 		ReadFileInt();
