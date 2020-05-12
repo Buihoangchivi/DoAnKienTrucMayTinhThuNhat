@@ -298,63 +298,112 @@ void CQInt::OnBnClickedTinhtoan()
 	}
 	//Kiểm tra hệ biểu diễn
 	int check_radio = GetCheckedRadioButton(IDC_Dec, IDC_Hex);
-	if (check_radio == IDC_Dec) {
-		bool check_dec1 = true;
-		bool check_dec2 = true;
-		check_dec1 = checkDec(num1);
-		check_dec2 = checkDec(num2);
-		if (!check_dec1 || !check_dec2)
+	int check_tinhtoan = GetCheckedRadioButton(IDC_Cong, IDC_XoayPhai);
+	QInt a;
+	QInt b;
+	if(check_tinhtoan>=IDC_DichTrai && check_tinhtoan<=IDC_XoayPhai) {
+		if (check_radio == IDC_Dec) {
+			bool check_dec1 = true;
+			check_dec1 = checkDec(num1);
+			if (!check_dec1)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			check_radio = 10;
+		}
+		else if (check_radio == IDC_Bin)
 		{
-			MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+			bool check_bin1 = true;
+			check_bin1 = checkBin(num1);
+			if (!check_bin1)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			check_radio = 2;
+		}
+		else if (check_radio == IDC_Hex) {
+			bool check_hex1 = true;
+			check_hex1 = checkHex(num1);
+			if (!check_hex1)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			check_radio = 16;
+		}
+		else {
+			MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
 		}
-		check_radio = 10;
-	}
-	else if (check_radio == IDC_Bin)
-	{
-		bool check_bin1 = true;
-		bool check_bin2 = true;
-		check_bin1 = checkBin(num1);
-		check_bin2 = checkBin(num2);
-		if (!check_bin1 || !check_bin2)
-		{
-			MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+		//Đưa dữ liệu vào QInt
+		if (!a.Scan(num1, check_radio)) {
+			MessageBox(_T("Ban nhap so thu nhat vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
 		}
-		check_radio = 2;
-	}
-	else if (check_radio == IDC_Hex) {
-		bool check_hex1 = true;
-		bool check_hex2 = true;
-		check_hex1 = checkHex(num1);
-		check_hex2 = checkHex(num2);
-		if (!check_hex1 || !check_hex2)
-		{
-			MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+		if (!b.Scan(num2, 10)) {
+			MessageBox(_T("Ban nhap so thu hai vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
 			return;
 		}
-		check_radio = 16;
 	}
 	else {
-		MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
-		return;
+		if (check_radio == IDC_Dec) {
+			bool check_dec1 = true;
+			bool check_dec2 = true;
+			check_dec1 = checkDec(num1);
+			check_dec2 = checkDec(num2);
+			if (!check_dec1 || !check_dec2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu he Dec"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			check_radio = 10;
+		}
+		else if (check_radio == IDC_Bin)
+		{
+			bool check_bin1 = true;
+			bool check_bin2 = true;
+			check_bin1 = checkBin(num1);
+			check_bin2 = checkBin(num2);
+			if (!check_bin1 || !check_bin2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu he Bin"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			check_radio = 2;
+		}
+		else if (check_radio == IDC_Hex) {
+			bool check_hex1 = true;
+			bool check_hex2 = true;
+			check_hex1 = checkHex(num1);
+			check_hex2 = checkHex(num2);
+			if (!check_hex1 || !check_hex2)
+			{
+				MessageBox(_T("Ban da nhap sai du lieu he Hex"), _T("Error"), MB_ICONERROR | MB_OK);
+				return;
+			}
+			check_radio = 16;
+		}
+		else {
+			MessageBox(_T("Ban chua chon he bieu dien"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
+		//Đưa dữ liệu vào QInt
+		if (!a.Scan(num1, check_radio)) {
+			MessageBox(_T("Ban nhap so thu nhat vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
+		if (!b.Scan(num2, check_radio)) {
+			MessageBox(_T("Ban nhap so thu hai vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
+			return;
+		}
 	}
-	//Đưa dữ liệu vào QInt
-	QInt a;
-	if( !a.Scan(num1, check_radio)) {
-		MessageBox(_T("Ban nhap so thu nhat vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
-		return;
-	}
-	QInt b;
-	if (!b.Scan(num2, check_radio)) {
-		MessageBox(_T("Ban nhap so thu hai vuot qua kieu du lieu"), _T("Error"), MB_ICONERROR | MB_OK);
-		return;
-	}
+	
 	
 	//Thực hiện tính toán dựa vào lựa chọn tính toán
 	QInt result;
 	int temp;
-	int check_tinhtoan = GetCheckedRadioButton(IDC_Cong, IDC_XoayPhai);
 	switch(check_tinhtoan)
 	{
 	case IDC_Cong:
