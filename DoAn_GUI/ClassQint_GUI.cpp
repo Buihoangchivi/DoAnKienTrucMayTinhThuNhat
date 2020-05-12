@@ -625,7 +625,7 @@ QInt QInt::ror(int k)
 	int i = 0;
 	while (k > 0)
 	{
-		temp.setBit(128 - k, i);
+		temp.setBit(128 - k, getBit(i));
 		i++;
 		k--;
 	}
